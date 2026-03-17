@@ -32,6 +32,7 @@ Steps implemented here:
 
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 from dataclasses import dataclass, field
@@ -40,6 +41,19 @@ from typing import Any
 
 import psycopg2
 import psycopg2.extras
+
+# Load .env from the project root (safe no-op if file is missing or dotenv not installed)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parents[3] / ".env")
+except ImportError:
+    pass  # python-dotenv not installed; rely on environment variables directly
+
+_DB_HOST     = os.getenv("DB_HOST",     "localhost")
+_DB_PORT     = int(os.getenv("DB_PORT", "5432"))
+_DB_NAME     = os.getenv("DB_NAME",     "projectdb")
+_DB_USER     = os.getenv("DB_USER",     "gaurav")
+_DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 
 
 PROJECTDB_SQL_PATH = Path(__file__).with_name("projectdb.sql")
@@ -77,13 +91,13 @@ class GeneratedSQL:
 
 
 def get_connection(
-	host: str = "localhost",
-	port: int = 5432,
-	dbname: str = "projectdb",
-	user: str = "gaurav",
-	password: str = "",
+	host: str = _DB_HOST,
+	port: int = _DB_PORT,
+	dbname: str = _DB_NAME,
+	user: str = _DB_USER,
+	password: str = _DB_PASSWORD,
 ) -> psycopg2.extensions.connection:
-	"""Open and return a PostgreSQL connection to the projectdb database."""
+	"""Open and return a PostgreSQL connection using credentials from .env."""
 
 	return psycopg2.connect(
 		host=host, port=port, dbname=dbname, user=user, password=password
@@ -91,11 +105,11 @@ def get_connection(
 
 
 def initialize_projectdb(
-	host: str = "localhost",
-	port: int = 5432,
-	dbname: str = "projectdb",
-	user: str = "gaurav",
-	password: str = "",
+	host: str = _DB_HOST,
+	port: int = _DB_PORT,
+	dbname: str = _DB_NAME,
+	user: str = _DB_USER,
+	password: str = _DB_PASSWORD,
 	sql_file: str | None = None,
 ) -> str:
 	"""

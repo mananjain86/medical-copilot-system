@@ -17,8 +17,12 @@ from .backend import (
     run_search,
     save_query,
 )
+from .login import login_page
+from .patient_search import patient_search_page
+from .admin_search import admin_search_page
 
 __all__ = [
+    # backend
     "GeneratedSQL",
     "PROJECTDB_SQL_PATH",
     "SearchQuery",
@@ -36,4 +40,8 @@ __all__ = [
     "resolve_symptom",
     "run_search",
     "save_query",
+    # pages
+    "login_page",
+    "patient_search_page",
+    "admin_search_page",
 ]
