@@ -7,7 +7,14 @@ from dataclasses import dataclass
 import streamlit as st
 
 try:
-    from src.modules.C13.backend import SearchResult, get_connection, nl_search_pipeline, get_search_history
+    from src.modules.C13.backend import (
+        SearchResult,
+        get_connection,
+        nl_search_pipeline,
+        get_search_history,
+        get_cohorts,
+        get_cohort_members,
+    )
 except Exception:
     @dataclass
     class SearchResult:
@@ -24,6 +31,12 @@ except Exception:
         raise RuntimeError("Database backend unavailable")
 
     def get_search_history(*args, **kwargs):
+        raise RuntimeError("Database backend unavailable")
+
+    def get_cohorts(*args, **kwargs):
+        raise RuntimeError("Database backend unavailable")
+
+    def get_cohort_members(*args, **kwargs):
         raise RuntimeError("Database backend unavailable")
 
 
@@ -413,7 +426,10 @@ def _sidebar(role: str = "Clinician") -> str:
         st.markdown("## MediCare")
         st.caption("Clinical Query Copilot")
 
+        is_admin = role == "Administrator"
         st.session_state.setdefault("ms_current_page", "Patient Search")
+        if st.session_state.ms_current_page not in {"Patient Search", "Search History", "Cohorts"}:
+            st.session_state.ms_current_page = "Patient Search"
         page = st.session_state.ms_current_page
 
         def _nav(label: str, key: str):
@@ -430,10 +446,37 @@ def _sidebar(role: str = "Clinician") -> str:
 
         _nav("Patient Search", "nav_ps")
         _nav("Search History", "nav_sh")
-        _nav("Admin Panel", "nav_ap")
+        _nav("Cohorts", "nav_cohorts")
 
         st.divider()
         st.caption(f"Role: {role}")
+
+        if is_admin:
+            st.markdown("### Admin Panel")
+            try:
+                conn = get_connection()
+                cohorts = get_cohorts(conn)
+                conn.close()
+            except Exception:
+                cohorts = []
+
+            total_cohorts = len(cohorts)
+            total_members = sum(int(c.get("member_count", 0) or 0) for c in cohorts)
+            st.caption(f"Cohorts: {total_cohorts} | Members: {total_members}")
+
+            if cohorts:
+                latest = cohorts[:5]
+                options = [f"#{c.get('cohort_id')} ({c.get('member_count', 0)})" for c in latest]
+                idx = st.selectbox(
+                    "Recent Cohorts",
+                    range(len(options)),
+                    format_func=lambda i: options[i],
+                    key="ms_admin_sidebar_cohort_idx",
+                )
+                selected = latest[idx]
+                st.caption(selected.get("cohort_name", ""))
+            else:
+                st.caption("No cohorts yet. Run searches to generate cohorts.")
 
     return st.session_state.ms_current_page
 
@@ -697,6 +740,89 @@ def _history_section() -> None:
         )
 
 
+def _cohorts_section() -> None:
+    st.markdown(
+        '<div class="ms-title">Cohorts</div>'
+        '<div class="ms-sub">Saved patient groups generated from search queries</div>',
+        unsafe_allow_html=True,
+    )
+
+    try:
+        conn = get_connection()
+        cohorts = get_cohorts(conn)
+    except Exception:
+        cohorts = []
+        conn = None
+
+    if not cohorts:
+        st.markdown(
+            """
+            <div class="empty">
+                <div class="empty-ico">🧩</div>
+                <div class="empty-ttl">No cohorts available</div>
+                <div class="empty-sub">Run searches to generate cohorts automatically.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if conn:
+            conn.close()
+        return
+
+    import pandas as pd
+
+    summary_rows = []
+    for c in cohorts:
+        summary_rows.append({
+            "Cohort ID": c.get("cohort_id"),
+            "Name": c.get("cohort_name"),
+            "Members": c.get("member_count", 0),
+            "Created": c.get("created_at"),
+        })
+
+    st.dataframe(pd.DataFrame(summary_rows[:25]), use_container_width=True, hide_index=True)
+
+    options = [f"#{c.get('cohort_id')} - {c.get('cohort_name')}" for c in cohorts[:50]]
+    idx = st.selectbox(
+        "Select Cohort",
+        range(len(options)),
+        format_func=lambda i: options[i],
+        key="ms_cohort_select_idx",
+    )
+    selected = cohorts[idx]
+    selected_id = int(selected.get("cohort_id"))
+
+    members = []
+    try:
+        if conn is None:
+            conn = get_connection()
+        members = get_cohort_members(conn, selected_id, limit=200)
+    except Exception:
+        members = []
+    finally:
+        if conn:
+            conn.close()
+
+    st.markdown(f"**Selected Cohort:** {selected.get('cohort_name')}")
+    st.caption(f"Cohort ID: {selected_id} | Members: {selected.get('member_count', 0)}")
+
+    if members:
+        member_rows = []
+        for m in members:
+            member_rows.append({
+                "Patient ID": m.get("patient_id"),
+                "Name": f"{m.get('first_name', '')} {m.get('last_name', '')}".strip(),
+                "Gender": m.get("gender"),
+                "Age": m.get("age"),
+                "City": m.get("city"),
+                "Query ID": m.get("query_id"),
+                "Added": m.get("added_at"),
+            })
+        st.dataframe(pd.DataFrame(member_rows), use_container_width=True, hide_index=True)
+    else:
+        st.info("No members found for this cohort.")
+
+
 # ── public entry ──────────────────────────────────────────────────────────────
 
 def patient_search_page(role: str = "Clinician") -> None:
@@ -707,21 +833,5 @@ def patient_search_page(role: str = "Clinician") -> None:
         _search_section()
     elif page == "Search History":
         _history_section()
-    elif page == "Admin Panel":
-        st.markdown(
-            '<div class="ms-title">Admin Panel</div>'
-            '<div class="ms-sub">Administrator access required</div>',
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            """
-            <div class="empty">
-                <div class="empty-ico">🔒</div>
-                <div class="empty-ttl">Admin Access Required</div>
-                <div class="empty-sub">
-                    Please sign out and log in as an Administrator.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+    elif page == "Cohorts":
+        _cohorts_section()

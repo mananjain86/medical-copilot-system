@@ -306,6 +306,31 @@ def _admin_panel_section() -> None:
         unsafe_allow_html=True,
     )
 
+    st.markdown("### Recent Cohorts")
+    try:
+        conn = get_connection()
+        cohorts = get_cohorts(conn)
+        conn.close()
+    except Exception:
+        cohorts = []
+
+    if cohorts:
+        import pandas as pd
+
+        rows = []
+        for c in cohorts[:10]:
+            rows.append({
+                "Cohort ID": c.get("cohort_id"),
+                "Name": c.get("cohort_name"),
+                "Members": c.get("member_count", 0),
+                "Created At": c.get("created_at"),
+            })
+        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    else:
+        st.info("No cohorts available yet. Run a few searches to generate cohorts.")
+
+    st.divider()
+
     # Template grid — 2 columns
     CAT_CLASS = {
         "DEMOGRAPHIC": "tmpl-cat-demo",

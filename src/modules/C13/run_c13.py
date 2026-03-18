@@ -19,7 +19,10 @@ st.set_page_config(
 )
 
 # Keep standalone behavior aligned with main website flow: no extra login layer.
-st.session_state.setdefault("ms_user_role", "Clinician")
+# If launched inside the main app, derive C13 role from app session role.
+if "ms_user_role" not in st.session_state:
+    app_role = st.session_state.get("role")
+    st.session_state.ms_user_role = "Administrator" if app_role == "Admin" else "Clinician"
 
 role = st.session_state.ms_user_role
 if role == "Administrator":

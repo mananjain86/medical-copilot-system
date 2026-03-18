@@ -380,7 +380,10 @@ def show_module_detail():
     if code == "C1":
         try:
             from src.modules.C13.patient_search import patient_search_page
-            patient_search_page(role="Clinician")
+            app_role = st.session_state.get("role")
+            c13_role = "Administrator" if app_role == "Admin" else "Clinician"
+            st.session_state.ms_user_role = c13_role
+            patient_search_page(role=c13_role)
         except Exception as exc:
             st.error(f"Unable to load C13 frontend: {exc}")
         st.divider()

@@ -614,7 +614,7 @@ def run_search(
 	nl_query: str,
 	search_type: str = "clinical",
 	sql_payload: GeneratedSQL | None = None,
-) -> list[SearchResult]:
+) -> tuple[list[SearchResult], int | None]:
 	"""
 	Execute query and return patient rows.
 
@@ -622,6 +622,7 @@ def run_search(
 	are always applied, and still log the query in search_queries.
 	"""
 
+	query_id: int | None = None
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 		if sql_payload is None:
 			cur.execute(
@@ -629,13 +630,37 @@ def run_search(
 				(user_id, nl_query, search_type),
 			)
 			rows = cur.fetchall()
+			cur.execute(
+				"""
+				SELECT query_id
+				FROM search_queries
+				WHERE user_id = %s AND query_text = %s AND search_type = %s
+				ORDER BY query_id DESC
+				LIMIT 1
+				""",
+				(user_id, nl_query, search_type),
+			)
+			qid_row = cur.fetchone()
+			query_id = int(qid_row["query_id"]) if qid_row else None
 		else:
 			cur.execute("SELECT log_search_query(%s, %s, %s)", (user_id, nl_query, search_type))
+			qid_row = cur.fetchone()
+			query_id = int(next(iter(qid_row.values()))) if qid_row else None
 			cur.execute(sql_payload.sql, sql_payload.params)
 			rows = cur.fetchall()
+
+			if query_id is not None and rows:
+				for row in rows:
+					cur.execute(
+						"""
+						INSERT INTO search_results(query_id, patient_id, relevance_score)
+						VALUES (%s, %s, %s)
+						""",
+						(query_id, int(row["patient_id"]), 1.0),
+					)
 		conn.commit()
 
-	return [
+	results = [
 		SearchResult(
 			patient_id=int(row["patient_id"]),
 			first_name=row["first_name"],
@@ -644,6 +669,60 @@ def run_search(
 		)
 		for row in rows
 	]
+
+	return results, query_id
+
+
+def _ensure_cohort_member_table(conn) -> None:
+	"""Ensure cohort-member mapping table exists for cohort persistence."""
+
+	with conn.cursor() as cur:
+		cur.execute(
+			"""
+			CREATE TABLE IF NOT EXISTS patient_cohort_members (
+				member_id SERIAL PRIMARY KEY,
+				cohort_id INTEGER NOT NULL REFERENCES patient_cohorts(cohort_id) ON DELETE CASCADE,
+				patient_id INTEGER NOT NULL REFERENCES patients(patient_id) ON DELETE CASCADE,
+				query_id INTEGER REFERENCES search_queries(query_id) ON DELETE SET NULL,
+				added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+				UNIQUE (cohort_id, patient_id)
+			)
+			"""
+		)
+		conn.commit()
+
+
+def create_search_cohort(
+	conn,
+	user_id: int,
+	nl_query: str,
+	search_type: str,
+	patient_ids: list[int],
+	query_id: int | None = None,
+) -> int:
+	"""Create a cohort for a search and persist its member patient ids."""
+
+	_ensure_cohort_member_table(conn)
+	cohort_name = f"U{user_id} | {search_type} | {nl_query[:80]}"
+
+	with conn.cursor() as cur:
+		cur.execute("INSERT INTO patient_cohorts(cohort_name) VALUES(%s) RETURNING cohort_id", (cohort_name,))
+		cohort_id = int(cur.fetchone()[0])
+
+		if patient_ids:
+			for pid in sorted(set(patient_ids)):
+				cur.execute(
+					"""
+					INSERT INTO patient_cohort_members(cohort_id, patient_id, query_id)
+					VALUES (%s, %s, %s)
+					ON CONFLICT (cohort_id, patient_id) DO NOTHING
+					""",
+					(cohort_id, int(pid), query_id),
+				)
+
+		conn.commit()
+
+	return cohort_id
 
 
 def get_search_history(conn, user_id: int) -> list[dict[str, Any]]:
@@ -700,10 +779,47 @@ def create_patient_cohort(conn, name: str) -> int:
 def get_cohorts(conn) -> list[dict[str, Any]]:
 	"""Return all patient cohorts from patient_cohorts."""
 
+	_ensure_cohort_member_table(conn)
+
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 		cur.execute(
-			"SELECT cohort_id, cohort_name, created_at "
-			"FROM patient_cohorts ORDER BY created_at DESC"
+			"""
+			SELECT c.cohort_id, c.cohort_name, c.created_at,
+			       COUNT(m.patient_id) AS member_count
+			FROM patient_cohorts c
+			LEFT JOIN patient_cohort_members m ON m.cohort_id = c.cohort_id
+			GROUP BY c.cohort_id, c.cohort_name, c.created_at
+			ORDER BY c.created_at DESC
+			"""
+		)
+		return [dict(row) for row in cur.fetchall()]
+
+
+def get_cohort_members(conn, cohort_id: int, limit: int = 200) -> list[dict[str, Any]]:
+	"""Return patient members for a given cohort id with basic demographics."""
+
+	_ensure_cohort_member_table(conn)
+
+	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+		cur.execute(
+			"""
+			SELECT
+				m.cohort_id,
+				m.patient_id,
+				p.first_name,
+				p.last_name,
+				p.gender,
+				DATE_PART('year', AGE(p.date_of_birth))::int AS age,
+				p.city,
+				m.query_id,
+				m.added_at
+			FROM patient_cohort_members m
+			JOIN patients p ON p.patient_id = m.patient_id
+			WHERE m.cohort_id = %s
+			ORDER BY m.added_at DESC
+			LIMIT %s
+			""",
+			(cohort_id, max(1, limit)),
 		)
 		return [dict(row) for row in cur.fetchall()]
 
@@ -740,11 +856,31 @@ def nl_search_pipeline(conn, user_id: int, nl_query: str) -> dict[str, Any]:
 	])
 	if parsed.search_type == "clinical" and not has_filter and not allow_all:
 		results: list[SearchResult] = []
+		query_id: int | None = None
 	else:
-		results = run_search(conn, user_id, nl_query, parsed.search_type, sql_payload=sql_payload)
+		results, query_id = run_search(
+			conn,
+			user_id,
+			nl_query,
+			parsed.search_type,
+			sql_payload=sql_payload,
+		)
+
+	cohort_id: int | None = None
+	if results:
+		cohort_id = create_search_cohort(
+			conn=conn,
+			user_id=user_id,
+			nl_query=nl_query,
+			search_type=parsed.search_type,
+			patient_ids=[r.patient_id for r in results],
+			query_id=query_id,
+		)
 
 	return {
 		"parsed": parsed,
 		"sql": sql_payload,
 		"results": results,
+		"query_id": query_id,
+		"cohort_id": cohort_id,
 	}
