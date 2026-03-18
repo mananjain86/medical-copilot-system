@@ -133,6 +133,36 @@ def _inject_css() -> None:
             text-align: center; font-size: 11px; color: #38516a; margin-top: 16px;
         }
         .demo-hint a { color: #00b4d8; text-decoration: none; }
+
+        /* Website-aligned light overrides */
+        [data-testid="stAppViewContainer"] {
+            background: #f7f9fc !important;
+        }
+        .login-card {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+        }
+        .logo-title { color: #111827 !important; }
+        .logo-sub { color: #6b7280 !important; }
+        .card-divider { background: #e5e7eb !important; }
+        .role-hint { color: #6b7280 !important; }
+
+        div[data-testid="stRadio"] {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        div[data-testid="stRadio"] label { color: #4b5563 !important; }
+
+        .f-label { color: #374151 !important; }
+        [data-testid="stTextInput"] input {
+            background: #ffffff !important;
+            border: 1px solid #d1d5db !important;
+            color: #111827 !important;
+        }
+        [data-testid="stTextInput"] input::placeholder { color: #9ca3af !important; }
+        .demo-hint { color: #6b7280 !important; }
+        .demo-hint a { color: #2563eb !important; }
         </style>
         """,
         unsafe_allow_html=True,
@@ -158,7 +188,7 @@ def login_page() -> None:
                 <div class="logo-icon">🫀</div>
                 <div>
                     <div class="logo-title">MediSearch</div>
-                    <div class="logo-sub">Natural Language Patient Search System</div>
+                    <div class="logo-sub">MediCare Natural Language Patient Search</div>
                 </div>
             </div>
             <div class="card-divider"></div>

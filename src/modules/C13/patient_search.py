@@ -3,9 +3,28 @@ Module C13 – MediSearch Patient Search Page  (matches target design)
 """
 
 import re
+from dataclasses import dataclass
 import streamlit as st
-import numpy as np
-from src.modules.C13.backend import get_connection, nl_search_pipeline, get_search_history
+
+try:
+    from src.modules.C13.backend import SearchResult, get_connection, nl_search_pipeline, get_search_history
+except Exception:
+    @dataclass
+    class SearchResult:
+        patient_id: str
+        first_name: str
+        last_name: str
+        gender: str
+
+    # Keep UI usable in frontend/demo mode even if DB deps (e.g. psycopg2) are missing.
+    def get_connection():
+        raise RuntimeError("Database backend unavailable")
+
+    def nl_search_pipeline(*args, **kwargs):
+        raise RuntimeError("Database backend unavailable")
+
+    def get_search_history(*args, **kwargs):
+        raise RuntimeError("Database backend unavailable")
 
 
 # ── suggestion chips ──────────────────────────────────────────────────────────
@@ -287,9 +306,77 @@ def _inject_css() -> None:
         unsafe_allow_html=True,
     )
 
+    # Website-aligned overrides (light MediCare look) without changing logic.
+    st.markdown(
+        """
+        <style>
+        [data-testid="stAppViewContainer"] { background: #f7f9fc !important; }
+        [data-testid="stSidebar"] > div:first-child {
+            background: #ffffff !important;
+            border-right: 1px solid #e5e7eb !important;
+        }
+
+        .ms-logo-name { color: #111827 !important; }
+        .ms-logo-sub  { color: #6b7280 !important; }
+
+        div[data-testid="stSidebar"] div[data-testid="stButton"] button {
+            color: #374151 !important;
+            background: transparent !important;
+        }
+        div[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
+            background: #f3f4f6 !important;
+            color: #111827 !important;
+        }
+        .nav-active button {
+            background: #eef2ff !important;
+            color: #1d4ed8 !important;
+        }
+
+        .ms-user-card {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        .ms-ava-name { color: #111827 !important; }
+        .ms-ava-role { color: #2563eb !important; }
+
+        .ms-title { color: #111827 !important; }
+        .ms-sub { color: #6b7280 !important; }
+
+        [data-testid="stTextInput"] input {
+            background: #ffffff !important;
+            border: 1px solid #d1d5db !important;
+            color: #111827 !important;
+        }
+        [data-testid="stTextInput"] input::placeholder { color: #9ca3af !important; }
+
+        .metric-box,
+        .pt-row,
+        .hist-row {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        .metric-val,
+        .pt-name,
+        .pt-count,
+        .hist-q,
+        .hist-num { color: #111827 !important; }
+        .metric-lbl,
+        .pt-meta,
+        .pt-clabel,
+        .hist-meta,
+        .hist-nlbl { color: #6b7280 !important; }
+        .pt-meta span,
+        .hist-meta span { color: #4b5563 !important; }
+
+        .empty-ttl { color: #111827 !important; }
+        .empty-sub { color: #6b7280 !important; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 def _search_mock_patients(query: str):
-    from src.modules.C13.backend import SearchResult
     if not query.strip():
         return []
     q = query.lower()
@@ -323,58 +410,30 @@ def _search_mock_patients(query: str):
 
 def _sidebar(role: str = "Clinician") -> str:
     with st.sidebar:
-        is_admin = role == "Administrator"
-
-        st.markdown(
-            """
-            <div class="ms-logo">
-                <div class="ms-logo-icon">🫀</div>
-                <div>
-                    <div class="ms-logo-name">MediSearch</div>
-                    <div class="ms-logo-sub">Patient Finder</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown("## MediCare")
+        st.caption("Clinical Query Copilot")
 
         st.session_state.setdefault("ms_current_page", "Patient Search")
         page = st.session_state.ms_current_page
 
-        def _nav(label: str, icon: str, key: str):
+        def _nav(label: str, key: str):
             active = page == label
             with st.container():
                 if active:
                     st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-                clicked = st.button(f"{icon}  {label}", use_container_width=True, key=key)
+                clicked = st.button(label, use_container_width=True, key=key)
                 if active:
                     st.markdown("</div>", unsafe_allow_html=True)
                 if clicked:
                     st.session_state.ms_current_page = label
                     st.rerun()
 
-        _nav("Patient Search", "🔍", "nav_ps")
-        _nav("Search History", "🕐", "nav_sh")
-        _nav("Admin Panel",    "⚙️",  "nav_ap")
+        _nav("Patient Search", "nav_ps")
+        _nav("Search History", "nav_sh")
+        _nav("Admin Panel", "nav_ap")
 
-        # spacer then user card
-        st.markdown("<br>" * 4, unsafe_allow_html=True)
-        ava_cls  = "ms-ava ms-ava-admin" if is_admin else "ms-ava"
-        role_cls = "ms-ava-role ms-ava-role-admin" if is_admin else "ms-ava-role"
-        initials = "SA" if is_admin else "JD"
-        name     = "System Admin" if is_admin else "Dr. Jane Doe"
-        st.markdown(
-            f"""
-            <div class="ms-user-card">
-                <div class="{ava_cls}">{initials}</div>
-                <div>
-                    <div class="ms-ava-name">{name}</div>
-                    <div class="{role_cls}">● {role}</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.divider()
+        st.caption(f"Role: {role}")
 
     return st.session_state.ms_current_page
 
@@ -417,16 +476,17 @@ def _search_section() -> None:
                             SELECT
                                 p.patient_id,
                                 DATE_PART('year', AGE(p.date_of_birth))::int AS age,
-                                v.department,
-                                v.discharge_date
+                                COALESCE(d.specialization, 'General Medicine') AS department,
+                                NULL::date AS discharge_date
                             FROM patients p
                             LEFT JOIN LATERAL (
-                                SELECT department, discharge_date
+                                SELECT doctor_id
                                 FROM visits
                                 WHERE patient_id = p.patient_id
                                 ORDER BY visit_date DESC
                                 LIMIT 1
                             ) v ON true
+                            LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
                             WHERE p.patient_id = ANY(%s)
                             """,
                             (ids,),
@@ -465,9 +525,10 @@ def _search_section() -> None:
 
         if enriched:
             ages   = [p["age"] for p in enriched if isinstance(p.get("age"), (int, float))]
-            female = sum(1 for p in enriched if p.get("gender") == "Female")
-            male   = len(enriched) - female
-            avg    = np.mean(ages) if ages else 0
+            genders = [str(p.get("gender", "")).strip().lower() for p in enriched]
+            female = sum(1 for g in genders if g == "female")
+            male   = sum(1 for g in genders if g == "male")
+            avg    = (sum(ages) / len(ages)) if ages else 0
 
             st.markdown(
                 f"""
@@ -490,9 +551,17 @@ def _search_section() -> None:
             )
 
             for p in enriched:
-                gender = p.get("gender", "")
-                g_badge = f'<span class="badge badge-f">{gender}</span>' if gender == "Female" \
-                          else f'<span class="badge badge-m">{gender}</span>'
+                gender_raw = str(p.get("gender", "")).strip()
+                gender_key = gender_raw.lower()
+                if gender_key == "female":
+                    gender = "Female"
+                    g_badge = f'<span class="badge badge-f">{gender}</span>'
+                elif gender_key == "male":
+                    gender = "Male"
+                    g_badge = f'<span class="badge badge-m">{gender}</span>'
+                else:
+                    gender = gender_raw or "Unknown"
+                    g_badge = f'<span class="badge">{gender}</span>'
                 status = p.get("status", "Active")
                 s_badge = f'<span class="badge badge-a">{status}</span>' if status == "Active" \
                           else f'<span class="badge badge-d">{status}</span>'

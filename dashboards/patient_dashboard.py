@@ -133,6 +133,19 @@ def patient_dashboard():
     st.session_state.setdefault("view", "main")
     st.session_state.setdefault("selected_category", None)
     st.session_state.setdefault("selected_module", None)
+    st.session_state.setdefault("patient_sidebar_selected", "Dashboard")
+
+    # Render C13 module directly without the app-wide sidebar, so its own
+    # frontend layout displays correctly.
+    selected_module = st.session_state.get("selected_module")
+    if (
+        st.session_state.get("view") == "module"
+        and isinstance(selected_module, (tuple, list))
+        and len(selected_module) > 0
+        and selected_module[0] == "C1"
+    ):
+        show_module_detail()
+        return
 
     # Sidebar
     selected = sidebar([
@@ -148,15 +161,18 @@ def patient_dashboard():
         "I - Integrated Capstone Projects"
     ])
 
-    # Handle sidebar selection
-    if selected != "Dashboard" and selected in CATEGORIES:
-        st.session_state.selected_category = selected
-        st.session_state.view = "category"
-        st.session_state.selected_module = None
-    elif selected == "Dashboard":
-        st.session_state.view = "main"
-        st.session_state.selected_category = None
-        st.session_state.selected_module = None
+    # Handle sidebar selection only when it changes.
+    # This avoids resetting module navigation after button-triggered reruns.
+    if selected != st.session_state.patient_sidebar_selected:
+        st.session_state.patient_sidebar_selected = selected
+        if selected != "Dashboard" and selected in CATEGORIES:
+            st.session_state.selected_category = selected
+            st.session_state.view = "category"
+            st.session_state.selected_module = None
+        elif selected == "Dashboard":
+            st.session_state.view = "main"
+            st.session_state.selected_category = None
+            st.session_state.selected_module = None
 
     # ROUTER
     if st.session_state.view == "category":
@@ -360,6 +376,18 @@ def show_category_view():
 def show_module_detail():
     code, name, desc, tables, records = st.session_state.selected_module
     cat_key = st.session_state.selected_category
+
+    if code == "C1":
+        try:
+            from src.modules.C13.patient_search import patient_search_page
+            patient_search_page(role="Clinician")
+        except Exception as exc:
+            st.error(f"Unable to load C13 frontend: {exc}")
+        st.divider()
+        if st.button("⬅ Back to Modules", key="back_from_c13"):
+            st.session_state.view = "category"
+            st.rerun()
+        return
     
     # Breadcrumb
     st.markdown(f"Category {cat_key.split('-')[0].strip()} > {name}")

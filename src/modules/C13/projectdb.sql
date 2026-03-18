@@ -92,10 +92,10 @@ CREATE FUNCTION public.extract_gender(q text) RETURNS text
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    IF q ILIKE '%male%' THEN
-        RETURN 'male';
-    ELSIF q ILIKE '%female%' THEN
+    IF q ILIKE '%female%' THEN
         RETURN 'female';
+    ELSIF q ILIKE '%male%' THEN
+        RETURN 'male';
     END IF;
 
     RETURN NULL;

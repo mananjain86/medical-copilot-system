@@ -143,6 +143,28 @@ def _inject_css() -> None:
         .new-tmpl-wrap {
             position: absolute; top: 1.8rem; right: 2rem;
         }
+
+        /* Website-aligned admin overrides */
+        .tmpl-card,
+        .admin-stat-box {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        .tmpl-name,
+        .admin-stat-val { color: #111827 !important; }
+        .tmpl-meta,
+        .admin-stat-lbl { color: #6b7280 !important; }
+        .tmpl-meta b { color: #4b5563 !important; }
+        .tmpl-sql {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            color: #374151 !important;
+        }
+        .tmpl-param-tag {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb !important;
+            color: #374151 !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -151,50 +173,29 @@ def _inject_css() -> None:
 
 def _sidebar() -> str:
     with st.sidebar:
-        st.markdown(
-            """
-            <div class="ms-logo">
-                <div class="ms-logo-icon">🫀</div>
-                <div>
-                    <div class="ms-logo-name">MediSearch</div>
-                    <div class="ms-logo-sub">Patient Finder</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown("## MediCare")
+        st.caption("Clinical Query Copilot")
 
         st.session_state.setdefault("ms_current_page", "Patient Search")
         page = st.session_state.ms_current_page
 
-        def _nav(label: str, icon: str, key: str):
+        def _nav(label: str, key: str):
             active = page == label
             if active:
                 st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-            clicked = st.button(f"{icon}  {label}", use_container_width=True, key=key)
+            clicked = st.button(label, use_container_width=True, key=key)
             if active:
                 st.markdown("</div>", unsafe_allow_html=True)
             if clicked:
                 st.session_state.ms_current_page = label
                 st.rerun()
 
-        _nav("Patient Search", "🔍", "nav_ps")
-        _nav("Search History", "🕐", "nav_sh")
-        _nav("Admin Panel",    "⚙️",  "nav_ap")
+        _nav("Patient Search", "nav_ps")
+        _nav("Search History", "nav_sh")
+        _nav("Admin Panel", "nav_ap")
 
-        st.markdown("<br>" * 4, unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="ms-user-card">
-                <div class="ms-ava">SA</div>
-                <div>
-                    <div class="ms-ava-name">System Admin</div>
-                    <div class="ms-ava-role">● Administrator</div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.divider()
+        st.caption("Role: Administrator")
 
     return st.session_state.ms_current_page
 

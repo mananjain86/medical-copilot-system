@@ -67,8 +67,130 @@ class SearchQuery:
 	search_type: str = "clinical"
 	gender: str | None = None
 	age_above: int | None = None
+	age_below: int | None = None
 	symptom: str | None = None
+	diagnosis: str | None = None
+	city: str | None = None
+	department: str | None = None
 	expanded_terms: list[str] = field(default_factory=list)
+
+
+_STOPWORDS = {
+	"patient",
+	"patients",
+	"with",
+	"and",
+	"or",
+	"the",
+	"a",
+	"an",
+	"show",
+	"find",
+	"search",
+	"list",
+	"get",
+	"me",
+	"all",
+	"records",
+	"record",
+	"who",
+	"having",
+	"has",
+	"in",
+	"of",
+	"for",
+}
+
+
+_CONCEPT_MAP: dict[str, str] = {
+	# cardio terms
+	"heart disease": "chest pain",
+	"cardiac disease": "chest pain",
+	"heart problem": "chest pain",
+	"heart condition": "chest pain",
+	"cardiac problem": "chest pain",
+	"angina": "chest pain",
+	# pulmonary terms
+	"breathlessness": "shortness of breath",
+	"shortness breath": "shortness of breath",
+	"dyspnea": "shortness of breath",
+	"difficulty breathing": "shortness of breath",
+	"breathing problem": "shortness of breath",
+	"coughing": "cough",
+	"tussis": "cough",
+	# neuro terms
+	"head pain": "headache",
+	"cephalalgia": "headache",
+	# general medicine
+	"high temperature": "fever",
+	"pyrexia": "fever",
+	"tired": "fatigue",
+	"tiredness": "fatigue",
+	"weakness": "fatigue",
+	"vomiting": "nausea",
+	"nauseous": "nausea",
+	# diagnosis style terms
+	"diabetic": "diabetes",
+	"sugar": "diabetes",
+	"high sugar": "diabetes",
+	"flu": "flu",
+	"cold": "flu",
+	"influenza": "flu",
+	"chest congestion": "bronchitis",
+	"lung infection": "bronchitis",
+	"asthmatic": "asthma",
+}
+
+
+_DEPARTMENT_MAP: dict[str, str] = {
+	"cardio": "Cardiology",
+	"cardiology": "Cardiology",
+	"heart": "Cardiology",
+	"endo": "Endocrinology",
+	"endocrinology": "Endocrinology",
+	"diabetes": "Endocrinology",
+	"general medicine": "General Medicine",
+	"general": "General Medicine",
+	"neurology": "Neurology",
+	"neuro": "Neurology",
+	"brain": "Neurology",
+	"pulmonology": "Pulmonology",
+	"pulmo": "Pulmonology",
+	"lung": "Pulmonology",
+	"respiratory": "Pulmonology",
+}
+
+
+def _normalize_query(text: str) -> str:
+	"""Normalize common natural-language medical phrases to dataset terms."""
+
+	q = text.lower().strip()
+	for src, dst in _CONCEPT_MAP.items():
+		q = q.replace(src, dst)
+	return q
+
+
+def _extract_age_bounds(lower: str) -> tuple[int | None, int | None]:
+	"""Extract age bounds from natural-language text."""
+
+	age_above: int | None = None
+	age_below: int | None = None
+
+	between = re.search(r"between\s+(\d+)\s+(?:and|to)\s+(\d+)", lower)
+	if between:
+		a, b = int(between.group(1)), int(between.group(2))
+		age_above, age_below = min(a, b), max(a, b)
+		return age_above, age_below
+
+	over = re.search(r"(?:above|older than|over|greater than|more than)\s+(\d+)", lower)
+	if over:
+		age_above = int(over.group(1))
+
+	under = re.search(r"(?:below|under|younger than|less than)\s+(\d+)", lower)
+	if under:
+		age_below = int(under.group(1))
+
+	return age_above, age_below
 
 
 @dataclass
@@ -172,7 +294,7 @@ def parse_query(text: str) -> SearchQuery:
 	  "patients with pyrexia"
 	"""
 
-	lower = text.lower().strip()
+	lower = _normalize_query(text)
 
 	gender = None
 	if "female" in lower:
@@ -180,10 +302,19 @@ def parse_query(text: str) -> SearchQuery:
 	elif "male" in lower:
 		gender = "male"
 
-	age = None
-	age_match = re.search(r"(?:above|older than|over)\s+(\d+)", lower)
-	if age_match:
-		age = int(age_match.group(1))
+	age_above, age_below = _extract_age_bounds(lower)
+
+	city = None
+	for c in ("ahmedabad", "chennai", "delhi", "hyderabad", "kochi", "kolkata", "mumbai"):
+		if c in lower:
+			city = c.title()
+			break
+
+	department = None
+	for token, mapped in _DEPARTMENT_MAP.items():
+		if token in lower:
+			department = mapped
+			break
 
 	if any(word in lower for word in ("glucose", "hemoglobin", "cholesterol", "lab test", "lab result")):
 		search_type = "laboratory"
@@ -206,7 +337,7 @@ def parse_query(text: str) -> SearchQuery:
 		)
 	):
 		search_type = "clinical"
-	elif gender or age:
+	elif gender or age_above or age_below or city or department:
 		search_type = "demographic"
 	else:
 		search_type = "clinical"
@@ -215,7 +346,10 @@ def parse_query(text: str) -> SearchQuery:
 		raw_text=text,
 		search_type=search_type,
 		gender=gender,
-		age_above=age,
+		age_above=age_above,
+		age_below=age_below,
+		city=city,
+		department=department,
 	)
 
 
@@ -248,25 +382,90 @@ def expand_terms(conn, text: str) -> list[str]:
 def resolve_symptom(conn, text: str) -> str | None:
 	"""Resolve raw text to a canonical symptom name."""
 
-	words = re.findall(r"[a-zA-Z ]+", text.lower())
+	lower = _normalize_query(text)
 
 	with conn.cursor() as cur:
-		for phrase in words:
-			phrase = phrase.strip()
-			if not phrase:
-				continue
+		# 0) identify direct token/phrase overlap with known symptom names
+		cur.execute("SELECT symptom_name FROM symptoms")
+		for (symptom_name,) in cur.fetchall():
+			if symptom_name and symptom_name.lower() in lower:
+				return symptom_name
 
+		# 1) direct symptom phrase appears in the query text
+		cur.execute(
+			"""
+			SELECT symptom_name
+			FROM symptoms
+			WHERE %s ILIKE '%%' || symptom_name || '%%'
+			ORDER BY LENGTH(symptom_name) DESC
+			LIMIT 1
+			""",
+			(lower,),
+		)
+		row = cur.fetchone()
+		if row:
+			return row[0]
+
+		# 2) synonym appears in query text, map back to canonical symptom
+		cur.execute(
+			"""
+			SELECT word
+			FROM synonyms
+			WHERE %s ILIKE '%%' || synonym || '%%'
+			ORDER BY LENGTH(synonym) DESC
+			LIMIT 1
+			""",
+			(lower,),
+		)
+		row = cur.fetchone()
+		if row:
+			return row[0]
+
+		# 3) fallback token-wise exact match
+		for token in re.findall(r"[a-zA-Z]+", lower):
 			cur.execute(
-				"SELECT symptom_name FROM symptoms WHERE symptom_name ILIKE %s",
-				(phrase,),
+				"SELECT symptom_name FROM symptoms WHERE symptom_name ILIKE %s LIMIT 1",
+				(token,),
 			)
 			row = cur.fetchone()
 			if row:
 				return row[0]
 
 			cur.execute(
-				"SELECT word FROM synonyms WHERE synonym ILIKE %s",
-				(phrase,),
+				"SELECT word FROM synonyms WHERE synonym ILIKE %s LIMIT 1",
+				(token,),
+			)
+			row = cur.fetchone()
+			if row:
+				return row[0]
+
+	return None
+
+
+def resolve_diagnosis(conn, text: str) -> str | None:
+	"""Resolve diagnosis terms from NL query text using visits.diagnosis values."""
+
+	normalized = _normalize_query(text)
+
+	with conn.cursor() as cur:
+		cur.execute(
+			"""
+			SELECT diagnosis
+			FROM visits
+			WHERE %s ILIKE '%%' || diagnosis || '%%'
+			ORDER BY LENGTH(diagnosis) DESC
+			LIMIT 1
+			""",
+			(normalized,),
+		)
+		row = cur.fetchone()
+		if row:
+			return row[0]
+
+		for token in re.findall(r"[a-zA-Z]+", normalized):
+			cur.execute(
+				"SELECT diagnosis FROM visits WHERE diagnosis ILIKE %s LIMIT 1",
+				(token,),
 			)
 			row = cur.fetchone()
 			if row:
@@ -294,10 +493,63 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 		params["age_above"] = query.age_above
 		notes.append(f"age > {query.age_above}")
 
+	if query.age_below:
+		conditions.append("DATE_PART('year', AGE(p.date_of_birth)) < %(age_below)s")
+		params["age_below"] = query.age_below
+		notes.append(f"age < {query.age_below}")
+
 	if query.symptom:
 		conditions.append("(sy.symptom_name = %(symptom)s OR syn.synonym = %(symptom)s)")
 		params["symptom"] = query.symptom
 		notes.append(f"symptom = '{query.symptom}' (+ synonyms)")
+
+	if query.diagnosis:
+		conditions.append("v.diagnosis ILIKE %(diagnosis)s")
+		params["diagnosis"] = query.diagnosis
+		notes.append(f"diagnosis ~= '{query.diagnosis}'")
+
+	if query.city:
+		conditions.append("p.city ILIKE %(city)s")
+		params["city"] = query.city
+		notes.append(f"city = '{query.city}'")
+
+	if query.department:
+		conditions.append("d.specialization ILIKE %(department)s")
+		params["department"] = query.department
+		notes.append(f"department = '{query.department}'")
+
+	# Keyword fallback for free-text clinical queries when explicit entities are sparse.
+	keyword_terms = [
+		term for term in (query.expanded_terms or [])
+		if len(term) >= 3 and term not in _STOPWORDS
+	]
+	if query.search_type == "clinical" and not any([
+		query.gender,
+		query.age_above,
+		query.age_below,
+		query.symptom,
+		query.diagnosis,
+		query.city,
+		query.department,
+	]) and keyword_terms:
+		kw_clauses: list[str] = []
+		for idx, kw in enumerate(sorted(set(keyword_terms))[:10]):
+			key = f"kw_{idx}"
+			params[key] = f"%{kw}%"
+			kw_clauses.append(
+				"(" 
+				f"p.first_name ILIKE %({key})s OR "
+				f"p.last_name ILIKE %({key})s OR "
+				f"p.city ILIKE %({key})s OR "
+				f"v.diagnosis ILIKE %({key})s OR "
+				f"sy.symptom_name ILIKE %({key})s OR "
+				f"syn.synonym ILIKE %({key})s OR "
+				f"d.specialization ILIKE %({key})s"
+				")"
+			)
+		if kw_clauses:
+			conditions.append("(" + " OR ".join(kw_clauses) + ")")
+			notes.append("keyword fallback")
 
 	if query.search_type == "laboratory":
 		conditions.append("lt.test_name ILIKE %(lab_term)s")
@@ -326,7 +578,8 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 			"LEFT JOIN visits v              ON p.patient_id  = v.patient_id\n"
 			"LEFT JOIN patient_symptoms ps   ON v.visit_id    = ps.visit_id\n"
 			"LEFT JOIN symptoms sy           ON ps.symptom_id = sy.symptom_id\n"
-			"LEFT JOIN synonyms syn          ON sy.symptom_name = syn.word"
+			"LEFT JOIN synonyms syn          ON sy.symptom_name = syn.word\n"
+			"LEFT JOIN doctors d             ON v.doctor_id = d.doctor_id"
 		)
 		select_cols = (
 			"    p.patient_id,\n"
@@ -360,17 +613,26 @@ def run_search(
 	user_id: int,
 	nl_query: str,
 	search_type: str = "clinical",
+	sql_payload: GeneratedSQL | None = None,
 ) -> list[SearchResult]:
 	"""
-	Call run_patient_search() which logs query, creates cohort, and returns results.
+	Execute query and return patient rows.
+
+	If sql_payload is provided, we run the generated SQL directly so parsed NL filters
+	are always applied, and still log the query in search_queries.
 	"""
 
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-		cur.execute(
-			"SELECT * FROM run_patient_search(%s, %s, %s)",
-			(user_id, nl_query, search_type),
-		)
-		rows = cur.fetchall()
+		if sql_payload is None:
+			cur.execute(
+				"SELECT * FROM run_patient_search(%s, %s, %s)",
+				(user_id, nl_query, search_type),
+			)
+			rows = cur.fetchall()
+		else:
+			cur.execute("SELECT log_search_query(%s, %s, %s)", (user_id, nl_query, search_type))
+			cur.execute(sql_payload.sql, sql_payload.params)
+			rows = cur.fetchall()
 		conn.commit()
 
 	return [
@@ -452,10 +714,34 @@ def nl_search_pipeline(conn, user_id: int, nl_query: str) -> dict[str, Any]:
 	"""
 
 	parsed = parse_query(nl_query)
-	parsed.expanded_terms = expand_terms(conn, nl_query)
+	normalized_query = _normalize_query(nl_query)
+	parsed.expanded_terms = sorted(
+		set(expand_terms(conn, normalized_query))
+		| set(re.findall(r"[a-zA-Z]+", normalized_query))
+	)
 	parsed.symptom = resolve_symptom(conn, nl_query)
+	parsed.diagnosis = resolve_diagnosis(conn, nl_query)
 	sql_payload = generate_sql(parsed)
-	results = run_search(conn, user_id, nl_query, parsed.search_type)
+
+	# For clinical free-text with no resolved filter, avoid returning all patients.
+	lower_q = nl_query.lower().strip()
+	allow_all = any(
+		phrase in lower_q
+		for phrase in ("all patients", "all patient", "all records", "list all", "show all")
+	)
+	has_filter = any([
+		parsed.gender,
+		parsed.age_above,
+		parsed.age_below,
+		parsed.symptom,
+		parsed.diagnosis,
+		parsed.city,
+		parsed.department,
+	])
+	if parsed.search_type == "clinical" and not has_filter and not allow_all:
+		results: list[SearchResult] = []
+	else:
+		results = run_search(conn, user_id, nl_query, parsed.search_type, sql_payload=sql_payload)
 
 	return {
 		"parsed": parsed,
