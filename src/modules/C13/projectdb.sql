@@ -405,6 +405,7 @@ CREATE TABLE public.patients (
     date_of_birth date NOT NULL,
     phone character varying(15),
     city text,
+    status text DEFAULT 'Active',
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     search_vector tsvector,
     CONSTRAINT patients_gender_check CHECK (((gender)::text = ANY ((ARRAY['male'::character varying, 'female'::character varying, 'other'::character varying])::text[])))
@@ -423,7 +424,8 @@ CREATE VIEW public.patient_age_view AS
     last_name,
     gender,
     date_part('year'::text, age((date_of_birth)::timestamp with time zone)) AS age,
-    city
+    city,
+    status
    FROM public.patients;
 
 

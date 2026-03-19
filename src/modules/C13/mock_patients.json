@@ -1,0 +1,6536 @@
+[
+    {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes",
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes",
+            "Stage 1 Hypertension"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-15",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-02-10",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P003",
+        "name": "Patricia Lee",
+        "age": 62,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-28",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P004",
+        "name": "Robert Williams",
+        "age": 72,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension",
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Essential Hypertension",
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-03-01",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P005",
+        "name": "James Brown",
+        "age": 58,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma",
+            "Allergies"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma",
+            "Allergic Rhinitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-02-20",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P006",
+        "name": "Dorothy Wilson",
+        "age": 70,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis",
+            "Hypertension"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-01-05",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P007",
+        "name": "Charles Anderson",
+        "age": 55,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain",
+            "Sciatica"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-03-10",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P008",
+        "name": "Barbara Taylor",
+        "age": 67,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-15",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P009",
+        "name": "Thomas Moore",
+        "age": 63,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Kidney Disease"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes",
+            "CKD"
+        ],
+        "department": "Nephrology",
+        "admission_date": "2024-01-20",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P010",
+        "name": "Nancy Jackson",
+        "age": 71,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-02-28",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P011",
+        "name": "Richard Harris",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Depression",
+            "Anxiety"
+        ],
+        "diagnoses": [
+            "Major Depressive Disorder"
+        ],
+        "department": "Psychiatry",
+        "admission_date": "2024-03-05",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P012",
+        "name": "Susan White",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Breast Cancer"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-01-12",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P013",
+        "name": "David Thompson",
+        "age": 66,
+        "gender": "Male",
+        "symptoms": [
+            "Prostate Issues"
+        ],
+        "diagnoses": [
+            "Benign Prostate Hyperplasia"
+        ],
+        "department": "Urology",
+        "admission_date": "2024-02-08",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P014",
+        "name": "Margaret Garcia",
+        "age": 60,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-03-12",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P015",
+        "name": "Joseph Rodriguez",
+        "age": 76,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-30",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P016",
+        "name": "Elizabeth Lewis",
+        "age": 59,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-02-22",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P017",
+        "name": "Christopher Hill",
+        "age": 44,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-03-08",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P018",
+        "name": "Betty Scott",
+        "age": 73,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure",
+            "Edema"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-18",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P019",
+        "name": "William Adams",
+        "age": 50,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Obesity"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes",
+            "Morbid Obesity"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-02-05",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P020",
+        "name": "Helen Nelson",
+        "age": 64,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-15",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P021",
+        "name": "Mary Martin",
+        "age": 56,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-06-08",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P022",
+        "name": "Ashley Brown",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-12-30",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P023",
+        "name": "Margaret Martinez",
+        "age": 43,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-03-17",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-10-06",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P025",
+        "name": "Michelle Miller",
+        "age": 23,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-03-26",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P026",
+        "name": "Richard Taylor",
+        "age": 86,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-05-08",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P027",
+        "name": "Michelle Rodriguez",
+        "age": 86,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-11-18",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P028",
+        "name": "William Taylor",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-11-29",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P029",
+        "name": "Donald Gonzalez",
+        "age": 42,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-04-18",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P030",
+        "name": "Emily Wilson",
+        "age": 61,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-03-02",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P031",
+        "name": "Donald Johnson",
+        "age": 28,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-04-05",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P032",
+        "name": "James Jones",
+        "age": 58,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-04-19",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P033",
+        "name": "Ashley Wilson",
+        "age": 79,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-08-17",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P034",
+        "name": "Michael Williams",
+        "age": 54,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-08-14",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P035",
+        "name": "Paul Lopez",
+        "age": 51,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-02-06",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P036",
+        "name": "Joshua Wilson",
+        "age": 78,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-09-23",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P037",
+        "name": "Karen Smith",
+        "age": 31,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-04-15",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P038",
+        "name": "Patricia Martin",
+        "age": 89,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-14",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P039",
+        "name": "Thomas Rodriguez",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-21",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P040",
+        "name": "Daniel Hernandez",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Cough",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-20",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P041",
+        "name": "Ashley Gonzalez",
+        "age": 76,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-05-03",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P042",
+        "name": "Ashley Anderson",
+        "age": 84,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-20",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P043",
+        "name": "Mark Taylor",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-01-08",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P044",
+        "name": "Richard Johnson",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine",
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-02",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P045",
+        "name": "Charles Taylor",
+        "age": 79,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-02-08",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P046",
+        "name": "Donald Williams",
+        "age": 18,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-05-05",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P047",
+        "name": "Donald Taylor",
+        "age": 20,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-06",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P048",
+        "name": "Thomas Garcia",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy",
+            "Cough"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-01-14",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P049",
+        "name": "Donna Jackson",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-05-22",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P050",
+        "name": "Michael Lopez",
+        "age": 29,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-09-12",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P051",
+        "name": "Thomas Anderson",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-06-04",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P052",
+        "name": "Betty Jones",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-23",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P053",
+        "name": "Elizabeth Brown",
+        "age": 87,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-21",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P054",
+        "name": "Joshua Gonzalez",
+        "age": 59,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-04-05",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P055",
+        "name": "David Brown",
+        "age": 71,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-01-18",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P056",
+        "name": "Mark Johnson",
+        "age": 30,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-24",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P057",
+        "name": "Thomas Wilson",
+        "age": 33,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-24",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P058",
+        "name": "Joshua Gonzalez",
+        "age": 18,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-03-12",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P059",
+        "name": "Christopher Johnson",
+        "age": 35,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-11-18",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P060",
+        "name": "Barbara Wilson",
+        "age": 45,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-02-10",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P061",
+        "name": "Anthony Jones",
+        "age": 80,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-04-27",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P062",
+        "name": "Michelle Wilson",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-06-18",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P063",
+        "name": "Jessica Jackson",
+        "age": 39,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-11-12",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-06-29",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P065",
+        "name": "John Moore",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-11-18",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P066",
+        "name": "Andrew Hernandez",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-09-15",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P067",
+        "name": "Susan Lopez",
+        "age": 83,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-08-06",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P068",
+        "name": "Emily Wilson",
+        "age": 58,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-28",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-11",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P070",
+        "name": "Margaret Miller",
+        "age": 53,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-10-18",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P071",
+        "name": "Donna Martin",
+        "age": 74,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine",
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-01-24",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P072",
+        "name": "Emily Hernandez",
+        "age": 83,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-10-07",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P073",
+        "name": "Richard Taylor",
+        "age": 86,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-16",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-10-27",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P075",
+        "name": "Joseph Hernandez",
+        "age": 56,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-11",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P076",
+        "name": "Michelle Miller",
+        "age": 90,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-09-04",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P077",
+        "name": "Linda Miller",
+        "age": 20,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-14",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P078",
+        "name": "Susan Lopez",
+        "age": 33,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-07",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P079",
+        "name": "Linda Jones",
+        "age": 76,
+        "gender": "Female",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-03",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P080",
+        "name": "Sandra Garcia",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-07-09",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P081",
+        "name": "Donald Martin",
+        "age": 51,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-10",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P082",
+        "name": "Lisa Jackson",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-09",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P083",
+        "name": "Anthony Martinez",
+        "age": 19,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-03-26",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P084",
+        "name": "Paul Jones",
+        "age": 28,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-03-17",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P085",
+        "name": "Barbara Lopez",
+        "age": 70,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-09",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P086",
+        "name": "Michelle Williams",
+        "age": 39,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-08-30",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P087",
+        "name": "Susan Jones",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-02-03",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P088",
+        "name": "Mary Moore",
+        "age": 20,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-06-24",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P089",
+        "name": "Joshua Thomas",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-09-14",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P090",
+        "name": "Andrew Johnson",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-03-25",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P091",
+        "name": "Elizabeth Johnson",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-09",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P092",
+        "name": "Lisa Jones",
+        "age": 18,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-01-10",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P093",
+        "name": "Michael Smith",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-06-05",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P094",
+        "name": "Matthew Jackson",
+        "age": 49,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-03-18",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P095",
+        "name": "Betty Gonzalez",
+        "age": 48,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-02-04",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P096",
+        "name": "Joshua Smith",
+        "age": 39,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-10-18",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P097",
+        "name": "Richard Davis",
+        "age": 57,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-01",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P098",
+        "name": "Thomas Miller",
+        "age": 50,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-12-16",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-03-10",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P100",
+        "name": "Mary Jackson",
+        "age": 29,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-02-08",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P101",
+        "name": "David Jackson",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-07",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P102",
+        "name": "Emily Lopez",
+        "age": 46,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-11",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P103",
+        "name": "David Jones",
+        "age": 29,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-08",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P104",
+        "name": "Matthew Smith",
+        "age": 45,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-01-09",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P105",
+        "name": "Linda Johnson",
+        "age": 19,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-02-13",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P106",
+        "name": "Anthony Rodriguez",
+        "age": 78,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-03-17",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P107",
+        "name": "Steven Martinez",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-10-17",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P108",
+        "name": "Patricia Wilson",
+        "age": 55,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-05",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P109",
+        "name": "Emily Davis",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes",
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P110",
+        "name": "Matthew Smith",
+        "age": 30,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-02",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P111",
+        "name": "James Jackson",
+        "age": 89,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-04-30",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P112",
+        "name": "Mary Lopez",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-05-06",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P113",
+        "name": "Jennifer Moore",
+        "age": 44,
+        "gender": "Female",
+        "symptoms": [
+            "COPD",
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-02-27",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P114",
+        "name": "Daniel Jackson",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-17",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P115",
+        "name": "Michael Johnson",
+        "age": 20,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-26",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue",
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-02-09",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P117",
+        "name": "Michelle Smith",
+        "age": 82,
+        "gender": "Female",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-09",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P118",
+        "name": "Charles Taylor",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-02-16",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P119",
+        "name": "Mark Martin",
+        "age": 57,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-09-18",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P120",
+        "name": "Donald Brown",
+        "age": 20,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-12",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P121",
+        "name": "Michelle Hernandez",
+        "age": 46,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-02-03",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-09-14",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P123",
+        "name": "Patricia Wilson",
+        "age": 85,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-22",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P124",
+        "name": "Paul Gonzalez",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P125",
+        "name": "David Thomas",
+        "age": 29,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-01-16",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P126",
+        "name": "James Brown",
+        "age": 86,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-03-16",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P127",
+        "name": "Jessica Martin",
+        "age": 79,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-08",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P128",
+        "name": "Patricia Martinez",
+        "age": 53,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-05",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P129",
+        "name": "Mary Martin",
+        "age": 37,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-09-11",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P130",
+        "name": "Steven Thomas",
+        "age": 83,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-03-26",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P131",
+        "name": "Daniel Taylor",
+        "age": 70,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-09-07",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P132",
+        "name": "Betty Anderson",
+        "age": 39,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-12",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P133",
+        "name": "Joshua Martinez",
+        "age": 34,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-19",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-03-14",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P135",
+        "name": "Karen Moore",
+        "age": 39,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-09-23",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P136",
+        "name": "Mark Wilson",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-11-08",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P137",
+        "name": "Donna Anderson",
+        "age": 70,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-03-25",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P138",
+        "name": "Daniel Miller",
+        "age": 19,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-02-22",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P139",
+        "name": "Susan Jackson",
+        "age": 18,
+        "gender": "Female",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-11",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P140",
+        "name": "Andrew Davis",
+        "age": 38,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-22",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P141",
+        "name": "Joshua Lopez",
+        "age": 25,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-14",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P142",
+        "name": "Charles Jackson",
+        "age": 18,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-15",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P143",
+        "name": "Joshua Miller",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue",
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-11-25",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-06-03",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P145",
+        "name": "Karen Martin",
+        "age": 57,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-12-28",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P146",
+        "name": "William Wilson",
+        "age": 51,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-15",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P147",
+        "name": "Donald Jackson",
+        "age": 25,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-22",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P148",
+        "name": "Richard Rodriguez",
+        "age": 41,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-05-17",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P149",
+        "name": "Thomas Williams",
+        "age": 26,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-02-12",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P150",
+        "name": "Barbara Williams",
+        "age": 84,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy",
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-07",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P151",
+        "name": "Anthony Taylor",
+        "age": 58,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-05-22",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P152",
+        "name": "Michelle Hernandez",
+        "age": 75,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-11-27",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P153",
+        "name": "Jessica Martinez",
+        "age": 69,
+        "gender": "Female",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-08-20",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P154",
+        "name": "Elizabeth Martin",
+        "age": 20,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-10-02",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P155",
+        "name": "Barbara Hernandez",
+        "age": 72,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-06-30",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P156",
+        "name": "David Martinez",
+        "age": 78,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-02-03",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P157",
+        "name": "Thomas Brown",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-01-25",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P158",
+        "name": "Thomas Williams",
+        "age": 26,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-11-23",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P159",
+        "name": "Sandra Jones",
+        "age": 21,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-09-18",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P160",
+        "name": "William Jackson",
+        "age": 79,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-06-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P161",
+        "name": "Anthony Hernandez",
+        "age": 34,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain",
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-07-22",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P162",
+        "name": "Anthony Johnson",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-13",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P163",
+        "name": "Ashley Jones",
+        "age": 77,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-11",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P164",
+        "name": "Joshua Moore",
+        "age": 45,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid",
+            "Cough"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-09-01",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P165",
+        "name": "Matthew Johnson",
+        "age": 75,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-02-17",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P166",
+        "name": "Margaret Martin",
+        "age": 74,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-04-08",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P167",
+        "name": "Mark Hernandez",
+        "age": 88,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-26",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P168",
+        "name": "Christopher Miller",
+        "age": 42,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-12-31",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P169",
+        "name": "Richard Smith",
+        "age": 64,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-08-12",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P170",
+        "name": "Emily Miller",
+        "age": 19,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-09-22",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P171",
+        "name": "Joseph Gonzalez",
+        "age": 67,
+        "gender": "Male",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-09",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P172",
+        "name": "Michelle Lopez",
+        "age": 75,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-11-05",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-09-01",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-01-27",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P175",
+        "name": "Mark Johnson",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-04-27",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P176",
+        "name": "Mark Hernandez",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-01-13",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P177",
+        "name": "John Martinez",
+        "age": 21,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-04-25",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P178",
+        "name": "Richard Martinez",
+        "age": 69,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-20",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P179",
+        "name": "Joseph Hernandez",
+        "age": 23,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-06-18",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P180",
+        "name": "Donald Hernandez",
+        "age": 69,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-01-04",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P181",
+        "name": "Robert Miller",
+        "age": 52,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-01",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-06-25",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P183",
+        "name": "Daniel Brown",
+        "age": 35,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-08-13",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P184",
+        "name": "Michelle Davis",
+        "age": 35,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-01-06",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P185",
+        "name": "Donna Rodriguez",
+        "age": 33,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-17",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P186",
+        "name": "Michael Davis",
+        "age": 30,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-02-01",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P187",
+        "name": "Paul Rodriguez",
+        "age": 34,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis",
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-09-04",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P188",
+        "name": "Mark Jones",
+        "age": 23,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-08-25",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P189",
+        "name": "Paul Jackson",
+        "age": 38,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-11-14",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P190",
+        "name": "Andrew Jones",
+        "age": 19,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-31",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P191",
+        "name": "Betty Garcia",
+        "age": 35,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-01-15",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P192",
+        "name": "Patricia Rodriguez",
+        "age": 21,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-17",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P193",
+        "name": "Mary Jackson",
+        "age": 42,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-21",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P194",
+        "name": "Margaret Williams",
+        "age": 60,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-03-05",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P195",
+        "name": "Kimberly Jones",
+        "age": 72,
+        "gender": "Female",
+        "symptoms": [
+            "Cough",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-06-02",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P196",
+        "name": "Steven Hernandez",
+        "age": 64,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-02",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P197",
+        "name": "Elizabeth Garcia",
+        "age": 55,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-01-07",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P198",
+        "name": "Karen Anderson",
+        "age": 53,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-01-26",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P199",
+        "name": "Paul Martin",
+        "age": 78,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-08",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P200",
+        "name": "Robert Williams",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Cough",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-03-15",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P201",
+        "name": "Lisa Gonzalez",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-02-23",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P202",
+        "name": "Michael Lopez",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-01-14",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P203",
+        "name": "Nancy Hernandez",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-04-17",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P204",
+        "name": "Thomas Gonzalez",
+        "age": 63,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-06-15",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P205",
+        "name": "Daniel Miller",
+        "age": 52,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-12-10",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P206",
+        "name": "Jennifer Rodriguez",
+        "age": 32,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-01-07",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P207",
+        "name": "John Johnson",
+        "age": 35,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-01-16",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P208",
+        "name": "Joshua Johnson",
+        "age": 39,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-04-23",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P209",
+        "name": "Matthew Davis",
+        "age": 54,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-09",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-03-16",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P211",
+        "name": "Robert Hernandez",
+        "age": 40,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-03-06",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P212",
+        "name": "Andrew Jackson",
+        "age": 55,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure",
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-05-20",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P213",
+        "name": "Sandra Hernandez",
+        "age": 48,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-07-07",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-06-18",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P215",
+        "name": "Joseph Rodriguez",
+        "age": 50,
+        "gender": "Male",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-08-09",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P216",
+        "name": "John Rodriguez",
+        "age": 65,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-03-22",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss",
+            "COPD"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-27",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P218",
+        "name": "Emily Anderson",
+        "age": 52,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-10",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P219",
+        "name": "Lisa Jackson",
+        "age": 71,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine",
+            "COPD"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-02-28",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P220",
+        "name": "Charles Taylor",
+        "age": 73,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-11-28",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P221",
+        "name": "Lisa Thomas",
+        "age": 85,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-11-07",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P222",
+        "name": "James Gonzalez",
+        "age": 58,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-10-12",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P223",
+        "name": "David Lopez",
+        "age": 64,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-23",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P224",
+        "name": "Kimberly Brown",
+        "age": 75,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-11-24",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P225",
+        "name": "Patricia Williams",
+        "age": 35,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-04",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P226",
+        "name": "David Davis",
+        "age": 68,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-13",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P227",
+        "name": "David Jackson",
+        "age": 34,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-01-17",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P228",
+        "name": "Ashley Hernandez",
+        "age": 22,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes",
+            "COPD"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-12-25",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P229",
+        "name": "Jennifer Thomas",
+        "age": 42,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-17",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P230",
+        "name": "Mary Garcia",
+        "age": 35,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-05-05",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P231",
+        "name": "Thomas Anderson",
+        "age": 84,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-04",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P232",
+        "name": "Elizabeth Gonzalez",
+        "age": 53,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-10-02",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P233",
+        "name": "Elizabeth Lopez",
+        "age": 88,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-06-29",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P234",
+        "name": "Jennifer Miller",
+        "age": 44,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-10-05",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P235",
+        "name": "Karen Wilson",
+        "age": 80,
+        "gender": "Female",
+        "symptoms": [
+            "COPD",
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-27",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P236",
+        "name": "Robert Smith",
+        "age": 51,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-10-03",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-03-28",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P238",
+        "name": "Joseph Miller",
+        "age": 42,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-02-29",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P239",
+        "name": "Donna Williams",
+        "age": 71,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-18",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-27",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P241",
+        "name": "Andrew Anderson",
+        "age": 34,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-05-02",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P242",
+        "name": "David Brown",
+        "age": 86,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-07",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P243",
+        "name": "Sandra Hernandez",
+        "age": 20,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-08",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P244",
+        "name": "Nancy Wilson",
+        "age": 34,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-02-14",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P245",
+        "name": "Steven Garcia",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-06-21",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P246",
+        "name": "Steven Smith",
+        "age": 40,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-06",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P247",
+        "name": "Richard Gonzalez",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-12",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P248",
+        "name": "John Jackson",
+        "age": 56,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-03-06",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P249",
+        "name": "Ashley Lopez",
+        "age": 80,
+        "gender": "Female",
+        "symptoms": [
+            "Cough",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-22",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P250",
+        "name": "Kimberly Davis",
+        "age": 34,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-11",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P251",
+        "name": "Donald Anderson",
+        "age": 57,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-16",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P252",
+        "name": "Nancy Martinez",
+        "age": 38,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-02-26",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P253",
+        "name": "Thomas Davis",
+        "age": 43,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-10",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P254",
+        "name": "Susan Rodriguez",
+        "age": 71,
+        "gender": "Female",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-07-02",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P255",
+        "name": "Sarah Garcia",
+        "age": 76,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-04-09",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P256",
+        "name": "Emily Davis",
+        "age": 19,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-02-21",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P257",
+        "name": "Donald Gonzalez",
+        "age": 39,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-06-29",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-08-19",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P259",
+        "name": "Patricia Garcia",
+        "age": 85,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-02-07",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P260",
+        "name": "Elizabeth Hernandez",
+        "age": 89,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-12-30",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P261",
+        "name": "Steven Taylor",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-12-24",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P262",
+        "name": "Nancy Thomas",
+        "age": 87,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-10-15",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-05",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P264",
+        "name": "Robert Gonzalez",
+        "age": 81,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-12",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P265",
+        "name": "Joseph Smith",
+        "age": 32,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-04-12",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P266",
+        "name": "Jennifer Wilson",
+        "age": 30,
+        "gender": "Female",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-10-12",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P267",
+        "name": "Margaret Gonzalez",
+        "age": 54,
+        "gender": "Female",
+        "symptoms": [
+            "Cough",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-05-03",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P268",
+        "name": "Susan Wilson",
+        "age": 72,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-11-29",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P269",
+        "name": "David Gonzalez",
+        "age": 71,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-09-30",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P270",
+        "name": "Nancy Wilson",
+        "age": 34,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-02-01",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P271",
+        "name": "David Thomas",
+        "age": 66,
+        "gender": "Male",
+        "symptoms": [
+            "COPD",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-05-02",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P272",
+        "name": "Richard Hernandez",
+        "age": 43,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-11-30",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P273",
+        "name": "Elizabeth Moore",
+        "age": 86,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-03-07",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P274",
+        "name": "James Williams",
+        "age": 49,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-09-24",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P275",
+        "name": "John Miller",
+        "age": 58,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-06-08",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P276",
+        "name": "Matthew Wilson",
+        "age": 66,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-05-10",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P277",
+        "name": "Patricia Miller",
+        "age": 73,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-01-15",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P278",
+        "name": "Joseph Jackson",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers",
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-10-16",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P279",
+        "name": "Charles Smith",
+        "age": 56,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-09-02",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P280",
+        "name": "Charles Lopez",
+        "age": 50,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-11-17",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P281",
+        "name": "Michelle Jones",
+        "age": 46,
+        "gender": "Female",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-01-06",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P282",
+        "name": "Donald Anderson",
+        "age": 27,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-07-03",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P283",
+        "name": "David Davis",
+        "age": 66,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-11-28",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P284",
+        "name": "Kimberly Smith",
+        "age": 62,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-12-24",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P285",
+        "name": "Joshua Williams",
+        "age": 44,
+        "gender": "Male",
+        "symptoms": [
+            "Nausea",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-16",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P286",
+        "name": "Betty Thomas",
+        "age": 45,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-10-09",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P287",
+        "name": "Ashley Martin",
+        "age": 23,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-02-13",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P288",
+        "name": "Sarah Anderson",
+        "age": 30,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-01-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P289",
+        "name": "Joshua Brown",
+        "age": 41,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-04-06",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P290",
+        "name": "Susan Brown",
+        "age": 40,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-01-19",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P291",
+        "name": "Jennifer Smith",
+        "age": 36,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-05-19",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P292",
+        "name": "Betty Jones",
+        "age": 26,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-12-02",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P293",
+        "name": "Christopher Martinez",
+        "age": 18,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-01-04",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P294",
+        "name": "Betty Gonzalez",
+        "age": 77,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-03-04",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P295",
+        "name": "Joseph Lopez",
+        "age": 50,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-06-13",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P296",
+        "name": "Emily Martinez",
+        "age": 66,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-21",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P297",
+        "name": "Michelle Davis",
+        "age": 88,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-20",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P298",
+        "name": "Susan Brown",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-21",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P299",
+        "name": "Andrew Martin",
+        "age": 31,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-08",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P300",
+        "name": "Joshua Lopez",
+        "age": 70,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-17",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P301",
+        "name": "Linda Miller",
+        "age": 40,
+        "gender": "Female",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-31",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P302",
+        "name": "Michael Martin",
+        "age": 38,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus",
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-06-04",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P303",
+        "name": "Ashley Williams",
+        "age": 55,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-04",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P304",
+        "name": "Robert Garcia",
+        "age": 66,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-13",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P305",
+        "name": "Michael Martinez",
+        "age": 87,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-11",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P306",
+        "name": "Ashley Moore",
+        "age": 71,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-01-16",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P307",
+        "name": "Joshua Jackson",
+        "age": 44,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-11-03",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P308",
+        "name": "Steven Jackson",
+        "age": 81,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-07-02",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P309",
+        "name": "Christopher Lopez",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-10-29",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P310",
+        "name": "Donald Moore",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue",
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-03-04",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P311",
+        "name": "Sandra Wilson",
+        "age": 82,
+        "gender": "Female",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-03-08",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P312",
+        "name": "Ashley Davis",
+        "age": 65,
+        "gender": "Female",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-10-04",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P313",
+        "name": "Margaret Williams",
+        "age": 30,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-13",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P314",
+        "name": "Michael Anderson",
+        "age": 21,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-11-30",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P315",
+        "name": "James Moore",
+        "age": 74,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma",
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-08-06",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P316",
+        "name": "Mark Garcia",
+        "age": 27,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-27",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P317",
+        "name": "Joseph Rodriguez",
+        "age": 56,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain",
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-14",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P318",
+        "name": "Ashley Davis",
+        "age": 52,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-02-25",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P319",
+        "name": "Steven Thomas",
+        "age": 72,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-04-30",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P320",
+        "name": "William Thomas",
+        "age": 69,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-01-14",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-01",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P322",
+        "name": "Jessica Garcia",
+        "age": 67,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-02-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P323",
+        "name": "James Brown",
+        "age": 72,
+        "gender": "Male",
+        "symptoms": [
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-10-18",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P324",
+        "name": "John Jones",
+        "age": 82,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-03-12",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P325",
+        "name": "Joshua Taylor",
+        "age": 21,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-01-26",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P326",
+        "name": "Christopher Gonzalez",
+        "age": 60,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-01-14",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P327",
+        "name": "Emily Jackson",
+        "age": 76,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-03-07",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P328",
+        "name": "Donna Gonzalez",
+        "age": 46,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-12-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-03-29",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P330",
+        "name": "Nancy Martinez",
+        "age": 52,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-26",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P331",
+        "name": "Paul Jackson",
+        "age": 69,
+        "gender": "Male",
+        "symptoms": [
+            "Asthma",
+            "COPD"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-02-27",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P332",
+        "name": "John Rodriguez",
+        "age": 69,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-10-22",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P333",
+        "name": "Nancy Hernandez",
+        "age": 18,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-03-18",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P334",
+        "name": "Kimberly Gonzalez",
+        "age": 80,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-07-03",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P335",
+        "name": "Matthew Taylor",
+        "age": 28,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-30",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P336",
+        "name": "Patricia Williams",
+        "age": 23,
+        "gender": "Female",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-03-31",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P337",
+        "name": "Kimberly Rodriguez",
+        "age": 50,
+        "gender": "Female",
+        "symptoms": [
+            "Joint Pain"
+        ],
+        "diagnoses": [
+            "Arthritis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-07-28",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P338",
+        "name": "Andrew Brown",
+        "age": 90,
+        "gender": "Male",
+        "symptoms": [
+            "Chest Pain",
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-21",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P339",
+        "name": "Andrew Lopez",
+        "age": 86,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-01-23",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P340",
+        "name": "Joshua Smith",
+        "age": 74,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-10-29",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P341",
+        "name": "Matthew Moore",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-03-14",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P342",
+        "name": "Paul Miller",
+        "age": 22,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-08-14",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Discharged"
+    },
+    {
+        "id": "P343",
+        "name": "Sandra Taylor",
+        "age": 60,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2024-03-08",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P344",
+        "name": "Barbara Jackson",
+        "age": 19,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-15",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P345",
+        "name": "Daniel Taylor",
+        "age": 20,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-02",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P346",
+        "name": "Paul Martinez",
+        "age": 76,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-02-05",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P347",
+        "name": "Robert Lopez",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-02-09",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P348",
+        "name": "Betty Hernandez",
+        "age": 76,
+        "gender": "Female",
+        "symptoms": [
+            "COPD",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-01-30",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P349",
+        "name": "Thomas Garcia",
+        "age": 51,
+        "gender": "Male",
+        "symptoms": [
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Osteoporosis"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2024-01-01",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P350",
+        "name": "Michael Davis",
+        "age": 74,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-12-11",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P351",
+        "name": "William Jackson",
+        "age": 52,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2024-01-15",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P352",
+        "name": "Susan Smith",
+        "age": 20,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Diabetic Peripheral Neuropathy"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-06-26",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P353",
+        "name": "Joshua Anderson",
+        "age": 88,
+        "gender": "Male",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-11-05",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P354",
+        "name": "Thomas Miller",
+        "age": 64,
+        "gender": "Male",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-15",
+        "physician": "Dr. Michael Torres",
+        "status": "Active"
+    },
+    {
+        "id": "P355",
+        "name": "Barbara Wilson",
+        "age": 18,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-01-16",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P356",
+        "name": "John Williams",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2023-11-17",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P357",
+        "name": "Thomas Gonzalez",
+        "age": 62,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-04",
+        "physician": "Dr. Sarah Chen",
+        "status": "Discharged"
+    },
+    {
+        "id": "P358",
+        "name": "Andrew Lopez",
+        "age": 42,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-05-12",
+        "physician": "Dr. Emily Watson",
+        "status": "Discharged"
+    },
+    {
+        "id": "P359",
+        "name": "Matthew Taylor",
+        "age": 18,
+        "gender": "Male",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-21",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-10-08",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P361",
+        "name": "Barbara Miller",
+        "age": 64,
+        "gender": "Female",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-05-28",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P362",
+        "name": "William Martin",
+        "age": 36,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-21",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P363",
+        "name": "Jessica Smith",
+        "age": 86,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus",
+            "Nausea"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-23",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P364",
+        "name": "Elizabeth Gonzalez",
+        "age": 62,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-11-25",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P365",
+        "name": "Robert Martinez",
+        "age": 29,
+        "gender": "Male",
+        "symptoms": [
+            "Cough"
+        ],
+        "diagnoses": [
+            "Bronchitis"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-12-30",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P366",
+        "name": "Matthew Lopez",
+        "age": 48,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-02-15",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P367",
+        "name": "Richard Martin",
+        "age": 52,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-06-29",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P368",
+        "name": "Margaret Hernandez",
+        "age": 24,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-07-17",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-11-05",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P370",
+        "name": "Emily Anderson",
+        "age": 21,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "Osteoporosis"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-03-14",
+        "physician": "Dr. James Park",
+        "status": "Discharged"
+    },
+    {
+        "id": "P371",
+        "name": "James Hernandez",
+        "age": 49,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-12-10",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "symptoms": [
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-08-10",
+        "physician": "Dr. Linda Patel",
+        "status": "Discharged"
+    },
+    {
+        "id": "P373",
+        "name": "Donald Williams",
+        "age": 55,
+        "gender": "Male",
+        "symptoms": [
+            "COPD"
+        ],
+        "diagnoses": [
+            "COPD"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-11-25",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P374",
+        "name": "Paul Johnson",
+        "age": 57,
+        "gender": "Male",
+        "symptoms": [
+            "Weight Loss",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-30",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P375",
+        "name": "John Garcia",
+        "age": 37,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-04",
+        "physician": "Dr. Olivia Stone",
+        "status": "Discharged"
+    },
+    {
+        "id": "P376",
+        "name": "Charles Taylor",
+        "age": 39,
+        "gender": "Male",
+        "symptoms": [
+            "Alzheimers"
+        ],
+        "diagnoses": [
+            "Alzheimer's Disease"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-03-07",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P377",
+        "name": "Sandra Davis",
+        "age": 85,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-11-23",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P378",
+        "name": "Paul Gonzalez",
+        "age": 88,
+        "gender": "Male",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-05-16",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P379",
+        "name": "Jessica Thomas",
+        "age": 86,
+        "gender": "Female",
+        "symptoms": [
+            "Chest Pain",
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Angina"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2024-01-27",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P380",
+        "name": "Mary Williams",
+        "age": 23,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue",
+            "Diabetic Neuropathy"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2024-02-22",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P381",
+        "name": "Sarah Williams",
+        "age": 49,
+        "gender": "Female",
+        "symptoms": [
+            "Hypertension",
+            "Chest Pain"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-06-09",
+        "physician": "Dr. Paul Zhang",
+        "status": "Discharged"
+    },
+    {
+        "id": "P382",
+        "name": "William Johnson",
+        "age": 21,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid",
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-08-10",
+        "physician": "Dr. Sarah Chen",
+        "status": "Active"
+    },
+    {
+        "id": "P383",
+        "name": "Sarah Jones",
+        "age": 83,
+        "gender": "Female",
+        "symptoms": [
+            "Asthma"
+        ],
+        "diagnoses": [
+            "Bronchial Asthma"
+        ],
+        "department": "Pulmonology",
+        "admission_date": "2023-09-18",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P384",
+        "name": "Michelle Rodriguez",
+        "age": 53,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2024-03-12",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    },
+    {
+        "id": "P385",
+        "name": "Richard Moore",
+        "age": 39,
+        "gender": "Male",
+        "symptoms": [
+            "Thyroid"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-07-01",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P386",
+        "name": "Betty Lopez",
+        "age": 43,
+        "gender": "Female",
+        "symptoms": [
+            "Heart Failure"
+        ],
+        "diagnoses": [
+            "Congestive Heart Failure"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-12-11",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P387",
+        "name": "Betty Thomas",
+        "age": 73,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-07-20",
+        "physician": "Dr. Mark Sullivan",
+        "status": "Active"
+    },
+    {
+        "id": "P388",
+        "name": "Ashley Hernandez",
+        "age": 35,
+        "gender": "Female",
+        "symptoms": [
+            "Thyroid",
+            "COPD"
+        ],
+        "diagnoses": [
+            "Hypothyroidism"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2024-02-01",
+        "physician": "Dr. Rachel Kim",
+        "status": "Active"
+    },
+    {
+        "id": "P389",
+        "name": "Emily Martin",
+        "age": 51,
+        "gender": "Female",
+        "symptoms": [
+            "Weight Loss"
+        ],
+        "diagnoses": [
+            "Lung Cancer Stage 1"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-12-27",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P390",
+        "name": "John Gonzalez",
+        "age": 19,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-05-14",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P391",
+        "name": "Ashley Miller",
+        "age": 86,
+        "gender": "Female",
+        "symptoms": [
+            "Arthritis"
+        ],
+        "diagnoses": [
+            "Rheumatoid Arthritis"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-01-03",
+        "physician": "Dr. Michael Torres",
+        "status": "Discharged"
+    },
+    {
+        "id": "P392",
+        "name": "Susan Martinez",
+        "age": 27,
+        "gender": "Female",
+        "symptoms": [
+            "Back Pain"
+        ],
+        "diagnoses": [
+            "Lumbar Disc Herniation"
+        ],
+        "department": "Orthopedics",
+        "admission_date": "2023-01-29",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P393",
+        "name": "Paul Brown",
+        "age": 19,
+        "gender": "Male",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-07-11",
+        "physician": "Dr. Kevin Nguyen",
+        "status": "Active"
+    },
+    {
+        "id": "P394",
+        "name": "Kimberly Lopez",
+        "age": 52,
+        "gender": "Female",
+        "symptoms": [
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Breast Cancer Stage 2"
+        ],
+        "department": "Oncology",
+        "admission_date": "2023-02-12",
+        "physician": "Dr. James Park",
+        "status": "Active"
+    },
+    {
+        "id": "P395",
+        "name": "Emily Martin",
+        "age": 57,
+        "gender": "Female",
+        "symptoms": [
+            "Lupus",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Systemic Lupus Erythematosus"
+        ],
+        "department": "Rheumatology",
+        "admission_date": "2023-12-13",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P396",
+        "name": "Richard Jones",
+        "age": 24,
+        "gender": "Male",
+        "symptoms": [
+            "Migraine"
+        ],
+        "diagnoses": [
+            "Chronic Migraine"
+        ],
+        "department": "Neurology",
+        "admission_date": "2024-01-05",
+        "physician": "Dr. Paul Zhang",
+        "status": "Active"
+    },
+    {
+        "id": "P397",
+        "name": "Christopher Brown",
+        "age": 46,
+        "gender": "Male",
+        "symptoms": [
+            "Hypertension"
+        ],
+        "diagnoses": [
+            "Essential Hypertension"
+        ],
+        "department": "Cardiology",
+        "admission_date": "2023-01-11",
+        "physician": "Dr. Linda Patel",
+        "status": "Active"
+    },
+    {
+        "id": "P398",
+        "name": "John Moore",
+        "age": 52,
+        "gender": "Male",
+        "symptoms": [
+            "Diabetes",
+            "Fatigue"
+        ],
+        "diagnoses": [
+            "Type 2 Diabetes"
+        ],
+        "department": "Endocrinology",
+        "admission_date": "2023-09-12",
+        "physician": "Dr. Rachel Kim",
+        "status": "Discharged"
+    },
+    {
+        "id": "P399",
+        "name": "Jennifer Lopez",
+        "age": 32,
+        "gender": "Female",
+        "symptoms": [
+            "Abdominal Pain",
+            "Diabetes"
+        ],
+        "diagnoses": [
+            "Gastritis"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-02-25",
+        "physician": "Dr. Emily Watson",
+        "status": "Active"
+    },
+    {
+        "id": "P400",
+        "name": "Emily Thomas",
+        "age": 61,
+        "gender": "Female",
+        "symptoms": [
+            "Nausea",
+            "Abdominal Pain"
+        ],
+        "diagnoses": [
+            "GERD"
+        ],
+        "department": "Gastroenterology",
+        "admission_date": "2023-02-23",
+        "physician": "Dr. Olivia Stone",
+        "status": "Active"
+    }
+]

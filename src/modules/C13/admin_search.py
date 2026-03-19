@@ -8,6 +8,7 @@ from src.modules.C13.patient_search import (
     MOCK_PATIENTS, MOCK_HISTORY, _search_mock_patients,
     _inject_css as _shared_css,
     _history_section,
+    _cohorts_section,
 )
 
 # ── mock NL templates (matching target Admin Panel screenshot) ─────────────────
@@ -144,26 +145,23 @@ def _inject_css() -> None:
             position: absolute; top: 1.8rem; right: 2rem;
         }
 
-        /* Website-aligned admin overrides */
-        .tmpl-card,
-        .admin-stat-box {
-            background: #ffffff !important;
-            border: 1px solid #e5e7eb !important;
+        /* ── background + sidebar ── */
+        [data-testid="stAppViewContainer"] { 
+            background: #0F172A !important; 
         }
-        .tmpl-name,
-        .admin-stat-val { color: #111827 !important; }
-        .tmpl-meta,
-        .admin-stat-lbl { color: #6b7280 !important; }
-        .tmpl-meta b { color: #4b5563 !important; }
-        .tmpl-sql {
-            background: #f9fafb !important;
-            border: 1px solid #e5e7eb !important;
-            color: #374151 !important;
+        [data-testid="stSidebar"] > div:first-child {
+            background: #1E293B !important;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
-        .tmpl-param-tag {
-            background: #f9fafb !important;
-            border: 1px solid #e5e7eb !important;
-            color: #374151 !important;
+        .block-container { 
+            padding: 2.2rem 2.4rem !important; 
+            max-width: 100% !important;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 20px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         </style>
         """,
@@ -176,7 +174,7 @@ def _sidebar() -> str:
         st.markdown("## MediCare")
         st.caption("Clinical Query Copilot")
 
-        st.session_state.setdefault("ms_current_page", "Patient Search")
+        st.session_state.setdefault("ms_current_page", "Patient")
         page = st.session_state.ms_current_page
 
         def _nav(label: str, key: str):
@@ -190,8 +188,9 @@ def _sidebar() -> str:
                 st.session_state.ms_current_page = label
                 st.rerun()
 
-        _nav("Patient Search", "nav_ps")
-        _nav("Search History", "nav_sh")
+        _nav("Patient", "nav_ps")
+        _nav("History", "nav_sh")
+        _nav("Cohort", "nav_cohorts")
         _nav("Admin Panel", "nav_ap")
 
         st.divider()
@@ -386,9 +385,11 @@ def admin_search_page() -> None:
     _inject_css()
     page = _sidebar()
 
-    if page == "Patient Search":
+    if page == "Patient":
         _search_section()
-    elif page == "Search History":
+    elif page == "History":
         _history_section()
+    elif page == "Cohort":
+        _cohorts_section()
     elif page == "Admin Panel":
         _admin_panel_section()

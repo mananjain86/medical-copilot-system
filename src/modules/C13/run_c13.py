@@ -18,6 +18,22 @@ st.set_page_config(
     layout="wide",
 )
 
+# ---------------- LOAD CUSTOM CSS ----------------
+def local_css(file_name):
+    try:
+        # adjust path for standalone run
+        css_path = Path(__file__).resolve().parents[3] / "assets" / "styles.css"
+        with open(css_path) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    except Exception:
+        pass
+
+local_css("assets/styles.css")
+
+# ---------------- NAVIGATION ----------------
+# Navigation is now handled internally by patient_search_page and admin_search_page
+# to avoid duplicate sidebars.
+
 # Keep standalone behavior aligned with main website flow: no extra login layer.
 # If launched inside the main app, derive C13 role from app session role.
 if "ms_user_role" not in st.session_state:

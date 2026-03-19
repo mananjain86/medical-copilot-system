@@ -68,10 +68,12 @@ class SearchQuery:
 	gender: str | None = None
 	age_above: int | None = None
 	age_below: int | None = None
+	age_is: int | None = None
 	symptom: str | None = None
 	diagnosis: str | None = None
 	city: str | None = None
 	department: str | None = None
+	status: str | None = None
 	expanded_terms: list[str] = field(default_factory=list)
 
 
@@ -99,6 +101,12 @@ _STOPWORDS = {
 	"in",
 	"of",
 	"for",
+	"age",
+	"over", "above", "older", "greater", "more",
+	"under", "below", "younger", "less",
+	"than", "between", "at", "least", "most",
+	"min", "max", "minimum", "maximum",
+	"male", "female", "man", "men", "woman", "women", "lady", "ladies",
 }
 
 
@@ -170,27 +178,33 @@ def _normalize_query(text: str) -> str:
 	return q
 
 
-def _extract_age_bounds(lower: str) -> tuple[int | None, int | None]:
-	"""Extract age bounds from natural-language text."""
+def _extract_age_bounds(lower: str) -> tuple[int | None, int | None, int | None]:
+	"""Extract age bounds (min, max, exact) from natural-language text."""
 
 	age_above: int | None = None
 	age_below: int | None = None
+	age_is: int | None = None
 
 	between = re.search(r"between\s+(\d+)\s+(?:and|to)\s+(\d+)", lower)
 	if between:
 		a, b = int(between.group(1)), int(between.group(2))
 		age_above, age_below = min(a, b), max(a, b)
-		return age_above, age_below
+		return age_above, age_below, age_is
 
-	over = re.search(r"(?:above|older than|over|greater than|more than)\s+(\d+)", lower)
+	exact = re.search(r"(?:aged|is|age)\s+(\d+)(?:\s+years\s+old)?", lower)
+	if exact:
+		age_is = int(exact.group(1))
+		return age_above, age_below, age_is
+
+	over = re.search(r"(?:above|older than|over|greater than|more than|at least|min|minimum)\s+(\d+)", lower)
 	if over:
 		age_above = int(over.group(1))
 
-	under = re.search(r"(?:below|under|younger than|less than)\s+(\d+)", lower)
+	under = re.search(r"(?:below|under|younger than|less than|at most|max|maximum)\s+(\d+)", lower)
 	if under:
 		age_below = int(under.group(1))
 
-	return age_above, age_below
+	return age_above, age_below, age_is
 
 
 @dataclass
@@ -201,6 +215,8 @@ class SearchResult:
 	first_name: str
 	last_name: str
 	gender: str
+	age: int
+	status: str
 
 
 @dataclass
@@ -302,7 +318,7 @@ def parse_query(text: str) -> SearchQuery:
 	elif "male" in lower:
 		gender = "male"
 
-	age_above, age_below = _extract_age_bounds(lower)
+	age_above, age_below, age_is = _extract_age_bounds(lower)
 
 	city = None
 	for c in ("ahmedabad", "chennai", "delhi", "hyderabad", "kochi", "kolkata", "mumbai"):
@@ -339,8 +355,12 @@ def parse_query(text: str) -> SearchQuery:
 		search_type = "clinical"
 	elif gender or age_above or age_below or city or department:
 		search_type = "demographic"
-	else:
-		search_type = "clinical"
+
+	status = None
+	if "active" in lower:
+		status = "Active"
+	elif "discharged" in lower:
+		status = "Discharged"
 
 	return SearchQuery(
 		raw_text=text,
@@ -348,8 +368,10 @@ def parse_query(text: str) -> SearchQuery:
 		gender=gender,
 		age_above=age_above,
 		age_below=age_below,
+		age_is=age_is,
 		city=city,
 		department=department,
+		status=status,
 	)
 
 
@@ -498,6 +520,11 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 		params["age_below"] = query.age_below
 		notes.append(f"age < {query.age_below}")
 
+	if query.age_is:
+		conditions.append("DATE_PART('year', AGE(p.date_of_birth)) = %(age_is)s")
+		params["age_is"] = query.age_is
+		notes.append(f"age = {query.age_is}")
+
 	if query.symptom:
 		conditions.append("(sy.symptom_name = %(symptom)s OR syn.synonym = %(symptom)s)")
 		params["symptom"] = query.symptom
@@ -517,6 +544,11 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 		conditions.append("d.specialization ILIKE %(department)s")
 		params["department"] = query.department
 		notes.append(f"department = '{query.department}'")
+
+	if query.status:
+		conditions.append("p.status ILIKE %(status)s")
+		params["status"] = query.status
+		notes.append(f"status = '{query.status}'")
 
 	# Keyword fallback for free-text clinical queries when explicit entities are sparse.
 	keyword_terms = [
@@ -587,7 +619,8 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 			"    p.last_name,\n"
 			"    p.gender,\n"
 			"    DATE_PART('year', AGE(p.date_of_birth)) AS age,\n"
-			"    p.city"
+			"    p.city,\n"
+			"    p.status"
 		)
 
 	sql = (
@@ -666,6 +699,8 @@ def run_search(
 			first_name=row["first_name"],
 			last_name=row["last_name"],
 			gender=row["gender"],
+			age=int(row.get("age", 0)),
+			status=row.get("status", "Active")
 		)
 		for row in rows
 	]
