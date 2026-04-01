@@ -21,11 +21,14 @@ From project root:
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r src/modules/C13/requirements.txt
 ```
 
 ## Database Setup (PostgreSQL)
+Prerequisite: Install PostgreSQL server and ensure the `psql` client is available in your shell `PATH`.
+
 1. Ensure PostgreSQL is running.
-2. Create `.env` in project root:
+2. Create `.env` in `src/modules/C13/`:
 
 ```env
 DB_HOST=localhost
