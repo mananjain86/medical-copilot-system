@@ -6,6 +6,8 @@ import re
 from dataclasses import dataclass
 import streamlit as st
 
+_BACKEND_IMPORT_ERROR: Exception | None = None
+
 try:
     from src.modules.C13.backend import (
         SearchResult,
@@ -15,7 +17,9 @@ try:
         get_cohorts,
         get_cohort_members,
     )
-except Exception:
+except Exception as e:
+    _BACKEND_IMPORT_ERROR = e
+
     @dataclass
     class SearchResult:
         patient_id: str
@@ -528,7 +532,7 @@ def _search_section() -> None:
                         "symptoms": [], "diagnoses": [],
                     })
             conn.close()
-        except Exception:
+        except Exception as e:
             use_mock = True
             patients_raw = _search_mock_patients(query)
             enriched = []
@@ -542,6 +546,9 @@ def _search_section() -> None:
                     "department": "—", "symptoms": [], "diagnoses": [], "status": "Active",
                 })
             st.info("Demo mode — database unavailable.", icon="ℹ️")
+            if _BACKEND_IMPORT_ERROR is not None:
+                st.caption(f"Backend import error: {type(_BACKEND_IMPORT_ERROR).__name__}: {_BACKEND_IMPORT_ERROR}")
+            st.caption(f"Runtime error: {type(e).__name__}: {e}")
 
         if enriched:
             ages   = [p["age"] for p in enriched if isinstance(p.get("age"), (int, float))]

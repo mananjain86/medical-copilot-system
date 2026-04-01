@@ -11,23 +11,17 @@ Database tables used:
   lab_results, lab_tests, doctors, users
 
 Stored functions already in the DB that we call:
-  run_patient_search(uid, query, type)
-  search_patients_nl(query)
-  log_search_query(uid, query, type)
-  create_cohort(name)
+	log_search_query(uid, query, type)
   save_user_query(uid, query)
   expand_query_terms(term)
-  extract_gender(query)
-  extract_age(query)
-  extract_symptom(query)
 
 Steps implemented here:
   1. parse_query()         - Extract gender / age / symptom from raw text
   2. expand_terms()        - Synonym expansion via the synonyms table
   3. generate_sql()        - Build dynamic SQL from parsed query (for DBMS demo tab)
-  4. run_search()          - Execute search via DB stored function
+	4. run_search()          - Execute generated SQL + persist query/results
   5. get_search_history()  - Fetch past queries for a user
-  6. Cohort helpers        - create_patient_cohort(), get_cohorts()
+	6. Cohort helpers        - create_search_cohort(), get_cohorts()
 """
 
 from __future__ import annotations
@@ -42,12 +36,33 @@ from typing import Any
 import psycopg2
 import psycopg2.extras
 
-# Load .env from the project root (safe no-op if file is missing or dotenv not installed)
-try:
-    from dotenv import load_dotenv
-    load_dotenv(Path(__file__).resolve().parents[3] / ".env")
-except ImportError:
-    pass  # python-dotenv not installed; rely on environment variables directly
+_C13_ENV_PATH = Path(__file__).with_name(".env")
+
+
+def _load_c13_env_file() -> None:
+	"""Load C13-local .env values, with a no-dependency fallback parser."""
+
+	if not _C13_ENV_PATH.exists():
+		return
+
+	try:
+		from dotenv import load_dotenv
+		load_dotenv(_C13_ENV_PATH, override=True)
+		return
+	except ImportError:
+		pass
+
+	for raw_line in _C13_ENV_PATH.read_text(encoding="utf-8").splitlines():
+		line = raw_line.strip()
+		if not line or line.startswith("#") or "=" not in line:
+			continue
+		key, value = line.split("=", 1)
+		key = key.strip()
+		value = value.strip().strip('"').strip("'")
+		os.environ[key] = value
+
+
+_load_c13_env_file()
 
 _DB_HOST     = os.getenv("DB_HOST",     "localhost")
 _DB_PORT     = int(os.getenv("DB_PORT", "5432"))
@@ -332,6 +347,7 @@ def parse_query(text: str) -> SearchQuery:
 			department = mapped
 			break
 
+	search_type = "clinical"
 	if any(word in lower for word in ("glucose", "hemoglobin", "cholesterol", "lab test", "lab result")):
 		search_type = "laboratory"
 	elif any(word in lower for word in ("visited", "last", "days", "week", "month", "recent")):
@@ -649,48 +665,34 @@ def run_search(
 	sql_payload: GeneratedSQL | None = None,
 ) -> tuple[list[SearchResult], int | None]:
 	"""
-	Execute query and return patient rows.
+	Execute generated SQL and return patient rows.
 
-	If sql_payload is provided, we run the generated SQL directly so parsed NL filters
-	are always applied, and still log the query in search_queries.
+	This is the single runtime search path used by nl_search_pipeline(), which
+	keeps parsing/filter behavior in one place (Python) while persisting audit
+	rows in DB tables.
 	"""
+
+	if sql_payload is None:
+		raise ValueError("sql_payload is required for run_search()")
 
 	query_id: int | None = None
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-		if sql_payload is None:
-			cur.execute(
-				"SELECT * FROM run_patient_search(%s, %s, %s)",
-				(user_id, nl_query, search_type),
-			)
-			rows = cur.fetchall()
-			cur.execute(
-				"""
-				SELECT query_id
-				FROM search_queries
-				WHERE user_id = %s AND query_text = %s AND search_type = %s
-				ORDER BY query_id DESC
-				LIMIT 1
-				""",
-				(user_id, nl_query, search_type),
-			)
-			qid_row = cur.fetchone()
-			query_id = int(qid_row["query_id"]) if qid_row else None
-		else:
-			cur.execute("SELECT log_search_query(%s, %s, %s)", (user_id, nl_query, search_type))
-			qid_row = cur.fetchone()
-			query_id = int(next(iter(qid_row.values()))) if qid_row else None
-			cur.execute(sql_payload.sql, sql_payload.params)
-			rows = cur.fetchall()
+		cur.execute("SELECT log_search_query(%s, %s, %s)", (user_id, nl_query, search_type))
+		qid_row = cur.fetchone()
+		query_id = int(next(iter(qid_row.values()))) if qid_row else None
 
-			if query_id is not None and rows:
-				for row in rows:
-					cur.execute(
-						"""
-						INSERT INTO search_results(query_id, patient_id, relevance_score)
-						VALUES (%s, %s, %s)
-						""",
-						(query_id, int(row["patient_id"]), 1.0),
-					)
+		cur.execute(sql_payload.sql, sql_payload.params)
+		rows = cur.fetchall()
+
+		if query_id is not None and rows:
+			for row in rows:
+				cur.execute(
+					"""
+					INSERT INTO search_results(query_id, patient_id, relevance_score)
+					VALUES (%s, %s, %s)
+					""",
+					(query_id, int(row["patient_id"]), 1.0),
+				)
 		conn.commit()
 
 	results = [
@@ -708,25 +710,6 @@ def run_search(
 	return results, query_id
 
 
-def _ensure_cohort_member_table(conn) -> None:
-	"""Ensure cohort-member mapping table exists for cohort persistence."""
-
-	with conn.cursor() as cur:
-		cur.execute(
-			"""
-			CREATE TABLE IF NOT EXISTS patient_cohort_members (
-				member_id SERIAL PRIMARY KEY,
-				cohort_id INTEGER NOT NULL REFERENCES patient_cohorts(cohort_id) ON DELETE CASCADE,
-				patient_id INTEGER NOT NULL REFERENCES patients(patient_id) ON DELETE CASCADE,
-				query_id INTEGER REFERENCES search_queries(query_id) ON DELETE SET NULL,
-				added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-				UNIQUE (cohort_id, patient_id)
-			)
-			"""
-		)
-		conn.commit()
-
-
 def create_search_cohort(
 	conn,
 	user_id: int,
@@ -736,8 +719,6 @@ def create_search_cohort(
 	query_id: int | None = None,
 ) -> int:
 	"""Create a cohort for a search and persist its member patient ids."""
-
-	_ensure_cohort_member_table(conn)
 	cohort_name = f"U{user_id} | {search_type} | {nl_query[:80]}"
 
 	with conn.cursor() as cur:
@@ -801,20 +782,8 @@ def get_saved_queries(conn, user_id: int) -> list[dict[str, Any]]:
 		return [dict(row) for row in cur.fetchall()]
 
 
-def create_patient_cohort(conn, name: str) -> int:
-	"""Create a named patient cohort via create_cohort()."""
-
-	with conn.cursor() as cur:
-		cur.execute("SELECT create_cohort(%s)", (name,))
-		cohort_id = cur.fetchone()[0]
-		conn.commit()
-	return cohort_id
-
-
 def get_cohorts(conn) -> list[dict[str, Any]]:
 	"""Return all patient cohorts from patient_cohorts."""
-
-	_ensure_cohort_member_table(conn)
 
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 		cur.execute(
@@ -832,8 +801,6 @@ def get_cohorts(conn) -> list[dict[str, Any]]:
 
 def get_cohort_members(conn, cohort_id: int, limit: int = 200) -> list[dict[str, Any]]:
 	"""Return patient members for a given cohort id with basic demographics."""
-
-	_ensure_cohort_member_table(conn)
 
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 		cur.execute(
@@ -874,32 +841,13 @@ def nl_search_pipeline(conn, user_id: int, nl_query: str) -> dict[str, Any]:
 	parsed.diagnosis = resolve_diagnosis(conn, nl_query)
 	sql_payload = generate_sql(parsed)
 
-	# For clinical free-text with no resolved filter, avoid returning all patients.
-	lower_q = nl_query.lower().strip()
-	allow_all = any(
-		phrase in lower_q
-		for phrase in ("all patients", "all patient", "all records", "list all", "show all")
+	results, query_id = run_search(
+		conn,
+		user_id,
+		nl_query,
+		parsed.search_type,
+		sql_payload=sql_payload,
 	)
-	has_filter = any([
-		parsed.gender,
-		parsed.age_above,
-		parsed.age_below,
-		parsed.symptom,
-		parsed.diagnosis,
-		parsed.city,
-		parsed.department,
-	])
-	if parsed.search_type == "clinical" and not has_filter and not allow_all:
-		results: list[SearchResult] = []
-		query_id: int | None = None
-	else:
-		results, query_id = run_search(
-			conn,
-			user_id,
-			nl_query,
-			parsed.search_type,
-			sql_payload=sql_payload,
-		)
 
 	cohort_id: int | None = None
 	if results:

@@ -225,10 +225,11 @@ def _search_section() -> None:
             result = nl_search_pipeline(conn, 1, query)
             conn.close()
             patients_raw = result.get("results", [])
-        except Exception:
+        except Exception as e:
             use_mock = True
             patients_raw = _search_mock_patients(query)
             st.info("Demo mode — database unavailable.", icon="ℹ️")
+            st.caption(f"Runtime error: {type(e).__name__}: {e}")
 
         if patients_raw:
             import pandas as pd

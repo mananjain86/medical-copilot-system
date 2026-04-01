@@ -19,30 +19,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: create_cohort(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.create_cohort(name text) RETURNS integer
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    cid INT;
-BEGIN
-
-INSERT INTO patient_cohorts(cohort_name)
-VALUES(name)
-RETURNING cohort_id INTO cid;
-
-RETURN cid;
-
-END;
-$$;
-
-
-ALTER FUNCTION public.create_cohort(name text) OWNER TO gaurav;
-
---
 -- Name: expand_query_terms(text); Type: FUNCTION; Schema: public; Owner: gaurav
 --
 
@@ -62,175 +38,6 @@ $$;
 
 
 ALTER FUNCTION public.expand_query_terms(term text) OWNER TO gaurav;
-
---
--- Name: extract_age(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_age(q text) RETURNS integer
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    age_val INT;
-BEGIN
-    IF q ~* '(?:between|from)\s+[0-9]+\s+(?:and|to)\s+[0-9]+' THEN
-        age_val := regexp_replace(q, '.*(?:between|from)\s+([0-9]+)\s+(?:and|to)\s+[0-9]+.*', '\1', 'i')::INT;
-        RETURN age_val;
-    ELSIF q ~* '(?:aged|age is|is)\s+[0-9]+' THEN
-        age_val := regexp_replace(q, '.*(?:aged|age is|is)\s+([0-9]+).*', '\1', 'i')::INT;
-        RETURN age_val;
-    ELSIF q ~* '(?:above|over|older than|greater than|more than|at least)\s+[0-9]+' THEN
-        age_val := regexp_replace(q, '.*(?:above|over|older than|greater than|more than|at least)\s+([0-9]+).*', '\1', 'i')::INT;
-        RETURN age_val;
-    END IF;
-
-    RETURN NULL;
-EXCEPTION
-    WHEN others THEN
-        RETURN NULL;
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_age(q text) OWNER TO gaurav;
-
---
--- Name: extract_gender(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_gender(q text) RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF q ILIKE '%female%' THEN
-        RETURN 'female';
-    ELSIF q ILIKE '%male%' THEN
-        RETURN 'male';
-    END IF;
-
-    RETURN NULL;
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_gender(q text) OWNER TO gaurav;
-
---
--- Name: extract_symptom(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_symptom(q text) RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    sym TEXT;
-BEGIN
-
-    -- direct symptom match
-    SELECT symptom_name
-    INTO sym
-    FROM symptoms
-    WHERE q ILIKE '%' || symptom_name || '%'
-    LIMIT 1;
-
-    IF sym IS NOT NULL THEN
-        RETURN sym;
-    END IF;
-
-    -- synonym match
-    SELECT s.word
-    INTO sym
-    FROM synonyms s
-    WHERE q ILIKE '%' || s.synonym || '%'
-    LIMIT 1;
-
-    RETURN sym;
-
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_symptom(q text) OWNER TO gaurav;
-
---
--- Name: extract_city(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_city(q text) RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF q ILIKE '%ahmedabad%' THEN
-        RETURN 'Ahmedabad';
-    ELSIF q ILIKE '%chennai%' THEN
-        RETURN 'Chennai';
-    ELSIF q ILIKE '%delhi%' THEN
-        RETURN 'Delhi';
-    ELSIF q ILIKE '%hyderabad%' THEN
-        RETURN 'Hyderabad';
-    ELSIF q ILIKE '%kochi%' THEN
-        RETURN 'Kochi';
-    ELSIF q ILIKE '%kolkata%' THEN
-        RETURN 'Kolkata';
-    ELSIF q ILIKE '%mumbai%' THEN
-        RETURN 'Mumbai';
-    END IF;
-
-    RETURN NULL;
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_city(q text) OWNER TO gaurav;
-
---
--- Name: extract_status(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_status(q text) RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF q ILIKE '%discharged%' THEN
-        RETURN 'Discharged';
-    ELSIF q ILIKE '%active%' THEN
-        RETURN 'Active';
-    END IF;
-
-    RETURN NULL;
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_status(q text) OWNER TO gaurav;
-
---
--- Name: extract_age_upper(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.extract_age_upper(q text) RETURNS integer
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    age_val INT;
-BEGIN
-    IF q ~* '(?:between|from)\s+[0-9]+\s+(?:and|to)\s+[0-9]+' THEN
-        age_val := regexp_replace(q, '.*(?:between|from)\s+[0-9]+\s+(?:and|to)\s+([0-9]+).*', '\1', 'i')::INT;
-        RETURN age_val;
-    ELSIF q ~* '(?:below|under|younger than|less than|at most|max|maximum)\s+[0-9]+' THEN
-        age_val := regexp_replace(q, '.*(?:below|under|younger than|less than|at most|max|maximum)\s+([0-9]+).*', '\1', 'i')::INT;
-        RETURN age_val;
-    END IF;
-
-    RETURN NULL;
-EXCEPTION
-    WHEN others THEN
-        RETURN NULL;
-END;
-$$;
-
-
-ALTER FUNCTION public.extract_age_upper(q text) OWNER TO gaurav;
 
 --
 -- Name: refresh_patient_search_vector(); Type: FUNCTION; Schema: public; Owner: gaurav
@@ -275,53 +82,6 @@ $$;
 ALTER FUNCTION public.log_search_query(uid integer, q text, type text) OWNER TO gaurav;
 
 --
--- Name: run_patient_search(integer, text, text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.run_patient_search(uid integer, q text, search_type text) RETURNS TABLE(patient_id integer, first_name text, last_name text, gender text)
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    qid INT;
-    cid INT;
-BEGIN
-
-    -- Step 1: log the search query
-    qid := log_search_query(uid, q, search_type);
-
-    -- Step 2: create a cohort
-    INSERT INTO patient_cohorts(cohort_name)
-    VALUES ('Cohort for query: ' || q)
-    RETURNING cohort_id INTO cid;
-
-    -- Step 3: run search and store results
-    RETURN QUERY
-    WITH results AS (
-        SELECT * FROM search_patients_nl(q)
-    ),
-    inserted_results AS (
-        INSERT INTO search_results(query_id, patient_id, relevance_score)
-        SELECT qid, r.patient_id, 1.0
-        FROM results r
-        RETURNING 1
-    ),
-    inserted_members AS (
-        INSERT INTO patient_cohort_members(cohort_id, patient_id, query_id)
-        SELECT cid, r.patient_id, qid
-        FROM results r
-        ON CONFLICT (cohort_id, patient_id) DO NOTHING
-        RETURNING 1
-    )
-    SELECT r.patient_id, r.first_name, r.last_name, r.gender
-    FROM results r;
-
-END;
-$$;
-
-
-ALTER FUNCTION public.run_patient_search(uid integer, q text, search_type text) OWNER TO gaurav;
-
---
 -- Name: save_user_query(integer, text); Type: FUNCTION; Schema: public; Owner: gaurav
 --
 
@@ -338,79 +98,6 @@ $$;
 
 
 ALTER FUNCTION public.save_user_query(uid integer, q text) OWNER TO gaurav;
-
---
--- Name: search_patients(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.search_patients(symptom text) RETURNS TABLE(patient_id integer, name text)
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-RETURN QUERY
-SELECT p.patient_id,p.first_name
-FROM patients p
-JOIN visits v ON p.patient_id=v.patient_id
-JOIN patient_symptoms ps ON v.visit_id=ps.visit_id
-JOIN symptoms s ON ps.symptom_id=s.symptom_id
-WHERE s.symptom_name = symptom;
-END;
-$$;
-
-
-ALTER FUNCTION public.search_patients(symptom text) OWNER TO gaurav;
-
---
--- Name: search_patients_nl(text); Type: FUNCTION; Schema: public; Owner: gaurav
---
-
-CREATE FUNCTION public.search_patients_nl(q text) RETURNS TABLE(patient_id integer, first_name text, last_name text, gender text)
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    g TEXT;
-    a INT;
-    a_max INT;
-    s TEXT;
-    c TEXT;
-    st TEXT;
-BEGIN
-
-    g := extract_gender(q);
-    a := extract_age(q);
-    a_max := extract_age_upper(q);
-    s := extract_symptom(q);
-    c := extract_city(q);
-    st := extract_status(q);
-
-    RETURN QUERY
-    SELECT DISTINCT 
-    p.patient_id,
-    p.first_name,
-    p.last_name,
-    p.gender::TEXT
-    FROM patients p
-    LEFT JOIN visits v ON p.patient_id = v.patient_id
-    LEFT JOIN patient_symptoms ps ON v.visit_id = ps.visit_id
-    LEFT JOIN symptoms sy ON ps.symptom_id = sy.symptom_id
-    WHERE
-        (g IS NULL OR p.gender = g)
-        AND
-        (a IS NULL OR DATE_PART('year', AGE(p.date_of_birth)) > a)
-        AND
-        (a_max IS NULL OR DATE_PART('year', AGE(p.date_of_birth)) <= a_max)
-        AND
-        (s IS NULL OR sy.symptom_name = s)
-        AND
-        (c IS NULL OR p.city ILIKE c)
-        AND
-        (st IS NULL OR p.status ILIKE st);
-
-END;
-$$;
-
-
-ALTER FUNCTION public.search_patients_nl(q text) OWNER TO gaurav;
 
 SET default_tablespace = '';
 
@@ -821,10 +508,7 @@ CREATE TABLE public.patient_cohort_members (
     query_id integer,
     added_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT patient_cohort_members_pkey PRIMARY KEY (member_id),
-    CONSTRAINT patient_cohort_members_cohort_patient_key UNIQUE (cohort_id, patient_id),
-    CONSTRAINT patient_cohort_members_cohort_id_fkey FOREIGN KEY (cohort_id) REFERENCES public.patient_cohorts(cohort_id) ON DELETE CASCADE,
-    CONSTRAINT patient_cohort_members_patient_id_fkey FOREIGN KEY (patient_id) REFERENCES public.patients(patient_id) ON DELETE CASCADE,
-    CONSTRAINT patient_cohort_members_query_id_fkey FOREIGN KEY (query_id) REFERENCES public.search_queries(query_id) ON DELETE SET NULL
+    CONSTRAINT patient_cohort_members_cohort_patient_key UNIQUE (cohort_id, patient_id)
 );
 
 
@@ -1707,6 +1391,30 @@ ALTER TABLE ONLY public.visits
 
 ALTER TABLE ONLY public.visits
     ADD CONSTRAINT visits_patient_id_fkey FOREIGN KEY (patient_id) REFERENCES public.patients(patient_id) ON DELETE CASCADE;
+
+
+--
+-- Name: patient_cohort_members patient_cohort_members_cohort_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+--
+
+ALTER TABLE ONLY public.patient_cohort_members
+    ADD CONSTRAINT patient_cohort_members_cohort_id_fkey FOREIGN KEY (cohort_id) REFERENCES public.patient_cohorts(cohort_id) ON DELETE CASCADE;
+
+
+--
+-- Name: patient_cohort_members patient_cohort_members_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+--
+
+ALTER TABLE ONLY public.patient_cohort_members
+    ADD CONSTRAINT patient_cohort_members_patient_id_fkey FOREIGN KEY (patient_id) REFERENCES public.patients(patient_id) ON DELETE CASCADE;
+
+
+--
+-- Name: patient_cohort_members patient_cohort_members_query_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+--
+
+ALTER TABLE ONLY public.patient_cohort_members
+    ADD CONSTRAINT patient_cohort_members_query_id_fkey FOREIGN KEY (query_id) REFERENCES public.search_queries(query_id) ON DELETE SET NULL;
 
 
 --
