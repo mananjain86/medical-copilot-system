@@ -73,8 +73,18 @@ CREATE FUNCTION public.extract_age(q text) RETURNS integer
 DECLARE
     age_val INT;
 BEGIN
-    age_val := regexp_replace(q, '.*above ([0-9]+).*', '\1')::INT;
-    RETURN age_val;
+    IF q ~* '(?:between|from)\s+[0-9]+\s+(?:and|to)\s+[0-9]+' THEN
+        age_val := regexp_replace(q, '.*(?:between|from)\s+([0-9]+)\s+(?:and|to)\s+[0-9]+.*', '\1', 'i')::INT;
+        RETURN age_val;
+    ELSIF q ~* '(?:aged|age is|is)\s+[0-9]+' THEN
+        age_val := regexp_replace(q, '.*(?:aged|age is|is)\s+([0-9]+).*', '\1', 'i')::INT;
+        RETURN age_val;
+    ELSIF q ~* '(?:above|over|older than|greater than|more than|at least)\s+[0-9]+' THEN
+        age_val := regexp_replace(q, '.*(?:above|over|older than|greater than|more than|at least)\s+([0-9]+).*', '\1', 'i')::INT;
+        RETURN age_val;
+    END IF;
+
+    RETURN NULL;
 EXCEPTION
     WHEN others THEN
         RETURN NULL;
@@ -143,6 +153,105 @@ $$;
 ALTER FUNCTION public.extract_symptom(q text) OWNER TO gaurav;
 
 --
+-- Name: extract_city(text); Type: FUNCTION; Schema: public; Owner: gaurav
+--
+
+CREATE FUNCTION public.extract_city(q text) RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF q ILIKE '%ahmedabad%' THEN
+        RETURN 'Ahmedabad';
+    ELSIF q ILIKE '%chennai%' THEN
+        RETURN 'Chennai';
+    ELSIF q ILIKE '%delhi%' THEN
+        RETURN 'Delhi';
+    ELSIF q ILIKE '%hyderabad%' THEN
+        RETURN 'Hyderabad';
+    ELSIF q ILIKE '%kochi%' THEN
+        RETURN 'Kochi';
+    ELSIF q ILIKE '%kolkata%' THEN
+        RETURN 'Kolkata';
+    ELSIF q ILIKE '%mumbai%' THEN
+        RETURN 'Mumbai';
+    END IF;
+
+    RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.extract_city(q text) OWNER TO gaurav;
+
+--
+-- Name: extract_status(text); Type: FUNCTION; Schema: public; Owner: gaurav
+--
+
+CREATE FUNCTION public.extract_status(q text) RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF q ILIKE '%discharged%' THEN
+        RETURN 'Discharged';
+    ELSIF q ILIKE '%active%' THEN
+        RETURN 'Active';
+    END IF;
+
+    RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.extract_status(q text) OWNER TO gaurav;
+
+--
+-- Name: extract_age_upper(text); Type: FUNCTION; Schema: public; Owner: gaurav
+--
+
+CREATE FUNCTION public.extract_age_upper(q text) RETURNS integer
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    age_val INT;
+BEGIN
+    IF q ~* '(?:between|from)\s+[0-9]+\s+(?:and|to)\s+[0-9]+' THEN
+        age_val := regexp_replace(q, '.*(?:between|from)\s+[0-9]+\s+(?:and|to)\s+([0-9]+).*', '\1', 'i')::INT;
+        RETURN age_val;
+    ELSIF q ~* '(?:below|under|younger than|less than|at most|max|maximum)\s+[0-9]+' THEN
+        age_val := regexp_replace(q, '.*(?:below|under|younger than|less than|at most|max|maximum)\s+([0-9]+).*', '\1', 'i')::INT;
+        RETURN age_val;
+    END IF;
+
+    RETURN NULL;
+EXCEPTION
+    WHEN others THEN
+        RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION public.extract_age_upper(q text) OWNER TO gaurav;
+
+--
+-- Name: refresh_patient_search_vector(); Type: FUNCTION; Schema: public; Owner: gaurav
+--
+
+CREATE FUNCTION public.refresh_patient_search_vector() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    NEW.search_vector := to_tsvector(
+        'english',
+        concat_ws(' ', NEW.first_name, NEW.last_name, NEW.city, NEW.status)
+    );
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public.refresh_patient_search_vector() OWNER TO gaurav;
+
+--
 -- Name: log_search_query(integer, text, text); Type: FUNCTION; Schema: public; Owner: gaurav
 --
 
@@ -189,14 +298,22 @@ BEGIN
     RETURN QUERY
     WITH results AS (
         SELECT * FROM search_patients_nl(q)
+    ),
+    inserted_results AS (
+        INSERT INTO search_results(query_id, patient_id, relevance_score)
+        SELECT qid, r.patient_id, 1.0
+        FROM results r
+        RETURNING 1
+    ),
+    inserted_members AS (
+        INSERT INTO patient_cohort_members(cohort_id, patient_id, query_id)
+        SELECT cid, r.patient_id, qid
+        FROM results r
+        ON CONFLICT (cohort_id, patient_id) DO NOTHING
+        RETURNING 1
     )
     SELECT r.patient_id, r.first_name, r.last_name, r.gender
     FROM results r;
-
-    -- Step 4: store results separately
-    INSERT INTO search_results(query_id, patient_id, relevance_score)
-    SELECT qid, r.patient_id, 1.0
-    FROM search_patients_nl(q) r;
 
 END;
 $$;
@@ -253,12 +370,18 @@ CREATE FUNCTION public.search_patients_nl(q text) RETURNS TABLE(patient_id integ
 DECLARE
     g TEXT;
     a INT;
+    a_max INT;
     s TEXT;
+    c TEXT;
+    st TEXT;
 BEGIN
 
     g := extract_gender(q);
     a := extract_age(q);
+    a_max := extract_age_upper(q);
     s := extract_symptom(q);
+    c := extract_city(q);
+    st := extract_status(q);
 
     RETURN QUERY
     SELECT DISTINCT 
@@ -275,7 +398,13 @@ BEGIN
         AND
         (a IS NULL OR DATE_PART('year', AGE(p.date_of_birth)) > a)
         AND
-        (s IS NULL OR sy.symptom_name = s);
+        (a_max IS NULL OR DATE_PART('year', AGE(p.date_of_birth)) <= a_max)
+        AND
+        (s IS NULL OR sy.symptom_name = s)
+        AND
+        (c IS NULL OR p.city ILIKE c)
+        AND
+        (st IS NULL OR p.status ILIKE st);
 
 END;
 $$;
@@ -682,6 +811,42 @@ ALTER SEQUENCE public.search_results_result_id_seq OWNED BY public.search_result
 
 
 --
+-- Name: patient_cohort_members; Type: TABLE; Schema: public; Owner: gaurav
+--
+
+CREATE TABLE public.patient_cohort_members (
+    member_id integer NOT NULL,
+    cohort_id integer NOT NULL,
+    patient_id integer NOT NULL,
+    query_id integer,
+    added_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT patient_cohort_members_pkey PRIMARY KEY (member_id),
+    CONSTRAINT patient_cohort_members_cohort_patient_key UNIQUE (cohort_id, patient_id),
+    CONSTRAINT patient_cohort_members_cohort_id_fkey FOREIGN KEY (cohort_id) REFERENCES public.patient_cohorts(cohort_id) ON DELETE CASCADE,
+    CONSTRAINT patient_cohort_members_patient_id_fkey FOREIGN KEY (patient_id) REFERENCES public.patients(patient_id) ON DELETE CASCADE,
+    CONSTRAINT patient_cohort_members_query_id_fkey FOREIGN KEY (query_id) REFERENCES public.search_queries(query_id) ON DELETE SET NULL
+);
+
+
+ALTER TABLE public.patient_cohort_members OWNER TO gaurav;
+
+
+CREATE SEQUENCE public.patient_cohort_members_member_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.patient_cohort_members_member_id_seq OWNER TO gaurav;
+
+
+ALTER SEQUENCE public.patient_cohort_members_member_id_seq OWNED BY public.patient_cohort_members.member_id;
+
+
+--
 -- Name: symptom_hierarchy; Type: TABLE; Schema: public; Owner: gaurav
 --
 
@@ -908,6 +1073,13 @@ ALTER TABLE ONLY public.search_results ALTER COLUMN result_id SET DEFAULT nextva
 
 
 --
+-- Name: patient_cohort_members member_id; Type: DEFAULT; Schema: public; Owner: gaurav
+--
+
+ALTER TABLE ONLY public.patient_cohort_members ALTER COLUMN member_id SET DEFAULT nextval('public.patient_cohort_members_member_id_seq'::regclass);
+
+
+--
 -- Name: symptoms symptom_id; Type: DEFAULT; Schema: public; Owner: gaurav
 --
 
@@ -1039,6 +1211,12 @@ COPY public.patients (patient_id, first_name, last_name, gender, date_of_birth, 
 14	Ananya	Sen	female	1997-06-15	\N	Kolkata	2026-03-16 18:40:22.922058	\N
 15	Suresh	Patel	male	1976-12-05	\N	Ahmedabad	2026-03-16 18:40:22.922058	\N
 \.
+
+UPDATE public.patients
+SET search_vector = to_tsvector(
+    'english',
+    concat_ws(' ', first_name, last_name, city, status)
+);
 
 
 --
@@ -1186,6 +1364,13 @@ SELECT pg_catalog.setval('public.lab_tests_test_id_seq', 3, true);
 --
 
 SELECT pg_catalog.setval('public.patient_cohorts_cohort_id_seq', 4, true);
+
+
+--
+-- Name: patient_cohort_members_member_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+--
+
+SELECT pg_catalog.setval('public.patient_cohort_members_member_id_seq', 1, false);
 
 
 --
@@ -1391,6 +1576,44 @@ ALTER TABLE ONLY public.visits
 --
 
 CREATE INDEX patient_search_idx ON public.patients USING gin (search_vector);
+
+
+--
+-- Name: search_queries_user_created_idx; Type: INDEX; Schema: public; Owner: gaurav
+--
+
+CREATE INDEX search_queries_user_created_idx ON public.search_queries USING btree (user_id, created_at DESC);
+
+
+--
+-- Name: search_results_query_idx; Type: INDEX; Schema: public; Owner: gaurav
+--
+
+CREATE INDEX search_results_query_idx ON public.search_results USING btree (query_id);
+
+
+--
+-- Name: patient_cohort_members_cohort_idx; Type: INDEX; Schema: public; Owner: gaurav
+--
+
+CREATE INDEX patient_cohort_members_cohort_idx ON public.patient_cohort_members USING btree (cohort_id);
+
+
+--
+-- Name: patient_cohort_members_patient_idx; Type: INDEX; Schema: public; Owner: gaurav
+--
+
+CREATE INDEX patient_cohort_members_patient_idx ON public.patient_cohort_members USING btree (patient_id);
+
+
+--
+-- Name: patients_search_vector_trigger; Type: TRIGGER; Schema: public; Owner: gaurav
+--
+
+CREATE TRIGGER patients_search_vector_trigger
+BEFORE INSERT OR UPDATE OF first_name, last_name, city, status ON public.patients
+FOR EACH ROW
+EXECUTE FUNCTION public.refresh_patient_search_vector();
 
 
 --
