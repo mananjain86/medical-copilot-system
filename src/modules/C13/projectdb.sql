@@ -19,7 +19,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Name: expand_query_terms(text); Type: FUNCTION; Schema: public; Owner: gaurav
+-- Name: expand_query_terms(text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.expand_query_terms(term text) RETURNS TABLE(expanded_term text)
@@ -37,10 +37,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.expand_query_terms(term text) OWNER TO gaurav;
+ALTER FUNCTION public.expand_query_terms(term text) OWNER TO postgres;
 
 --
--- Name: refresh_patient_search_vector(); Type: FUNCTION; Schema: public; Owner: gaurav
+-- Name: refresh_patient_search_vector(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.refresh_patient_search_vector() RETURNS trigger
@@ -56,10 +56,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.refresh_patient_search_vector() OWNER TO gaurav;
+ALTER FUNCTION public.refresh_patient_search_vector() OWNER TO postgres;
 
 --
--- Name: log_search_query(integer, text, text); Type: FUNCTION; Schema: public; Owner: gaurav
+-- Name: log_search_query(integer, text, text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.log_search_query(uid integer, q text, type text) RETURNS integer
@@ -79,10 +79,10 @@ END;
 $$;
 
 
-ALTER FUNCTION public.log_search_query(uid integer, q text, type text) OWNER TO gaurav;
+ALTER FUNCTION public.log_search_query(uid integer, q text, type text) OWNER TO postgres;
 
 --
--- Name: save_user_query(integer, text); Type: FUNCTION; Schema: public; Owner: gaurav
+-- Name: save_user_query(integer, text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.save_user_query(uid integer, q text) RETURNS void
@@ -97,14 +97,14 @@ END;
 $$;
 
 
-ALTER FUNCTION public.save_user_query(uid integer, q text) OWNER TO gaurav;
+ALTER FUNCTION public.save_user_query(uid integer, q text) OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: doctors; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: doctors; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.doctors (
@@ -114,10 +114,10 @@ CREATE TABLE public.doctors (
 );
 
 
-ALTER TABLE public.doctors OWNER TO gaurav;
+ALTER TABLE public.doctors OWNER TO postgres;
 
 --
--- Name: doctors_doctor_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: doctors_doctor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.doctors_doctor_id_seq
@@ -129,17 +129,17 @@ CREATE SEQUENCE public.doctors_doctor_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.doctors_doctor_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.doctors_doctor_id_seq OWNER TO postgres;
 
 --
--- Name: doctors_doctor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: doctors_doctor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.doctors_doctor_id_seq OWNED BY public.doctors.doctor_id;
 
 
 --
--- Name: lab_results; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: lab_results; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.lab_results (
@@ -151,10 +151,10 @@ CREATE TABLE public.lab_results (
 );
 
 
-ALTER TABLE public.lab_results OWNER TO gaurav;
+ALTER TABLE public.lab_results OWNER TO postgres;
 
 --
--- Name: lab_results_result_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: lab_results_result_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.lab_results_result_id_seq
@@ -166,17 +166,17 @@ CREATE SEQUENCE public.lab_results_result_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.lab_results_result_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.lab_results_result_id_seq OWNER TO postgres;
 
 --
--- Name: lab_results_result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: lab_results_result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.lab_results_result_id_seq OWNED BY public.lab_results.result_id;
 
 
 --
--- Name: lab_tests; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: lab_tests; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.lab_tests (
@@ -185,10 +185,10 @@ CREATE TABLE public.lab_tests (
 );
 
 
-ALTER TABLE public.lab_tests OWNER TO gaurav;
+ALTER TABLE public.lab_tests OWNER TO postgres;
 
 --
--- Name: lab_tests_test_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: lab_tests_test_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.lab_tests_test_id_seq
@@ -200,17 +200,17 @@ CREATE SEQUENCE public.lab_tests_test_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.lab_tests_test_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.lab_tests_test_id_seq OWNER TO postgres;
 
 --
--- Name: lab_tests_test_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: lab_tests_test_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.lab_tests_test_id_seq OWNED BY public.lab_tests.test_id;
 
 
 --
--- Name: patients; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: patients; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patients (
@@ -228,10 +228,10 @@ CREATE TABLE public.patients (
 );
 
 
-ALTER TABLE public.patients OWNER TO gaurav;
+ALTER TABLE public.patients OWNER TO postgres;
 
 --
--- Name: patient_age_view; Type: VIEW; Schema: public; Owner: gaurav
+-- Name: patient_age_view; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.patient_age_view AS
@@ -245,10 +245,10 @@ CREATE VIEW public.patient_age_view AS
    FROM public.patients;
 
 
-ALTER VIEW public.patient_age_view OWNER TO gaurav;
+ALTER VIEW public.patient_age_view OWNER TO postgres;
 
 --
--- Name: patient_cohorts; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: patient_cohorts; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patient_cohorts (
@@ -258,10 +258,10 @@ CREATE TABLE public.patient_cohorts (
 );
 
 
-ALTER TABLE public.patient_cohorts OWNER TO gaurav;
+ALTER TABLE public.patient_cohorts OWNER TO postgres;
 
 --
--- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patient_cohorts_cohort_id_seq
@@ -273,17 +273,17 @@ CREATE SEQUENCE public.patient_cohorts_cohort_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.patient_cohorts_cohort_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.patient_cohorts_cohort_id_seq OWNER TO postgres;
 
 --
--- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.patient_cohorts_cohort_id_seq OWNED BY public.patient_cohorts.cohort_id;
 
 
 --
--- Name: patient_symptoms; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: patient_symptoms; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patient_symptoms (
@@ -293,10 +293,10 @@ CREATE TABLE public.patient_symptoms (
 );
 
 
-ALTER TABLE public.patient_symptoms OWNER TO gaurav;
+ALTER TABLE public.patient_symptoms OWNER TO postgres;
 
 --
--- Name: patient_symptoms_record_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: patient_symptoms_record_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patient_symptoms_record_id_seq
@@ -308,17 +308,17 @@ CREATE SEQUENCE public.patient_symptoms_record_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.patient_symptoms_record_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.patient_symptoms_record_id_seq OWNER TO postgres;
 
 --
--- Name: patient_symptoms_record_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: patient_symptoms_record_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.patient_symptoms_record_id_seq OWNED BY public.patient_symptoms.record_id;
 
 
 --
--- Name: patient_visit_summary; Type: VIEW; Schema: public; Owner: gaurav
+-- Name: patient_visit_summary; Type: VIEW; Schema: public; Owner: postgres
 --
 
 CREATE VIEW public.patient_visit_summary AS
@@ -328,10 +328,10 @@ SELECT
     NULL::bigint AS total_visits;
 
 
-ALTER VIEW public.patient_visit_summary OWNER TO gaurav;
+ALTER VIEW public.patient_visit_summary OWNER TO postgres;
 
 --
--- Name: patients_patient_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: patients_patient_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patients_patient_id_seq
@@ -343,17 +343,17 @@ CREATE SEQUENCE public.patients_patient_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.patients_patient_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.patients_patient_id_seq OWNER TO postgres;
 
 --
--- Name: patients_patient_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: patients_patient_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.patients_patient_id_seq OWNED BY public.patients.patient_id;
 
 
 --
--- Name: query_templates; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: query_templates; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.query_templates (
@@ -364,10 +364,10 @@ CREATE TABLE public.query_templates (
 );
 
 
-ALTER TABLE public.query_templates OWNER TO gaurav;
+ALTER TABLE public.query_templates OWNER TO postgres;
 
 --
--- Name: query_templates_template_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: query_templates_template_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.query_templates_template_id_seq
@@ -379,17 +379,17 @@ CREATE SEQUENCE public.query_templates_template_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.query_templates_template_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.query_templates_template_id_seq OWNER TO postgres;
 
 --
--- Name: query_templates_template_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: query_templates_template_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.query_templates_template_id_seq OWNED BY public.query_templates.template_id;
 
 
 --
--- Name: saved_queries; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: saved_queries; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.saved_queries (
@@ -400,10 +400,10 @@ CREATE TABLE public.saved_queries (
 );
 
 
-ALTER TABLE public.saved_queries OWNER TO gaurav;
+ALTER TABLE public.saved_queries OWNER TO postgres;
 
 --
--- Name: saved_queries_saved_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: saved_queries_saved_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.saved_queries_saved_id_seq
@@ -415,17 +415,17 @@ CREATE SEQUENCE public.saved_queries_saved_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.saved_queries_saved_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.saved_queries_saved_id_seq OWNER TO postgres;
 
 --
--- Name: saved_queries_saved_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: saved_queries_saved_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.saved_queries_saved_id_seq OWNED BY public.saved_queries.saved_id;
 
 
 --
--- Name: search_queries; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: search_queries; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.search_queries (
@@ -437,10 +437,10 @@ CREATE TABLE public.search_queries (
 );
 
 
-ALTER TABLE public.search_queries OWNER TO gaurav;
+ALTER TABLE public.search_queries OWNER TO postgres;
 
 --
--- Name: search_queries_query_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: search_queries_query_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.search_queries_query_id_seq
@@ -452,17 +452,17 @@ CREATE SEQUENCE public.search_queries_query_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.search_queries_query_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.search_queries_query_id_seq OWNER TO postgres;
 
 --
--- Name: search_queries_query_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: search_queries_query_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.search_queries_query_id_seq OWNED BY public.search_queries.query_id;
 
 
 --
--- Name: search_results; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: search_results; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.search_results (
@@ -473,10 +473,10 @@ CREATE TABLE public.search_results (
 );
 
 
-ALTER TABLE public.search_results OWNER TO gaurav;
+ALTER TABLE public.search_results OWNER TO postgres;
 
 --
--- Name: search_results_result_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: search_results_result_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.search_results_result_id_seq
@@ -488,17 +488,17 @@ CREATE SEQUENCE public.search_results_result_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.search_results_result_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.search_results_result_id_seq OWNER TO postgres;
 
 --
--- Name: search_results_result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: search_results_result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.search_results_result_id_seq OWNED BY public.search_results.result_id;
 
 
 --
--- Name: patient_cohort_members; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patient_cohort_members (
@@ -512,7 +512,7 @@ CREATE TABLE public.patient_cohort_members (
 );
 
 
-ALTER TABLE public.patient_cohort_members OWNER TO gaurav;
+ALTER TABLE public.patient_cohort_members OWNER TO postgres;
 
 
 CREATE SEQUENCE public.patient_cohort_members_member_id_seq
@@ -524,14 +524,14 @@ CREATE SEQUENCE public.patient_cohort_members_member_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.patient_cohort_members_member_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.patient_cohort_members_member_id_seq OWNER TO postgres;
 
 
 ALTER SEQUENCE public.patient_cohort_members_member_id_seq OWNED BY public.patient_cohort_members.member_id;
 
 
 --
--- Name: symptom_hierarchy; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: symptom_hierarchy; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.symptom_hierarchy (
@@ -540,10 +540,10 @@ CREATE TABLE public.symptom_hierarchy (
 );
 
 
-ALTER TABLE public.symptom_hierarchy OWNER TO gaurav;
+ALTER TABLE public.symptom_hierarchy OWNER TO postgres;
 
 --
--- Name: symptoms; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: symptoms; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.symptoms (
@@ -552,10 +552,10 @@ CREATE TABLE public.symptoms (
 );
 
 
-ALTER TABLE public.symptoms OWNER TO gaurav;
+ALTER TABLE public.symptoms OWNER TO postgres;
 
 --
--- Name: symptoms_symptom_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: symptoms_symptom_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.symptoms_symptom_id_seq
@@ -567,17 +567,17 @@ CREATE SEQUENCE public.symptoms_symptom_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.symptoms_symptom_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.symptoms_symptom_id_seq OWNER TO postgres;
 
 --
--- Name: symptoms_symptom_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: symptoms_symptom_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.symptoms_symptom_id_seq OWNED BY public.symptoms.symptom_id;
 
 
 --
--- Name: synonyms; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: synonyms; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.synonyms (
@@ -587,10 +587,10 @@ CREATE TABLE public.synonyms (
 );
 
 
-ALTER TABLE public.synonyms OWNER TO gaurav;
+ALTER TABLE public.synonyms OWNER TO postgres;
 
 --
--- Name: synonyms_synonym_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: synonyms_synonym_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.synonyms_synonym_id_seq
@@ -602,17 +602,17 @@ CREATE SEQUENCE public.synonyms_synonym_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.synonyms_synonym_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.synonyms_synonym_id_seq OWNER TO postgres;
 
 --
--- Name: synonyms_synonym_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: synonyms_synonym_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.synonyms_synonym_id_seq OWNED BY public.synonyms.synonym_id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.users (
@@ -624,10 +624,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO gaurav;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.users_user_id_seq
@@ -639,17 +639,17 @@ CREATE SEQUENCE public.users_user_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_user_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.users_user_id_seq OWNER TO postgres;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
 
 
 --
--- Name: visits; Type: TABLE; Schema: public; Owner: gaurav
+-- Name: visits; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.visits (
@@ -662,10 +662,10 @@ CREATE TABLE public.visits (
 );
 
 
-ALTER TABLE public.visits OWNER TO gaurav;
+ALTER TABLE public.visits OWNER TO postgres;
 
 --
--- Name: visits_visit_id_seq; Type: SEQUENCE; Schema: public; Owner: gaurav
+-- Name: visits_visit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.visits_visit_id_seq
@@ -677,122 +677,122 @@ CREATE SEQUENCE public.visits_visit_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.visits_visit_id_seq OWNER TO gaurav;
+ALTER SEQUENCE public.visits_visit_id_seq OWNER TO postgres;
 
 --
--- Name: visits_visit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gaurav
+-- Name: visits_visit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.visits_visit_id_seq OWNED BY public.visits.visit_id;
 
 
 --
--- Name: doctors doctor_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: doctors doctor_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.doctors ALTER COLUMN doctor_id SET DEFAULT nextval('public.doctors_doctor_id_seq'::regclass);
 
 
 --
--- Name: lab_results result_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: lab_results result_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_results ALTER COLUMN result_id SET DEFAULT nextval('public.lab_results_result_id_seq'::regclass);
 
 
 --
--- Name: lab_tests test_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: lab_tests test_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_tests ALTER COLUMN test_id SET DEFAULT nextval('public.lab_tests_test_id_seq'::regclass);
 
 
 --
--- Name: patient_cohorts cohort_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: patient_cohorts cohort_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohorts ALTER COLUMN cohort_id SET DEFAULT nextval('public.patient_cohorts_cohort_id_seq'::regclass);
 
 
 --
--- Name: patient_symptoms record_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: patient_symptoms record_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_symptoms ALTER COLUMN record_id SET DEFAULT nextval('public.patient_symptoms_record_id_seq'::regclass);
 
 
 --
--- Name: patients patient_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: patients patient_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patients ALTER COLUMN patient_id SET DEFAULT nextval('public.patients_patient_id_seq'::regclass);
 
 
 --
--- Name: query_templates template_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: query_templates template_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.query_templates ALTER COLUMN template_id SET DEFAULT nextval('public.query_templates_template_id_seq'::regclass);
 
 
 --
--- Name: saved_queries saved_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: saved_queries saved_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.saved_queries ALTER COLUMN saved_id SET DEFAULT nextval('public.saved_queries_saved_id_seq'::regclass);
 
 
 --
--- Name: search_queries query_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: search_queries query_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_queries ALTER COLUMN query_id SET DEFAULT nextval('public.search_queries_query_id_seq'::regclass);
 
 
 --
--- Name: search_results result_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: search_results result_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_results ALTER COLUMN result_id SET DEFAULT nextval('public.search_results_result_id_seq'::regclass);
 
 
 --
--- Name: patient_cohort_members member_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members member_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohort_members ALTER COLUMN member_id SET DEFAULT nextval('public.patient_cohort_members_member_id_seq'::regclass);
 
 
 --
--- Name: symptoms symptom_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: symptoms symptom_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.symptoms ALTER COLUMN symptom_id SET DEFAULT nextval('public.symptoms_symptom_id_seq'::regclass);
 
 
 --
--- Name: synonyms synonym_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: synonyms synonym_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.synonyms ALTER COLUMN synonym_id SET DEFAULT nextval('public.synonyms_synonym_id_seq'::regclass);
 
 
 --
--- Name: users user_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
 
 
 --
--- Name: visits visit_id; Type: DEFAULT; Schema: public; Owner: gaurav
+-- Name: visits visit_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.visits ALTER COLUMN visit_id SET DEFAULT nextval('public.visits_visit_id_seq'::regclass);
 
 
 --
--- Data for Name: doctors; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: doctors; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.doctors (doctor_id, doctor_name, specialization) FROM stdin;
@@ -805,7 +805,7 @@ COPY public.doctors (doctor_id, doctor_name, specialization) FROM stdin;
 
 
 --
--- Data for Name: lab_results; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: lab_results; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.lab_results (result_id, visit_id, test_id, result_value, result_date) FROM stdin;
@@ -828,7 +828,7 @@ COPY public.lab_results (result_id, visit_id, test_id, result_value, result_date
 
 
 --
--- Data for Name: lab_tests; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: lab_tests; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.lab_tests (test_id, test_name) FROM stdin;
@@ -839,7 +839,7 @@ COPY public.lab_tests (test_id, test_name) FROM stdin;
 
 
 --
--- Data for Name: patient_cohorts; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: patient_cohorts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.patient_cohorts (cohort_id, cohort_name, created_at) FROM stdin;
@@ -851,7 +851,7 @@ COPY public.patient_cohorts (cohort_id, cohort_name, created_at) FROM stdin;
 
 
 --
--- Data for Name: patient_symptoms; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: patient_symptoms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.patient_symptoms (record_id, visit_id, symptom_id) FROM stdin;
@@ -875,7 +875,7 @@ COPY public.patient_symptoms (record_id, visit_id, symptom_id) FROM stdin;
 
 
 --
--- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.patients (patient_id, first_name, last_name, gender, date_of_birth, phone, city, created_at, search_vector) FROM stdin;
@@ -904,7 +904,7 @@ SET search_vector = to_tsvector(
 
 
 --
--- Data for Name: query_templates; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: query_templates; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.query_templates (template_id, template_pattern, sql_template, description) FROM stdin;
@@ -913,7 +913,7 @@ COPY public.query_templates (template_id, template_pattern, sql_template, descri
 
 
 --
--- Data for Name: saved_queries; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: saved_queries; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.saved_queries (saved_id, user_id, query_text, created_at) FROM stdin;
@@ -921,7 +921,7 @@ COPY public.saved_queries (saved_id, user_id, query_text, created_at) FROM stdin
 
 
 --
--- Data for Name: search_queries; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: search_queries; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.search_queries (query_id, query_text, search_type, created_at, user_id) FROM stdin;
@@ -933,7 +933,7 @@ COPY public.search_queries (query_id, query_text, search_type, created_at, user_
 
 
 --
--- Data for Name: search_results; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: search_results; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.search_results (result_id, query_id, patient_id, relevance_score) FROM stdin;
@@ -950,7 +950,7 @@ COPY public.search_results (result_id, query_id, patient_id, relevance_score) FR
 
 
 --
--- Data for Name: symptom_hierarchy; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: symptom_hierarchy; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.symptom_hierarchy (parent_symptom, child_symptom) FROM stdin;
@@ -958,7 +958,7 @@ COPY public.symptom_hierarchy (parent_symptom, child_symptom) FROM stdin;
 
 
 --
--- Data for Name: symptoms; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: symptoms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.symptoms (symptom_id, symptom_name) FROM stdin;
@@ -973,7 +973,7 @@ COPY public.symptoms (symptom_id, symptom_name) FROM stdin;
 
 
 --
--- Data for Name: synonyms; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: synonyms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.synonyms (synonym_id, word, synonym) FROM stdin;
@@ -987,7 +987,7 @@ COPY public.synonyms (synonym_id, word, synonym) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.users (user_id, username, role, department, created_at) FROM stdin;
@@ -1000,7 +1000,7 @@ COPY public.users (user_id, username, role, department, created_at) FROM stdin;
 
 
 --
--- Data for Name: visits; Type: TABLE DATA; Schema: public; Owner: gaurav
+-- Data for Name: visits; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.visits (visit_id, patient_id, doctor_id, visit_date, diagnosis, notes) FROM stdin;
@@ -1023,112 +1023,112 @@ COPY public.visits (visit_id, patient_id, doctor_id, visit_date, diagnosis, note
 
 
 --
--- Name: doctors_doctor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: doctors_doctor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.doctors_doctor_id_seq', 5, true);
 
 
 --
--- Name: lab_results_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: lab_results_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.lab_results_result_id_seq', 15, true);
 
 
 --
--- Name: lab_tests_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: lab_tests_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.lab_tests_test_id_seq', 3, true);
 
 
 --
--- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: patient_cohorts_cohort_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patient_cohorts_cohort_id_seq', 4, true);
 
 
 --
--- Name: patient_cohort_members_member_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members_member_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patient_cohort_members_member_id_seq', 1, false);
 
 
 --
--- Name: patient_symptoms_record_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: patient_symptoms_record_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patient_symptoms_record_id_seq', 16, true);
 
 
 --
--- Name: patients_patient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: patients_patient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patients_patient_id_seq', 15, true);
 
 
 --
--- Name: query_templates_template_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: query_templates_template_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.query_templates_template_id_seq', 1, true);
 
 
 --
--- Name: saved_queries_saved_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: saved_queries_saved_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.saved_queries_saved_id_seq', 1, false);
 
 
 --
--- Name: search_queries_query_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: search_queries_query_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.search_queries_query_id_seq', 4, true);
 
 
 --
--- Name: search_results_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: search_results_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.search_results_result_id_seq', 9, true);
 
 
 --
--- Name: symptoms_symptom_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: symptoms_symptom_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.symptoms_symptom_id_seq', 7, true);
 
 
 --
--- Name: synonyms_synonym_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: synonyms_synonym_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.synonyms_synonym_id_seq', 6, true);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.users_user_id_seq', 5, true);
 
 
 --
--- Name: visits_visit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gaurav
+-- Name: visits_visit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.visits_visit_id_seq', 15, true);
 
 
 --
--- Name: doctors doctors_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: doctors doctors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.doctors
@@ -1136,7 +1136,7 @@ ALTER TABLE ONLY public.doctors
 
 
 --
--- Name: lab_results lab_results_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: lab_results lab_results_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_results
@@ -1144,7 +1144,7 @@ ALTER TABLE ONLY public.lab_results
 
 
 --
--- Name: lab_tests lab_tests_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: lab_tests lab_tests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_tests
@@ -1152,7 +1152,7 @@ ALTER TABLE ONLY public.lab_tests
 
 
 --
--- Name: patient_cohorts patient_cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_cohorts patient_cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohorts
@@ -1160,7 +1160,7 @@ ALTER TABLE ONLY public.patient_cohorts
 
 
 --
--- Name: patient_symptoms patient_symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_symptoms patient_symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_symptoms
@@ -1168,7 +1168,7 @@ ALTER TABLE ONLY public.patient_symptoms
 
 
 --
--- Name: patients patients_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patients patients_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patients
@@ -1176,7 +1176,7 @@ ALTER TABLE ONLY public.patients
 
 
 --
--- Name: query_templates query_templates_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: query_templates query_templates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.query_templates
@@ -1184,7 +1184,7 @@ ALTER TABLE ONLY public.query_templates
 
 
 --
--- Name: saved_queries saved_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: saved_queries saved_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.saved_queries
@@ -1192,7 +1192,7 @@ ALTER TABLE ONLY public.saved_queries
 
 
 --
--- Name: search_queries search_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: search_queries search_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_queries
@@ -1200,7 +1200,7 @@ ALTER TABLE ONLY public.search_queries
 
 
 --
--- Name: search_results search_results_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: search_results search_results_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_results
@@ -1208,7 +1208,7 @@ ALTER TABLE ONLY public.search_results
 
 
 --
--- Name: symptoms symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: symptoms symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.symptoms
@@ -1216,7 +1216,7 @@ ALTER TABLE ONLY public.symptoms
 
 
 --
--- Name: symptoms symptoms_symptom_name_key; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: symptoms symptoms_symptom_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.symptoms
@@ -1224,7 +1224,7 @@ ALTER TABLE ONLY public.symptoms
 
 
 --
--- Name: synonyms synonyms_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: synonyms synonyms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.synonyms
@@ -1232,7 +1232,7 @@ ALTER TABLE ONLY public.synonyms
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -1240,7 +1240,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -1248,7 +1248,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: visits visits_pkey; Type: CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: visits visits_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.visits
@@ -1256,42 +1256,42 @@ ALTER TABLE ONLY public.visits
 
 
 --
--- Name: patient_search_idx; Type: INDEX; Schema: public; Owner: gaurav
+-- Name: patient_search_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX patient_search_idx ON public.patients USING gin (search_vector);
 
 
 --
--- Name: search_queries_user_created_idx; Type: INDEX; Schema: public; Owner: gaurav
+-- Name: search_queries_user_created_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX search_queries_user_created_idx ON public.search_queries USING btree (user_id, created_at DESC);
 
 
 --
--- Name: search_results_query_idx; Type: INDEX; Schema: public; Owner: gaurav
+-- Name: search_results_query_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX search_results_query_idx ON public.search_results USING btree (query_id);
 
 
 --
--- Name: patient_cohort_members_cohort_idx; Type: INDEX; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members_cohort_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX patient_cohort_members_cohort_idx ON public.patient_cohort_members USING btree (cohort_id);
 
 
 --
--- Name: patient_cohort_members_patient_idx; Type: INDEX; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members_patient_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX patient_cohort_members_patient_idx ON public.patient_cohort_members USING btree (patient_id);
 
 
 --
--- Name: patients_search_vector_trigger; Type: TRIGGER; Schema: public; Owner: gaurav
+-- Name: patients_search_vector_trigger; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER patients_search_vector_trigger
@@ -1301,7 +1301,7 @@ EXECUTE FUNCTION public.refresh_patient_search_vector();
 
 
 --
--- Name: patient_visit_summary _RETURN; Type: RULE; Schema: public; Owner: gaurav
+-- Name: patient_visit_summary _RETURN; Type: RULE; Schema: public; Owner: postgres
 --
 
 CREATE OR REPLACE VIEW public.patient_visit_summary AS
@@ -1314,7 +1314,7 @@ CREATE OR REPLACE VIEW public.patient_visit_summary AS
 
 
 --
--- Name: lab_results lab_results_test_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: lab_results lab_results_test_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_results
@@ -1322,7 +1322,7 @@ ALTER TABLE ONLY public.lab_results
 
 
 --
--- Name: lab_results lab_results_visit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: lab_results lab_results_visit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.lab_results
@@ -1330,7 +1330,7 @@ ALTER TABLE ONLY public.lab_results
 
 
 --
--- Name: patient_symptoms patient_symptoms_symptom_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_symptoms patient_symptoms_symptom_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_symptoms
@@ -1338,7 +1338,7 @@ ALTER TABLE ONLY public.patient_symptoms
 
 
 --
--- Name: patient_symptoms patient_symptoms_visit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_symptoms patient_symptoms_visit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_symptoms
@@ -1346,7 +1346,7 @@ ALTER TABLE ONLY public.patient_symptoms
 
 
 --
--- Name: saved_queries saved_queries_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: saved_queries saved_queries_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.saved_queries
@@ -1354,7 +1354,7 @@ ALTER TABLE ONLY public.saved_queries
 
 
 --
--- Name: search_queries search_queries_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: search_queries search_queries_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_queries
@@ -1362,7 +1362,7 @@ ALTER TABLE ONLY public.search_queries
 
 
 --
--- Name: search_results search_results_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: search_results search_results_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_results
@@ -1370,7 +1370,7 @@ ALTER TABLE ONLY public.search_results
 
 
 --
--- Name: search_results search_results_query_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: search_results search_results_query_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.search_results
@@ -1378,7 +1378,7 @@ ALTER TABLE ONLY public.search_results
 
 
 --
--- Name: visits visits_doctor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: visits visits_doctor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.visits
@@ -1386,7 +1386,7 @@ ALTER TABLE ONLY public.visits
 
 
 --
--- Name: visits visits_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: visits visits_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.visits
@@ -1394,7 +1394,7 @@ ALTER TABLE ONLY public.visits
 
 
 --
--- Name: patient_cohort_members patient_cohort_members_cohort_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members patient_cohort_members_cohort_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohort_members
@@ -1402,7 +1402,7 @@ ALTER TABLE ONLY public.patient_cohort_members
 
 
 --
--- Name: patient_cohort_members patient_cohort_members_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members patient_cohort_members_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohort_members
@@ -1410,7 +1410,7 @@ ALTER TABLE ONLY public.patient_cohort_members
 
 
 --
--- Name: patient_cohort_members patient_cohort_members_query_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: gaurav
+-- Name: patient_cohort_members patient_cohort_members_query_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patient_cohort_members

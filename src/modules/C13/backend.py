@@ -28,7 +28,7 @@ from __future__ import annotations
 
 import os
 import re
-import subprocess
+import io
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -64,11 +64,15 @@ def _load_c13_env_file() -> None:
 
 _load_c13_env_file()
 
+_DATABASE_PRIVATE_URL = os.getenv("DATABASE_URL")
+_DATABASE_PUBLIC_URL = os.getenv("DATABASE_PUBLIC_URL")
+_DATABASE_URL = _DATABASE_PRIVATE_URL or _DATABASE_PUBLIC_URL
 _DB_HOST     = os.getenv("DB_HOST",     "localhost")
 _DB_PORT     = int(os.getenv("DB_PORT", "5432"))
 _DB_NAME     = os.getenv("DB_NAME",     "projectdb")
 _DB_USER     = os.getenv("DB_USER",     "gaurav")
 _DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+_DB_SSLMODE  = os.getenv("DB_SSLMODE") or os.getenv("PGSSLMODE")
 
 
 PROJECTDB_SQL_PATH = Path(__file__).with_name("projectdb.sql")
@@ -244,20 +248,107 @@ class GeneratedSQL:
 
 
 def get_connection(
+	dsn: str | None = _DATABASE_URL,
 	host: str = _DB_HOST,
 	port: int = _DB_PORT,
 	dbname: str = _DB_NAME,
 	user: str = _DB_USER,
 	password: str = _DB_PASSWORD,
 ) -> psycopg2.extensions.connection:
-	"""Open and return a PostgreSQL connection using credentials from .env."""
+	"""Open and return a PostgreSQL connection.
+
+	Priority order:
+	1) DATABASE_URL / DATABASE_PUBLIC_URL
+	2) DB_HOST/DB_PORT/DB_NAME/DB_USER/DB_PASSWORD
+	"""
+
+	if dsn:
+		kwargs: dict[str, Any] = {}
+		if _DB_SSLMODE and "sslmode=" not in dsn:
+			kwargs["sslmode"] = _DB_SSLMODE
+		try:
+			return psycopg2.connect(dsn, **kwargs)
+		except psycopg2.OperationalError:
+			if _DATABASE_PUBLIC_URL and dsn != _DATABASE_PUBLIC_URL:
+				return psycopg2.connect(_DATABASE_PUBLIC_URL, **kwargs)
+			raise
 
 	return psycopg2.connect(
 		host=host, port=port, dbname=dbname, user=user, password=password
 	)
 
 
+def _load_sql_dump_via_psycopg2(conn: psycopg2.extensions.connection, sql_text: str) -> None:
+	"""Execute a pg_dump plain SQL file, including COPY ... FROM stdin blocks, without psql."""
+
+	skipped_prefixes = (
+		"\\",
+		"SET transaction_timeout",
+	)
+
+	with conn.cursor() as cur:
+		def _execute_chunk_if_sql(lines_chunk: list[str]) -> None:
+			if not lines_chunk:
+				return
+
+			# Avoid sending comment-only sections to PostgreSQL, which raises
+			# "can't execute an empty query" in psycopg2.
+			sql_lines = [
+				ln
+				for ln in lines_chunk
+				if ln.strip() and not ln.lstrip().startswith("--")
+			]
+			if not sql_lines:
+				return
+
+			candidate = "".join(sql_lines).strip()
+			if not candidate:
+				return
+
+			cur.execute(candidate)
+
+		chunk: list[str] = []
+		lines = sql_text.splitlines(keepends=True)
+		i = 0
+
+		while i < len(lines):
+			line = lines[i]
+			stripped = line.strip()
+
+			if stripped.startswith(skipped_prefixes):
+				i += 1
+				continue
+
+			if " OWNER TO " in line:
+				i += 1
+				continue
+
+			if stripped.startswith("COPY ") and stripped.endswith("FROM stdin;"):
+				_execute_chunk_if_sql(chunk)
+				chunk = []
+
+				copy_cmd = line
+				i += 1
+				copy_data: list[str] = []
+				while i < len(lines):
+					data_line = lines[i]
+					if data_line.strip() == "\\.":
+						break
+					copy_data.append(data_line)
+					i += 1
+
+				cur.copy_expert(copy_cmd, io.StringIO("".join(copy_data)))
+				i += 1
+				continue
+
+			chunk.append(line)
+			i += 1
+
+		_execute_chunk_if_sql(chunk)
+
+
 def initialize_projectdb(
+	dsn: str | None = _DATABASE_URL,
 	host: str = _DB_HOST,
 	port: int = _DB_PORT,
 	dbname: str = _DB_NAME,
@@ -269,12 +360,21 @@ def initialize_projectdb(
 	Create the `projectdb` database if needed and load the bundled `projectdb.sql` dump.
 
 	This keeps the course project tied directly to the real database file instead of
-	any dummy in-memory data.
+	any dummy in-memory data, without requiring the `psql` CLI.
 	"""
 
 	target_sql = Path(sql_file) if sql_file else PROJECTDB_SQL_PATH
 	if not target_sql.exists():
 		raise FileNotFoundError(f"SQL file not found: {target_sql}")
+
+	if dsn:
+		conn = get_connection(dsn=dsn)
+		conn.autocommit = True
+		try:
+			_load_sql_dump_via_psycopg2(conn, target_sql.read_text(encoding="utf-8"))
+		finally:
+			conn.close()
+		return f"Loaded database from {target_sql} via DATABASE_URL"
 
 	admin_conn = psycopg2.connect(
 		host=host,
@@ -292,26 +392,12 @@ def initialize_projectdb(
 	finally:
 		admin_conn.close()
 
-	env = None
-	if password:
-		env = {"PGPASSWORD": password}
-
-	command = [
-		"psql",
-		"-h",
-		host,
-		"-p",
-		str(port),
-		"-U",
-		user,
-		"-d",
-		dbname,
-		"-f",
-		str(target_sql),
-	]
-	result = subprocess.run(command, check=False, capture_output=True, text=True, env=env)
-	if result.returncode != 0:
-		raise RuntimeError(result.stderr.strip() or "Failed to load projectdb.sql")
+	conn = get_connection(dsn=None, host=host, port=port, dbname=dbname, user=user, password=password)
+	conn.autocommit = True
+	try:
+		_load_sql_dump_via_psycopg2(conn, target_sql.read_text(encoding="utf-8"))
+	finally:
+		conn.close()
 
 	return f"Loaded database from {target_sql} into {dbname}"
 
