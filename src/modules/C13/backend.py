@@ -38,29 +38,38 @@ import psycopg2.extras
 from psycopg2 import sql as psy_sql
 
 _C13_ENV_PATH = Path(__file__).with_name(".env")
+_ROOT_ENV_PATH = Path(__file__).resolve().parents[3] / ".env"
 
 
-def _load_c13_env_file() -> None:
-	"""Load C13-local .env values, with a no-dependency fallback parser."""
+def _load_env_file(path: Path, override: bool) -> None:
+	"""Load key-value pairs from a .env file path."""
 
-	if not _C13_ENV_PATH.exists():
+	if not path.exists():
 		return
 
 	try:
 		from dotenv import load_dotenv
-		load_dotenv(_C13_ENV_PATH, override=True)
+		load_dotenv(path, override=override)
 		return
 	except ImportError:
 		pass
 
-	for raw_line in _C13_ENV_PATH.read_text(encoding="utf-8").splitlines():
+	for raw_line in path.read_text(encoding="utf-8").splitlines():
 		line = raw_line.strip()
 		if not line or line.startswith("#") or "=" not in line:
 			continue
 		key, value = line.split("=", 1)
 		key = key.strip()
 		value = value.strip().strip('"').strip("'")
-		os.environ[key] = value
+		if override or key not in os.environ:
+			os.environ[key] = value
+
+
+def _load_c13_env_file() -> None:
+	"""Load root .env first, then C13-local .env as fallback."""
+
+	_load_env_file(_ROOT_ENV_PATH, override=False)
+	_load_env_file(_C13_ENV_PATH, override=False)
 
 
 _load_c13_env_file()
@@ -431,35 +440,12 @@ def initialize_projectdb(
 	finally:
 		admin_conn.close()
 
-<<<<<<< HEAD
 	conn = get_connection(dsn=None, host=host, port=port, dbname=dbname, user=user, password=password)
 	conn.autocommit = True
 	try:
 		_load_sql_dump_via_psycopg2(conn, target_sql.read_text(encoding="utf-8"))
 	finally:
 		conn.close()
-=======
-	env = os.environ.copy()
-	if password:
-		env["PGPASSWORD"] = password
-
-	command = [
-		"psql",
-		"-h",
-		host,
-		"-p",
-		str(port),
-		"-U",
-		user,
-		"-d",
-		dbname,
-		"-f",
-		str(target_sql),
-	]
-	result = subprocess.run(command, check=False, capture_output=True, text=True, env=env)
-	if result.returncode != 0:
-		raise RuntimeError(result.stderr.strip() or "Failed to load projectdb.sql")
->>>>>>> 3ff6460 (logic correction)
 
 	return f"Loaded database from {target_sql} into {dbname}"
 
@@ -882,6 +868,25 @@ def run_search(
 	return results, query_id
 
 
+def _ensure_cohort_member_table(conn) -> None:
+	"""Ensure patient_cohort_members exists for cohort/member persistence."""
+
+	with conn.cursor() as cur:
+		cur.execute(
+			"""
+			CREATE TABLE IF NOT EXISTS patient_cohort_members (
+				member_id SERIAL PRIMARY KEY,
+				cohort_id INTEGER NOT NULL REFERENCES patient_cohorts(cohort_id) ON DELETE CASCADE,
+				patient_id INTEGER NOT NULL REFERENCES patients(patient_id) ON DELETE CASCADE,
+				query_id INTEGER REFERENCES search_queries(query_id) ON DELETE SET NULL,
+				added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+				UNIQUE (cohort_id, patient_id)
+			)
+			"""
+		)
+		conn.commit()
+
+
 def create_search_cohort(
 	conn,
 	user_id: int,
@@ -891,16 +896,12 @@ def create_search_cohort(
 	query_id: int | None = None,
 ) -> int:
 	"""Create a cohort for a search and persist its member patient ids."""
-<<<<<<< HEAD
-	cohort_name = f"U{user_id} | {search_type} | {nl_query[:80]}"
-=======
 
 	_ensure_cohort_member_table(conn)
 	_repair_c13_write_sequences(conn)
 	clean_query = " ".join(str(nl_query or "").split())[:80]
 	cohort_name = clean_query or f"{search_type.title()} Cohort"
 	norm_cohort_name = cohort_name.lower()
->>>>>>> 3ff6460 (logic correction)
 
 	with conn.cursor() as cur:
 		cur.execute(

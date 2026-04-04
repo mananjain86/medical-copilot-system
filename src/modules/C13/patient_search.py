@@ -2,9 +2,12 @@
 Module C13 – MediSearch Patient Search Page  (matches target design)
 """
 
-import re
 from html import escape
 from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+import json
+import re
 import streamlit as st
 
 _BACKEND_IMPORT_ERROR: Exception | None = None
@@ -57,28 +60,127 @@ SUGGESTIONS = [
     "female patients with diabetes over 60",
 ]
 
-import json
-from pathlib import Path
 
-# ── load mock patient data ────────────────────────────────────────────────────
-def load_mock_patients():
-    json_path = Path(__file__).parent / "mock_patients.json"
-    if json_path.exists():
-        with open(json_path, "r") as f:
-            return json.load(f)
-    return []
+def _load_mock_patients() -> list[dict]:
+    data_path = Path(__file__).with_name("mock_patients.json")
+    if not data_path.exists():
+        return []
+    try:
+        raw = json.loads(data_path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return raw if isinstance(raw, list) else []
 
-MOCK_PATIENTS = load_mock_patients()
 
-# ── mock history entries ───────────────────────────────────────────────────────
-MOCK_HISTORY = [
-    {"query_text": "female patients over 60 with diabetes",   "search_type": "Demographic · Clinical Combo", "created_at": "3h ago",  "results": 3},
-    {"query_text": "patients with hypertension in cardiology", "search_type": "Symptom-Based Search",        "created_at": "4h ago",  "results": 5},
-    {"query_text": "elderly patients with heart disease",      "search_type": "Age Range Search",             "created_at": "5h ago",  "results": 4},
-    {"query_text": "diabetic patients",                        "search_type": "Symptom-Based Search",        "created_at": "1d ago",  "results": 6},
-    {"query_text": "male patients with asthma",                "search_type": "Demographic · Clinical Combo", "created_at": "4d ago",  "results": 2},
-    {"query_text": "patients in neurology over 60",            "search_type": "Department Search",           "created_at": "6d ago",  "results": 3},
-]
+MOCK_PATIENTS = _load_mock_patients()
+
+
+def _ensure_mock_state() -> None:
+    st.session_state.setdefault("ms_mock_history", [])
+    st.session_state.setdefault("ms_mock_cohorts", [])
+
+
+def _search_mock_patients(query: str) -> list[dict]:
+    q = (query or "").strip().lower()
+    if not q:
+        return []
+
+    gender_filter = None
+    if re.search(r"\b(female|woman|women|lady|ladies)\b", q):
+        gender_filter = "female"
+    elif re.search(r"\b(male|man|men|guy|guys)\b", q):
+        gender_filter = "male"
+
+    min_age = None
+    max_age = None
+    m = re.search(r"(?:over|above|older than|at least)\s+(\d+)", q)
+    if m:
+        min_age = int(m.group(1))
+    m = re.search(r"(?:under|below|younger than|at most)\s+(\d+)", q)
+    if m:
+        max_age = int(m.group(1))
+
+    stop = {
+        "patients", "patient", "with", "and", "the", "over", "above", "under", "below",
+        "older", "younger", "than", "at", "least", "most", "female", "male", "women", "men",
+    }
+    keywords = [tok for tok in re.findall(r"[a-z]+", q) if tok not in stop and len(tok) > 2]
+
+    results = []
+    for p in MOCK_PATIENTS:
+        gender = str(p.get("gender", "")).lower()
+        age = p.get("age", 0)
+        if gender_filter and gender != gender_filter:
+            continue
+        if min_age is not None and isinstance(age, (int, float)) and age < min_age:
+            continue
+        if max_age is not None and isinstance(age, (int, float)) and age > max_age:
+            continue
+
+        hay = " ".join(
+            [
+                str(p.get("name", "")),
+                str(p.get("department", "")),
+                " ".join(p.get("symptoms", []) or []),
+                " ".join(p.get("diagnoses", []) or []),
+            ]
+        ).lower()
+        if keywords and not all(k in hay for k in keywords):
+            continue
+
+        results.append(
+            {
+                "id": p.get("id"),
+                "name": p.get("name", "Unknown"),
+                "age": p.get("age", "—"),
+                "gender": p.get("gender", "Unknown"),
+                "department": p.get("department", "—"),
+                "status": p.get("status", "Active"),
+                "diagnoses": p.get("diagnoses", []),
+                "symptoms": p.get("symptoms", []),
+                "city": p.get("city", "—"),
+            }
+        )
+    return results
+
+
+def _record_mock_search(query: str, results: list[dict]) -> None:
+    _ensure_mock_state()
+
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M")
+    st.session_state.ms_mock_history.insert(
+        0,
+        {
+            "query_text": query,
+            "search_type": "Mock Search",
+            "created_at": ts,
+            "results": len(results),
+        },
+    )
+    st.session_state.ms_mock_history = st.session_state.ms_mock_history[:50]
+
+    key = " ".join(query.lower().split())
+    cohorts = st.session_state.ms_mock_cohorts
+    existing = next((c for c in cohorts if c.get("_key") == key), None)
+    if existing:
+        existing["member_count"] = len(results)
+        existing["members"] = results
+        existing["created_at"] = ts
+        return
+
+    next_id = max([int(c.get("cohort_id", 0)) for c in cohorts] + [0]) + 1
+    cohorts.insert(
+        0,
+        {
+            "cohort_id": next_id,
+            "cohort_name": query,
+            "member_count": len(results),
+            "created_at": ts,
+            "members": results,
+            "_key": key,
+        },
+    )
+
 
 
 # ── shared CSS ────────────────────────────────────────────────────────────────
@@ -530,79 +632,6 @@ def _inject_css() -> None:
 # Note: Sidebar and Page entry moved to end of file for clarity.
 
 
-def _search_mock_patients(query: str):
-    if not query.strip():
-        return []
-    q = query.lower()
-    gender_filter = None
-    if re.search(r"\b(?:female|woman|women|lady|ladies)\b", q):
-        gender_filter = "Female"
-    elif re.search(r"\b(?:male|man|men|gentleman|gentlemen|guy|guys)\b", q):
-        gender_filter = "Male"
-
-    age_between_match = re.search(r"between\s+(\d+)\s+(?:and|to)\s+(\d+)", q)
-    min_age, max_age, exact_age = None, None, None
-    if age_between_match:
-        a, b = int(age_between_match.group(1)), int(age_between_match.group(2))
-        min_age, max_age = min(a, b), max(a, b)
-    else:
-        exact_match = re.search(r"(?:aged|is|age)\s+(\d+)(?:\s+years\s+old)?", q)
-        if exact_match:
-            exact_age = int(exact_match.group(1))
-        else:
-            age_above_match = re.search(r"(?:over|above|older|greater|more|at least|min|minimum)\s+(\d+)|>\s*(\d+)", q)
-            if age_above_match:
-                vals = [g for g in age_above_match.groups() if g]
-                if vals: min_age = int(vals[0])
-
-            age_below_match = re.search(r"(?:under|below|younger|less|at most|max|maximum)\s+(\d+)|<\s*(\d+)", q)
-            if age_below_match:
-                vals = [g for g in age_below_match.groups() if g]
-                if vals: max_age = int(vals[0])
-
-    status_filter = None
-    if re.search(r"\bactive\b", q):
-        status_filter = "Active"
-    elif re.search(r"\bdischarged\b", q):
-        status_filter = "Discharged"
-
-    # Improved stop words to include all synonyms
-    stop_pattern = (
-        r"\bpatients?\b|\bwith\b|\band\b|\bthe\b|\bover\b|\babove\b|\bolder\b|\bgreater\b|\bmore\b"
-        r"|\bunder\b|\bbelow\b|\byounger\b|\bless\b|\bthan\b|\bbetween\b|\bat\b|\bleast\b|\bmost\b"
-        r"|\bmin\b|\bmax\b|\bminimum\b|\bmaximum\b"
-        r"|\bfemale\b|\bmale\b|\bwoman\b|\bwomen\b|\blady\b|\bladies\b|\bman\b|\bmen\b|\bguy\b|\bguys\b"
-        r"|\belderly\b|\byears?\b|\bold\b|\bage\b|\bstatus\b|\bactive\b|\bdischarged\b"
-    )
-    keywords = re.sub(stop_pattern, " ", q).split()
-    keywords = [k for k in keywords if len(k) > 2]
-    results = []
-    for p in MOCK_PATIENTS:
-        if gender_filter and p["gender"] != gender_filter:
-            continue
-        if exact_age and p.get("age", 0) != exact_age:
-            continue
-        if min_age and p.get("age", 0) < min_age:
-            continue
-        if max_age and p.get("age", 0) > max_age:
-            continue
-        if status_filter and p.get("status", "").lower() != status_filter.lower():
-            continue
-        if keywords:
-            hay = " ".join(p.get("symptoms", []) + p.get("diagnoses", []) + [p.get("department", ""), p.get("name", "")]).lower()
-            if not any(kw in hay for kw in keywords):
-                continue
-        results.append(SearchResult(
-            patient_id=p["id"],
-            first_name=p["name"].split()[0],
-            last_name=" ".join(p["name"].split()[1:]),
-            gender=p["gender"],
-            age=p.get("age", 0),
-            status=p.get("status", "Unknown")
-        ))
-    return results
-
-
 def _load_patient_details(patient_id: int) -> dict | None:
     """Fetch detailed patient context for the details panel."""
 
@@ -841,12 +870,8 @@ def _sidebar(role: str = "Clinician") -> str:
 
         if is_admin:
             st.markdown("### Admin Panel")
-            try:
-                conn = get_connection()
-                cohorts = get_cohorts(conn)
-                conn.close()
-            except Exception:
-                cohorts = []
+            _ensure_mock_state()
+            cohorts = st.session_state.ms_mock_cohorts
 
             total_cohorts = len(cohorts)
             total_members = sum(int(c.get("member_count", 0) or 0) for c in cohorts)
@@ -890,40 +915,8 @@ def _search_section() -> None:
     run = searched or st.session_state.pop("_ms_run", False)
 
     if run and (query or "").strip():
-        use_mock = False
-        try:
-            conn = get_connection()
-            result = nl_search_pipeline(conn, st.session_state.get("ms_user_id", 1), query)
-            raw_results = result.get("results", [])
-            enriched = []
-            for p in raw_results:
-                enriched.append({
-                    "id": getattr(p, "patient_id", None),
-                    "name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                    "age": getattr(p, "age", "—"),
-                    "gender": getattr(p, "gender", ""),
-                    "department": "—",
-                    "status": getattr(p, "status", "Active"),
-                    "symptoms": [], "diagnoses": [],
-                })
-            conn.close()
-        except Exception as e:
-            use_mock = True
-            patients_raw = _search_mock_patients(query)
-            enriched = []
-            for p in patients_raw:
-                pid  = getattr(p, "patient_id", None)
-                mock = next((m for m in MOCK_PATIENTS if m["id"] == pid), None)
-                enriched.append(mock if mock else {
-                    "id": pid,
-                    "name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                    "age": "—", "gender": getattr(p, "gender", ""),
-                    "department": "—", "symptoms": [], "diagnoses": [], "status": "Active",
-                })
-            st.info("Demo mode — database unavailable.", icon="ℹ️")
-            if _BACKEND_IMPORT_ERROR is not None:
-                st.caption(f"Backend import error: {type(_BACKEND_IMPORT_ERROR).__name__}: {_BACKEND_IMPORT_ERROR}")
-            st.caption(f"Runtime error: {type(e).__name__}: {e}")
+        enriched = _search_mock_patients(query)
+        _record_mock_search(query, enriched)
 
         if enriched:
             ages   = [p["age"] for p in enriched if isinstance(p.get("age"), (int, float))]
@@ -1027,37 +1020,8 @@ def _history_section() -> None:
         unsafe_allow_html=True,
     )
 
-    history = []
-    using_mock = False
-    try:
-        conn = get_connection()
-        raw = get_search_history(conn, st.session_state.get("ms_user_id", 1))
-        conn.close()
-        if raw:
-            # Format the created_at datetime into a human-readable "Xh ago" string
-            from datetime import datetime, timezone
-            now = datetime.now(timezone.utc)
-            for row in raw:
-                ts = row.get("created_at")
-                if hasattr(ts, "astimezone"):
-                    diff = now - ts.astimezone(timezone.utc)
-                    total_seconds = int(diff.total_seconds())
-                    if total_seconds < 3600:
-                        row["created_at"] = f"{total_seconds // 60}m ago"
-                    elif total_seconds < 86400:
-                        row["created_at"] = f"{total_seconds // 3600}h ago"
-                    else:
-                        row["created_at"] = f"{total_seconds // 86400}d ago"
-            history = raw
-        else:
-            history = MOCK_HISTORY
-            using_mock = True
-    except Exception:
-        history = MOCK_HISTORY
-        using_mock = True
-
-    if using_mock:
-        st.info("Demo mode — showing sample history. Connect to a database to see real search history.", icon="ℹ️")
+    _ensure_mock_state()
+    history = st.session_state.ms_mock_history
 
     # Filter input
     filt = st.text_input(
@@ -1130,20 +1094,12 @@ def _cohorts_section() -> None:
         unsafe_allow_html=True,
     )
 
-    try:
-        conn = get_connection()
-        cohorts = get_cohorts(conn)
-    except Exception:
-        cohorts = []
-        conn = None
+    _ensure_mock_state()
+    cohorts = st.session_state.ms_mock_cohorts
 
     if not cohorts:
-        cohorts = [
-            {"cohort_id": 1, "cohort_name": "Diabetes Type 2 - High Risk", "member_count": 145, "created_at": "2024-01-10"},
-            {"cohort_id": 2, "cohort_name": "Post-Op Cardiac Follow-up", "member_count": 82, "created_at": "2024-02-15"},
-            {"cohort_id": 3, "cohort_name": "Respiratory Intensive Care", "member_count": 45, "created_at": "2024-03-01"},
-            {"cohort_id": 4, "cohort_name": "Elderly Care Program", "member_count": 210, "created_at": "2024-03-12"}
-        ]
+        st.info("No cohorts available.")
+        return
 
     import pandas as pd
     import matplotlib.pyplot as plt
@@ -1227,31 +1183,22 @@ def _cohorts_section() -> None:
 
                 exp_label = f"Open Cohort #{cid} - {name}"
                 with st.expander(exp_label, expanded=False):
-                    members = []
-                    member_conn = None
-                    try:
-                        member_conn = get_connection()
-                        members = get_cohort_members(member_conn, int(cid), limit=200)
-                    except Exception:
-                        members = []
-                    finally:
-                        try:
-                            if member_conn:
-                                member_conn.close()
-                        except Exception:
-                            pass
+                    members = c.get("members", [])
 
                     if members:
                         member_rows = []
                         for m in members:
+                            name_parts = str(m.get("name", "")).split()
+                            first_name = name_parts[0] if name_parts else ""
+                            last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""
                             member_rows.append({
-                                "ID": m.get("patient_id"),
-                                "First Name": m.get("first_name", ""),
-                                "Last Name": m.get("last_name", ""),
+                                "ID": m.get("id"),
+                                "First Name": first_name,
+                                "Last Name": last_name,
                                 "Sex": m.get("gender"),
                                 "Age": m.get("age"),
                                 "City": m.get("city"),
-                                "Added": m.get("added_at").strftime("%Y-%m-%d") if hasattr(m.get("added_at"), "strftime") else m.get("added_at"),
+                                "Added": c.get("created_at"),
                             })
                         st.dataframe(pd.DataFrame(member_rows), width="stretch", hide_index=True)
                     else:

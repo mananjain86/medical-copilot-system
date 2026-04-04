@@ -3,13 +3,14 @@ Module C13 – MediSearch Admin Search Page  (matches target design)
 """
 
 import streamlit as st
-from src.modules.C13.backend import get_connection, nl_search_pipeline, get_search_history, get_cohorts
 from src.modules.C13.patient_search import (
-    MOCK_PATIENTS, MOCK_HISTORY, _search_mock_patients,
     _inject_css as _shared_css,
     render_patient_detail_card,
     _history_section,
     _cohorts_section,
+    _search_mock_patients,
+    _record_mock_search,
+    _ensure_mock_state,
 )
 
 # ── mock NL templates (matching target Admin Panel screenshot) ─────────────────
@@ -69,8 +70,6 @@ SUGGESTIONS = [
     "patients in cardiology department",
     "female patients with diabetes over 60",
 ]
-
-
 def _inject_css() -> None:
     _shared_css()
     st.markdown(
@@ -212,68 +211,34 @@ def _search_section() -> None:
     run = searched or st.session_state.pop("_ma_run", False)
 
     if run and (query or "").strip():
-        patients_raw = []
-        use_mock = False
-        try:
-            conn = get_connection()
-            result = nl_search_pipeline(conn, 1, query)
-            conn.close()
-            patients_raw = result.get("results", [])
-        except Exception as e:
-            use_mock = True
-            patients_raw = _search_mock_patients(query)
-            st.info("Demo mode — database unavailable.", icon="ℹ️")
-            st.caption(f"Runtime error: {type(e).__name__}: {e}")
+        patients_raw = _search_mock_patients(query)
+        _record_mock_search(query, patients_raw)
 
         if patients_raw:
             import pandas as pd
             rows = []
             detail_items = []
             for p in patients_raw:
-                if use_mock:
-                    pid = getattr(p, "patient_id", None)
-                    mock = next((m for m in MOCK_PATIENTS if m["id"] == pid), None)
-                    row = {
-                        "ID": mock["id"] if mock else pid,
-                        "Name": mock["name"] if mock else f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                        "Age": mock["age"] if mock else getattr(p, "age", "—"),
-                        "Gender": mock["gender"] if mock else getattr(p, "gender", ""),
-                        "Department": mock["department"] if mock else "—",
-                        "Status": mock["status"] if mock else getattr(p, "status", "Active"),
+                row = {
+                    "ID": p.get("id"),
+                    "Name": p.get("name", "Unknown"),
+                    "Age": p.get("age", "—"),
+                    "Gender": p.get("gender", ""),
+                    "Department": p.get("department", "—"),
+                    "Status": p.get("status", "Active"),
+                }
+                rows.append(row)
+                detail_items.append(
+                    {
+                        "id": row["ID"],
+                        "name": row["Name"],
+                        "age": row["Age"],
+                        "gender": row["Gender"],
+                        "city": "—",
+                        "diagnoses": [],
+                        "symptoms": [],
                     }
-                    rows.append(row)
-                    detail_items.append(
-                        {
-                            "id": row["ID"],
-                            "name": row["Name"],
-                            "age": row["Age"],
-                            "gender": row["Gender"],
-                            "city": mock.get("city", "—") if mock else "—",
-                            "diagnoses": mock.get("diagnoses", []) if mock else [],
-                            "symptoms": mock.get("symptoms", []) if mock else [],
-                        }
-                    )
-                else:
-                    row = {
-                        "ID": getattr(p, "patient_id", None),
-                        "Name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                        "Age": getattr(p, "age", "—"),
-                        "Gender": getattr(p, "gender", ""),
-                        "Department": "—",
-                        "Status": getattr(p, "status", "Active"),
-                    }
-                    rows.append(row)
-                    detail_items.append(
-                        {
-                            "id": row["ID"],
-                            "name": row["Name"],
-                            "age": row["Age"],
-                            "gender": row["Gender"],
-                            "city": "—",
-                            "diagnoses": [],
-                            "symptoms": [],
-                        }
-                    )
+                )
             st.success(f"Found **{len(rows)}** patient(s)")
             st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 
@@ -340,12 +305,8 @@ def _admin_panel_section() -> None:
     )
 
     st.markdown("### Recent Cohorts")
-    try:
-        conn = get_connection()
-        cohorts = get_cohorts(conn)
-        conn.close()
-    except Exception:
-        cohorts = []
+    _ensure_mock_state()
+    cohorts = st.session_state.ms_mock_cohorts
 
     if cohorts:
         import pandas as pd

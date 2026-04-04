@@ -1,20 +1,19 @@
 """
-Expand the C13 PostgreSQL dataset with realistic synthetic records.
+Load C13 dataset records from mock_patients.json into PostgreSQL.
 
-This script is idempotent by phone-prefix marker and target count:
-- It creates synthetic patients with phone numbers starting with "9000".
-- Re-running only tops up to the requested synthetic target size.
+This script intentionally avoids random/synthetic generation.
+It uses deterministic transforms from src/modules/C13/mock_patients.json.
 
 Usage:
     source .venv/bin/activate
-    python src/modules/C13/enhance_dataset.py --target 400
+    python src/modules/C13/enhance_dataset.py --limit 200
 """
 
 from __future__ import annotations
 
 import argparse
-import random
-from datetime import date, timedelta
+import json
+from datetime import date, datetime, timedelta
 from pathlib import Path
 import sys
 
@@ -22,265 +21,299 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from src.modules.C13.backend import get_connection
 
+MOCK_JSON_PATH = Path(__file__).with_name("mock_patients.json")
 
-MALE_FIRST_NAMES = [
-    "Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Krishna", "Ishaan", "Rohan",
-    "Rahul", "Amit", "Nikhil", "Suresh", "Karan", "Manish", "Deepak", "Ravi", "Ajay", "Vikram",
-]
-
-FEMALE_FIRST_NAMES = [
-    "Aanya", "Diya", "Saanvi", "Myra", "Ananya", "Ira", "Meera", "Riya", "Kavya", "Siya",
-    "Priya", "Pooja", "Neha", "Sneha", "Anita", "Shreya", "Nisha", "Komal", "Preeti", "Tanya",
-]
-
-LAST_NAMES = [
-    "Sharma", "Verma", "Patel", "Mehta", "Singh", "Gupta", "Reddy", "Nair", "Iyer", "Khan",
-    "Malhotra", "Joshi", "Kapoor", "Bansal", "Chopra", "Mishra", "Yadav", "Jain", "Das", "Kulkarni",
-]
-
-CITIES = ["Mumbai", "Delhi", "Kolkata", "Chennai", "Hyderabad", "Ahmedabad", "Kochi"]
-
-DIAGNOSES = [
-    "asthma",
-    "bronchitis",
-    "chest pain",
-    "diabetes",
-    "fatigue",
-    "flu",
-    "headache",
-    "migraine",
-    "nausea",
-    "viral fever",
-]
-
-DIAGNOSIS_TO_SYMPTOMS = {
-    "asthma": ["shortness of breath", "cough"],
-    "bronchitis": ["cough", "fatigue"],
-    "chest pain": ["chest pain", "shortness of breath"],
-    "diabetes": ["fatigue"],
-    "fatigue": ["fatigue"],
-    "flu": ["fever", "cough", "fatigue"],
-    "headache": ["headache"],
-    "migraine": ["headache", "nausea"],
-    "nausea": ["nausea"],
-    "viral fever": ["fever", "fatigue"],
-}
-
-DIAGNOSIS_TO_SPECIALIZATION = {
-    "asthma": "Pulmonology",
-    "bronchitis": "Pulmonology",
-    "chest pain": "Cardiology",
-    "diabetes": "Endocrinology",
-    "fatigue": "General Medicine",
-    "flu": "General Medicine",
-    "headache": "Neurology",
-    "migraine": "Neurology",
-    "nausea": "General Medicine",
-    "viral fever": "General Medicine",
-}
-
-LAB_TEST_BY_DIAGNOSIS = {
-    "diabetes": "glucose",
-    "chest pain": "cholesterol",
-    "asthma": "hemoglobin",
-    "bronchitis": "hemoglobin",
-    "fatigue": "hemoglobin",
-    "flu": "hemoglobin",
-    "headache": "hemoglobin",
-    "migraine": "hemoglobin",
-    "nausea": "glucose",
-    "viral fever": "glucose",
+LAB_TEST_BY_KEYWORD = {
+    "diabetes": ("glucose", 165.0),
+    "cholesterol": ("cholesterol", 220.0),
+    "cardiac": ("cholesterol", 230.0),
+    "heart": ("cholesterol", 230.0),
+    "asthma": ("hemoglobin", 12.0),
+    "bronch": ("hemoglobin", 11.5),
 }
 
 
-def random_dob(min_age: int = 18, max_age: int = 85) -> date:
-    today = date.today()
-    start = today - timedelta(days=max_age * 365)
-    end = today - timedelta(days=min_age * 365)
-    return start + timedelta(days=random.randint(0, (end - start).days))
+def _load_mock_records() -> list[dict]:
+    if not MOCK_JSON_PATH.exists():
+        raise FileNotFoundError(f"Missing mock data file: {MOCK_JSON_PATH}")
+    data = json.loads(MOCK_JSON_PATH.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError("mock_patients.json must contain a list of patient objects")
+    return data
 
 
-def random_visit_date() -> date:
-    today = date.today()
-    return today - timedelta(days=random.randint(0, 730))
+def _safe_age(raw_age: object) -> int:
+    try:
+        age = int(raw_age)
+    except Exception:
+        return 40
+    return min(95, max(1, age))
 
 
-def random_lab_value(test_name: str) -> float:
-    if test_name == "glucose":
-        return float(random.randint(80, 260))
-    if test_name == "cholesterol":
-        return float(random.randint(140, 300))
-    return float(random.randint(9, 18))
+def _gender_value(raw_gender: object) -> str:
+    g = str(raw_gender or "").strip().lower()
+    if g in {"male", "female"}:
+        return g
+    return "male"
 
 
-def rectify_synthetic_gender_names(seed: int = 42) -> dict[str, int]:
-    """Fix gender/name mismatches for synthetic patients (phone prefix 9000)."""
+def _name_parts(full_name: object) -> tuple[str, str]:
+    parts = str(full_name or "Unknown Patient").strip().split()
+    if not parts:
+        return "Unknown", "Patient"
+    if len(parts) == 1:
+        return parts[0], "Patient"
+    return parts[0], " ".join(parts[1:])
 
-    random.seed(seed)
+
+def _city_from_record(item: dict) -> str:
+    return str(item.get("city") or "Mumbai").strip() or "Mumbai"
+
+
+def _visit_date(raw_date: object) -> date:
+    text = str(raw_date or "").strip()
+    if text:
+        try:
+            return datetime.strptime(text, "%Y-%m-%d").date()
+        except ValueError:
+            pass
+    return date.today() - timedelta(days=30)
+
+
+def _phone_from_mock_id(mock_id: object, fallback_index: int) -> str:
+    text = str(mock_id or "").strip()
+    digits = "".join(ch for ch in text if ch.isdigit())
+    if not digits:
+        digits = str(fallback_index)
+    # Stable 10-digit number with 9000 marker prefix.
+    return ("9000" + digits.zfill(6))[-10:]
+
+
+def _pick_diagnosis(item: dict) -> str:
+    diagnoses = item.get("diagnoses") or []
+    if isinstance(diagnoses, list) and diagnoses:
+        return str(diagnoses[0]).strip() or "General Checkup"
+    symptoms = item.get("symptoms") or []
+    if isinstance(symptoms, list) and symptoms:
+        return str(symptoms[0]).strip() or "General Checkup"
+    return "General Checkup"
+
+
+def _lookup_specialization(department: str, diagnosis: str) -> str:
+    dep = (department or "").lower()
+    diag = (diagnosis or "").lower()
+    if "card" in dep or "heart" in diag:
+        return "Cardiology"
+    if "neuro" in dep:
+        return "Neurology"
+    if "pulmo" in dep or "asth" in diag or "bronch" in diag:
+        return "Pulmonology"
+    if "endo" in dep or "diabet" in diag:
+        return "Endocrinology"
+    if "rheum" in dep or "arth" in diag:
+        return "Rheumatology"
+    if "ortho" in dep or "back" in diag:
+        return "Orthopedics"
+    return "General Medicine"
+
+
+def _ensure_symptom(cur, symptom_name: str) -> int:
+    cur.execute("SELECT symptom_id FROM symptoms WHERE LOWER(symptom_name) = LOWER(%s) LIMIT 1", (symptom_name,))
+    row = cur.fetchone()
+    if row:
+        return int(row[0])
+
+    cur.execute(
+        "INSERT INTO symptoms(symptom_name) VALUES(%s) RETURNING symptom_id",
+        (symptom_name,),
+    )
+    return int(cur.fetchone()[0])
+
+
+def _maybe_add_lab_result(cur, visit_id: int, diagnosis: str, visit_dt: date) -> int:
+    diag = diagnosis.lower()
+    test_name = None
+    test_value = None
+    for key, (name, value) in LAB_TEST_BY_KEYWORD.items():
+        if key in diag:
+            test_name = name
+            test_value = value
+            break
+
+    if not test_name:
+        return 0
+
+    cur.execute("SELECT test_id FROM lab_tests WHERE LOWER(test_name) = LOWER(%s) LIMIT 1", (test_name,))
+    row = cur.fetchone()
+    if not row:
+        return 0
+
+    test_id = int(row[0])
+    cur.execute(
+        """
+        SELECT 1 FROM lab_results
+        WHERE visit_id = %s AND test_id = %s
+        LIMIT 1
+        """,
+        (visit_id, test_id),
+    )
+    if cur.fetchone():
+        return 0
+
+    cur.execute(
+        """
+        INSERT INTO lab_results(visit_id, test_id, result_value, result_date)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (visit_id, test_id, test_value, visit_dt),
+    )
+    return 1
+
+
+def _sync_serial_sequence(cur, table_name: str, pk_column: str) -> None:
+    cur.execute("SELECT pg_get_serial_sequence(%s, %s)", (table_name, pk_column))
+    row = cur.fetchone()
+    if not row or not row[0]:
+        return
+    seq_name = row[0]
+
+    cur.execute(f"SELECT COALESCE(MAX({pk_column}), 0) FROM {table_name}")
+    max_id = int(cur.fetchone()[0] or 0)
+    cur.execute("SELECT setval(%s, %s, false)", (seq_name, max(1, max_id + 1)))
+
+
+def import_mock_patients(limit: int | None = None) -> dict[str, int]:
+    records = _load_mock_records()
+    if limit is not None and limit > 0:
+        records = records[:limit]
+
     conn = get_connection()
-    counters = {"rectified_male": 0, "rectified_female": 0, "rectified_total": 0}
-
-    female_set = {n.lower() for n in FEMALE_FIRST_NAMES}
-    male_set = {n.lower() for n in MALE_FIRST_NAMES}
+    counters = {
+        "patients_upserted": 0,
+        "visits_upserted": 0,
+        "patient_symptoms_upserted": 0,
+        "lab_results_upserted": 0,
+        "records_processed": len(records),
+    }
 
     with conn.cursor() as cur:
-        cur.execute(
-            """
-            SELECT patient_id, gender, first_name
-            FROM patients
-            WHERE phone LIKE '9000%'
-              AND gender IN ('male', 'female')
-            """
-        )
-        rows = cur.fetchall()
+        _sync_serial_sequence(cur, "patients", "patient_id")
+        _sync_serial_sequence(cur, "visits", "visit_id")
+        _sync_serial_sequence(cur, "symptoms", "symptom_id")
+        _sync_serial_sequence(cur, "lab_results", "result_id")
 
-        for patient_id, gender, first_name in rows:
-            first_name_l = (first_name or "").lower()
-            replacement = None
+        cur.execute("SELECT doctor_id FROM doctors ORDER BY doctor_id LIMIT 1")
+        first_doc = cur.fetchone()
+        if not first_doc:
+            raise RuntimeError("No doctors found in database. Seed doctors before importing mock patients.")
+        fallback_doctor_id = int(first_doc[0])
 
-            if gender == "male" and first_name_l in female_set:
-                replacement = random.choice(MALE_FIRST_NAMES)
-                counters["rectified_male"] += 1
-            elif gender == "female" and first_name_l in male_set:
-                replacement = random.choice(FEMALE_FIRST_NAMES)
-                counters["rectified_female"] += 1
+        for idx, item in enumerate(records, start=1):
+            first_name, last_name = _name_parts(item.get("name"))
+            gender = _gender_value(item.get("gender"))
+            age = _safe_age(item.get("age"))
+            dob = date.today() - timedelta(days=age * 365)
+            phone = _phone_from_mock_id(item.get("id"), idx)
+            city = _city_from_record(item)
+            department = str(item.get("department") or "").strip()
+            diagnosis = _pick_diagnosis(item)
+            visit_dt = _visit_date(item.get("admission_date"))
 
-            if replacement:
+            cur.execute(
+                "SELECT patient_id FROM patients WHERE phone = %s LIMIT 1",
+                (phone,),
+            )
+            row = cur.fetchone()
+            if row:
+                patient_id = int(row[0])
                 cur.execute(
-                    "UPDATE patients SET first_name = %s WHERE patient_id = %s",
-                    (replacement, patient_id),
+                    """
+                    UPDATE patients
+                    SET first_name = %s,
+                        last_name = %s,
+                        gender = %s,
+                        date_of_birth = %s,
+                        city = %s
+                    WHERE patient_id = %s
+                    """,
+                    (first_name, last_name, gender, dob, city, patient_id),
                 )
-                counters["rectified_total"] += 1
-
-    conn.commit()
-    conn.close()
-    return counters
-
-
-def enhance_dataset(target_synthetic_patients: int, seed: int = 42) -> dict[str, int]:
-    random.seed(seed)
-
-    conn = get_connection()
-    counters = {"patients": 0, "visits": 0, "patient_symptoms": 0, "lab_results": 0}
-
-    with conn.cursor() as cur:
-        # Lookup maps
-        cur.execute("SELECT symptom_id, symptom_name FROM symptoms")
-        symptom_id_by_name = {name: sid for sid, name in cur.fetchall()}
-
-        cur.execute("SELECT test_id, test_name FROM lab_tests")
-        test_id_by_name = {name: tid for tid, name in cur.fetchall()}
-
-        cur.execute("SELECT doctor_id, specialization FROM doctors")
-        doctors_by_spec: dict[str, list[int]] = {}
-        for doc_id, spec in cur.fetchall():
-            doctors_by_spec.setdefault(spec, []).append(doc_id)
-
-        cur.execute("SELECT doctor_id FROM doctors ORDER BY doctor_id")
-        all_doctors = [row[0] for row in cur.fetchall()]
-
-        cur.execute("SELECT COUNT(*) FROM patients WHERE phone LIKE '9000%'")
-        existing_synthetic = cur.fetchone()[0]
-        to_add = max(0, target_synthetic_patients - existing_synthetic)
-
-        # Build deterministic unique phone numbers for marker-prefixed synthetic rows.
-        cur.execute("SELECT COALESCE(MAX(patient_id), 0) FROM patients")
-        max_patient_id = cur.fetchone()[0]
-
-        for i in range(to_add):
-            gender = random.choice(["male", "female"])
-            if gender == "male":
-                first_name = random.choice(MALE_FIRST_NAMES)
             else:
-                first_name = random.choice(FEMALE_FIRST_NAMES)
-            last_name = random.choice(LAST_NAMES)
-            dob = random_dob()
-            city = random.choice(CITIES)
+                cur.execute(
+                    """
+                    INSERT INTO patients(first_name, last_name, gender, date_of_birth, phone, city)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    RETURNING patient_id
+                    """,
+                    (first_name, last_name, gender, dob, phone, city),
+                )
+                patient_id = int(cur.fetchone()[0])
 
-            # 10-digit marker phone, guaranteed distinct by sequence offset.
-            phone = f"9000{max_patient_id + i + 1:06d}"[-10:]
+            counters["patients_upserted"] += 1
+
+            specialization = _lookup_specialization(department, diagnosis)
+            cur.execute(
+                "SELECT doctor_id FROM doctors WHERE LOWER(specialization) = LOWER(%s) ORDER BY doctor_id LIMIT 1",
+                (specialization,),
+            )
+            drow = cur.fetchone()
+            doctor_id = int(drow[0]) if drow else fallback_doctor_id
 
             cur.execute(
                 """
-                INSERT INTO patients (first_name, last_name, gender, date_of_birth, phone, city)
-                VALUES (%s, %s, %s, %s, %s, %s)
-                RETURNING patient_id
+                SELECT visit_id FROM visits
+                WHERE patient_id = %s AND visit_date = %s AND LOWER(diagnosis) = LOWER(%s)
+                LIMIT 1
                 """,
-                (first_name, last_name, gender, dob, phone, city),
+                (patient_id, visit_dt, diagnosis),
             )
-            patient_id = cur.fetchone()[0]
-            counters["patients"] += 1
-
-            visit_count = random.randint(1, 3)
-            for _ in range(visit_count):
-                diagnosis = random.choice(DIAGNOSES)
-                specialization = DIAGNOSIS_TO_SPECIALIZATION.get(diagnosis, "General Medicine")
-                doctor_choices = doctors_by_spec.get(specialization) or all_doctors
-                doctor_id = random.choice(doctor_choices)
-
+            vrow = cur.fetchone()
+            if vrow:
+                visit_id = int(vrow[0])
+            else:
                 cur.execute(
                     """
-                    INSERT INTO visits (patient_id, doctor_id, visit_date, diagnosis, notes)
+                    INSERT INTO visits(patient_id, doctor_id, visit_date, diagnosis, notes)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING visit_id
                     """,
-                    (patient_id, doctor_id, random_visit_date(), diagnosis, "Synthetic expanded dataset record"),
+                    (patient_id, doctor_id, visit_dt, diagnosis, "Imported from mock_patients.json"),
                 )
-                visit_id = cur.fetchone()[0]
-                counters["visits"] += 1
+                visit_id = int(cur.fetchone()[0])
+                counters["visits_upserted"] += 1
 
-                # Attach 1-2 symptoms relevant to diagnosis.
-                symptom_names = DIAGNOSIS_TO_SYMPTOMS.get(diagnosis, ["fatigue"])
-                sample_size = 1 if len(symptom_names) == 1 else random.randint(1, 2)
-                for symptom_name in random.sample(symptom_names, k=sample_size):
-                    symptom_id = symptom_id_by_name.get(symptom_name)
-                    if symptom_id is None:
-                        continue
-                    cur.execute(
-                        "INSERT INTO patient_symptoms (visit_id, symptom_id) VALUES (%s, %s)",
-                        (visit_id, symptom_id),
-                    )
-                    counters["patient_symptoms"] += 1
+            symptoms = item.get("symptoms") if isinstance(item.get("symptoms"), list) else []
+            for symptom in symptoms:
+                symptom_name = str(symptom).strip()
+                if not symptom_name:
+                    continue
+                symptom_id = _ensure_symptom(cur, symptom_name)
+                cur.execute(
+                    """
+                    INSERT INTO patient_symptoms(visit_id, symptom_id)
+                    VALUES (%s, %s)
+                    ON CONFLICT DO NOTHING
+                    """,
+                    (visit_id, symptom_id),
+                )
+                counters["patient_symptoms_upserted"] += cur.rowcount
 
-                # Add a lab result for most visits.
-                if random.random() < 0.8:
-                    test_name = LAB_TEST_BY_DIAGNOSIS.get(diagnosis, "hemoglobin")
-                    test_id = test_id_by_name.get(test_name)
-                    if test_id is not None:
-                        cur.execute(
-                            """
-                            INSERT INTO lab_results (visit_id, test_id, result_value, result_date)
-                            VALUES (%s, %s, %s, %s)
-                            """,
-                            (visit_id, test_id, random_lab_value(test_name), random_visit_date()),
-                        )
-                        counters["lab_results"] += 1
+            counters["lab_results_upserted"] += _maybe_add_lab_result(cur, visit_id, diagnosis, visit_dt)
 
     conn.commit()
     conn.close()
-
-    counters.update(rectify_synthetic_gender_names(seed=seed))
-    counters["synthetic_target"] = target_synthetic_patients
-    counters["added_patients"] = to_add
     return counters
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Expand C13 dataset with synthetic records")
-    parser.add_argument("--target", type=int, default=400, help="Target synthetic patient count (phone prefix 9000)")
-    parser.add_argument("--seed", type=int, default=42, help="Random seed")
-    parser.add_argument(
-        "--rectify-names-only",
-        action="store_true",
-        help="Only rectify synthetic patient names against gender; do not add new records.",
-    )
+    parser = argparse.ArgumentParser(description="Import mock_patients.json into C13 PostgreSQL")
+    parser.add_argument("--limit", type=int, default=0, help="Optional number of records to import from mock_patients.json")
     args = parser.parse_args()
 
-    if args.rectify_names_only:
-        stats = rectify_synthetic_gender_names(seed=args.seed)
-    else:
-        stats = enhance_dataset(target_synthetic_patients=args.target, seed=args.seed)
-    print("Dataset enhancement complete:")
+    limit = args.limit if args.limit and args.limit > 0 else None
+    stats = import_mock_patients(limit=limit)
+
+    print("Mock patient import complete:")
     for key, value in stats.items():
         print(f"  {key}: {value}")
 
