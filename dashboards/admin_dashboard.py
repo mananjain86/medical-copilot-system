@@ -81,11 +81,11 @@ def admin_dashboard():
         # Filter buttons
         filter_cols = st.columns([1, 1, 1, 3])
         with filter_cols[0]:
-            st.button("All", type="primary", use_container_width=True)
+            st.button("All", type="primary", width="stretch")
         with filter_cols[1]:
-            st.button("Unsaid", use_container_width=True)
+            st.button("Unsaid", width="stretch")
         with filter_cols[2]:
-            st.button("New", use_container_width=True)
+            st.button("New", width="stretch")
         
         st.markdown("---")
         st.caption("14 Jun 2023 / 01:50PM")

@@ -3,6 +3,7 @@ Module C13 – MediSearch Patient Search Page  (matches target design)
 """
 
 import re
+from html import escape
 from dataclasses import dataclass
 import streamlit as st
 
@@ -87,128 +88,114 @@ def _inject_css() -> None:
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-        /* ── restore default streamlit containers ── */
+        :root {
+            --primary-color: #6366F1;
+            --primary-deep: #4F46E5;
+            --accent-color: #06B6D4;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --bg-main: #0F172A;
+            --bg-elevated: rgba(30, 41, 59, 0.74);
+            --bg-soft: rgba(15, 23, 42, 0.52);
+            --border-soft: rgba(148, 163, 184, 0.24);
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --shadow-soft: 0 10px 24px rgba(2, 6, 23, 0.24);
+        }
+
         [data-testid="stHeader"], [data-testid="stToolbar"], footer {
             display: block !important;
             visibility: visible !important;
         }
 
-        /* ── background (applied to stApp to avoid covering header) ── */
-        .stApp { 
-            background: #0F172A !important; 
+        .stApp {
+            background: radial-gradient(circle at top right, #1E293B 0%, #0F172A 62%, #0B1220 100%) !important;
+            color: var(--text-primary) !important;
+        }
+        .block-container {
+            padding: 2rem 2.2rem !important;
+            max-width: 100% !important;
+            margin: 18px !important;
+            border-radius: 18px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(12px);
         }
         [data-testid="stSidebar"] > div:first-child {
-            background: #1E293B !important;
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-        }
-        .block-container { 
-            padding: 2.2rem 2.4rem !important; 
-            max-width: 100% !important;
-            background: rgba(30, 41, 59, 0.4);
-            border-radius: 20px;
-            margin: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(180deg, #131f36, #0f1a2d) !important;
+            border-right: 1px solid var(--border-soft) !important;
         }
 
-        /* scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #1f3050; border-radius: 99px; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 99px; }
 
-        /* ── logo ── */
-        .ms-logo {
-            display: flex; align-items: center; gap: 10px;
-            padding: 18px 14px 12px;
-        }
-        .ms-logo-icon {
-            width: 34px; height: 34px;
-            background: linear-gradient(135deg, #00b4d8, #0070f3);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-        }
-        .ms-logo-name { color: #f0f6ff; font-weight: 800; font-size: 15px; line-height: 1; }
-        .ms-logo-sub  { color: #3d6880; font-size: 10px; margin-top: 2px; font-weight: 500; }
-
-        /* ── nav button reset ── */
         div[data-testid="stSidebar"] div[data-testid="stButton"] button {
             width: 100% !important;
             background: transparent !important;
-            color: #4b7594 !important;
-            border: none !important;
-            border-radius: 8px !important;
+            color: var(--text-secondary) !important;
+            border: 1px solid transparent !important;
+            border-radius: 10px !important;
             text-align: left !important;
             font-size: 13px !important;
-            font-weight: 500 !important;
-            padding: 9px 12px !important;
+            font-weight: 600 !important;
+            padding: 10px 12px !important;
             justify-content: flex-start !important;
-            transition: all .15s !important;
-            box-shadow: none !important;
+            transition: all .18s ease !important;
         }
         div[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
-            background: rgba(0,180,216,.08) !important;
-            color: #8cccdf !important;
+            background: rgba(99, 102, 241, 0.12) !important;
+            border-color: rgba(99, 102, 241, 0.32) !important;
+            color: #C7D2FE !important;
         }
-        /* active nav item */
-        div[data-testid="stSidebar"] div[data-testid="stButton"][key$="_active"] button,
         .nav-active button {
-            background: rgba(0,180,216,.12) !important;
-            color: #00b4d8 !important;
+            background: rgba(99, 102, 241, 0.16) !important;
+            border-color: rgba(99, 102, 241, 0.36) !important;
+            color: #E0E7FF !important;
         }
 
-        /* ── user card ── */
-        .ms-user-card {
-            margin: 8px 10px; padding: 10px 12px;
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 10px;
-            display: flex; align-items: center; gap: 10px;
+        .ms-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -.4px;
         }
-        .ms-ava {
-            width: 32px; height: 32px; border-radius: 50%;
-            background: linear-gradient(135deg, #00b4d8, #0070f3);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0;
+        .ms-sub {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 4px;
+            margin-bottom: 18px;
         }
-        .ms-ava-admin { background: linear-gradient(135deg, #9b59b6, #6c3483) !important; }
-        .ms-ava-name  { color: #cde; font-size: 12px; font-weight: 600; line-height: 1.1; }
-        .ms-ava-role  { color: #00b4d8; font-size: 10px; font-weight: 500; }
-        .ms-ava-role-admin { color: #9b59b6 !important; }
 
-        /* ── main headings ── */
-        .ms-title { font-size: 22px; font-weight: 800; color: #e8f4fd; letter-spacing: -.3px; }
-        .ms-sub   { color: #3d5869; font-size: 13px; margin-top: 2px; margin-bottom: 20px; }
-
-        /* ── search bar ── */
         [data-testid="stTextInput"] input {
-            background: #111f30 !important;
-            border: 1px solid #1f3248 !important;
-            border-radius: 10px !important;
-            color: #cde !important;
+            background: #0F172A !important;
+            border: 1px solid #334155 !important;
+            border-radius: 12px !important;
+            color: var(--text-primary) !important;
             font-size: 13px !important;
-            font-family: 'Inter', sans-serif !important;
             padding: 11px 14px !important;
         }
+        [data-testid="stTextInput"] input::placeholder { color: var(--text-muted) !important; }
         [data-testid="stTextInput"] input:focus {
-            border-color: #00b4d8 !important;
-            box-shadow: 0 0 0 2px rgba(0,180,216,.12) !important;
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, .2) !important;
         }
-        [data-testid="stTextInput"] input::placeholder { color: #2a3f52 !important; }
         [data-testid="stTextInput"] > label { display: none !important; }
 
-        /* ── search button (main area only) ── */
-        div[data-testid="stMain"] > div > div > div[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button {
-            background: linear-gradient(135deg, #00b4d8, #0070f3) !important;
-            color: #fff !important;
+        div[data-testid="stButton"] > button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
             border: none !important;
-            border-radius: 10px !important;
-            font-weight: 700 !important; font-size: 13px !important;
-            padding: 11px 18px !important;
-            box-shadow: 0 2px 12px rgba(0,176,216,.3) !important;
-            transition: opacity .18s !important;
+            border-radius: 12px !important;
+            color: #fff !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 8px 18px rgba(99, 102, 241, .28) !important;
+            transition: transform .16s ease, box-shadow .16s ease !important;
         }
-        div[data-testid="stMain"] > div > div > div[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] div[data-testid="stButton"] > button:hover {
-            opacity: .85 !important;
+        div[data-testid="stButton"] > button:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 12px 20px rgba(99, 102, 241, .34) !important;
         }
 
         /* ── chip label ── */
@@ -235,47 +222,57 @@ def _inject_css() -> None:
 
         /* ── metric strip ── */
         .metric-strip {
-            display: grid; grid-template-columns: repeat(3,1fr);
-            gap: 12px; margin: 20px 0 16px;
+            display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 12px; margin: 18px 0 14px;
         }
         .metric-box {
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 10px; padding: 16px 18px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow-soft);
         }
-        .metric-val { font-size: 28px; font-weight: 800; color: #e8f4fd; line-height: 1; }
-        .metric-lbl { font-size: 10px; color: #2e4a60; font-weight: 600;
+        .metric-val { font-size: 28px; font-weight: 800; color: var(--text-primary); line-height: 1; }
+        .metric-lbl { font-size: 10px; color: var(--text-secondary); font-weight: 700;
                       text-transform: uppercase; letter-spacing: .8px; margin-top: 4px; }
 
         /* ── result row ── */
         .pt-row {
             display: flex; align-items: center;
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 10px; padding: 14px 16px; margin-bottom: 6px;
-            transition: background .15s;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow-soft);
+            transition: transform .15s ease, background .15s ease;
         }
-        .pt-row:hover { background: #132030; }
+        .pt-row:hover {
+            background: rgba(51, 65, 85, .58);
+            transform: translateY(-1px);
+        }
         .pt-avatar {
             width: 36px; height: 36px; border-radius: 50%;
-            background: #0e2035;
+            background: linear-gradient(135deg, rgba(99, 102, 241, .24), rgba(6, 182, 212, .2));
             display: flex; align-items: center; justify-content: center;
             font-size: 14px; flex-shrink: 0; margin-right: 12px;
         }
         .pt-body     { flex: 1; min-width: 0; }
-        .pt-name     { font-weight: 700; color: #d4eaf8; font-size: 14px; }
-        .pt-meta     { color: #2e4a60; font-size: 11px; margin-top: 2px; }
-        .pt-meta span { color: #3a6278; }
+        .pt-name     { font-weight: 700; color: var(--text-primary); font-size: 14px; }
+        .pt-meta     { color: var(--text-secondary); font-size: 11px; margin-top: 2px; }
+        .pt-meta span { color: #cbd5e1; }
         .pt-right    { text-align: right; flex-shrink: 0; margin-left: 16px; }
-        .pt-count    { font-size: 20px; font-weight: 800; color: #e8f4fd; line-height: 1; }
-        .pt-clabel   { font-size: 10px; color: #2e4a60; font-weight: 600;
+        .pt-count    { font-size: 20px; font-weight: 800; color: var(--text-primary); line-height: 1; }
+        .pt-clabel   { font-size: 10px; color: var(--text-secondary); font-weight: 600;
                        text-transform: uppercase; letter-spacing: .7px; margin-top: 2px; }
 
         /* badge */
         .badge { display:inline-block; padding:2px 8px; border-radius:99px;
                  font-size:10px; font-weight:600; margin-right:4px; }
-        .badge-f { background:rgba(255,150,200,.12); color:#f9a8d4; }
-        .badge-m { background:rgba(100,200,230,.10); color:#7dd3fc; }
-        .badge-a { background:rgba(0,230,118,.10); color:#4ade80; }
-        .badge-d { background:rgba(250,170,60,.10); color:#fbbf24; }
+        .badge-f { background:rgba(236, 72, 153, .15); color:#F9A8D4; }
+        .badge-m { background:rgba(14, 165, 233, .16); color:#93C5FD; }
+        .badge-a { background:rgba(16, 185, 129, .15); color:#6EE7B7; }
+        .badge-d { background:rgba(245, 158, 11, .15); color:#FCD34D; }
 
         /* ── empty state ── */
         .empty { display:flex; flex-direction:column; align-items:center;
@@ -288,25 +285,27 @@ def _inject_css() -> None:
         /* ── history rows ── */
         .hist-row {
             display: flex; align-items: center;
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 10px; padding: 14px 16px; margin-bottom: 6px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
             gap: 12px;
+            box-shadow: var(--shadow-soft);
         }
-        .hist-row:hover { background: #132030; }
+        .hist-row:hover { background: rgba(51, 65, 85, .56); }
         .hist-ico {
             width: 32px; height: 32px; border-radius: 50%;
-            background: #0e2035; border: 1px solid #1a2e44;
+            background: #0f172a; border: 1px solid var(--border-soft);
             display:flex; align-items:center; justify-content:center;
             font-size:13px; flex-shrink:0;
         }
         .hist-body { flex:1; min-width:0; }
-        .hist-q    { color: #d4eaf8; font-size: 13px; font-weight: 600; }
-        .hist-q b  { color: #00b4d8; font-weight: 700; }
-        .hist-meta { color: #2e4a60; font-size: 11px; margin-top: 3px; }
-        .hist-meta span { color: #1f6688; }
+        .hist-q    { color: var(--text-primary); font-size: 13px; font-weight: 600; }
+        .hist-q b  { color: #C7D2FE; font-weight: 700; }
+        .hist-meta { color: var(--text-secondary); font-size: 11px; margin-top: 3px; }
+        .hist-meta span { color: #cbd5e1; }
         .hist-right { text-align:right; flex-shrink:0; }
-        .hist-num   { font-size:20px; font-weight:800; color:#e8f4fd; }
-        .hist-nlbl  { font-size:10px; color:#2e4a60; font-weight:600;
+        .hist-num   { font-size:20px; font-weight:800; color:var(--text-primary); }
+        .hist-nlbl  { font-size:10px; color:var(--text-secondary); font-weight:600;
                       text-transform:uppercase; letter-spacing:.6px; }
 
         /* filter input */
@@ -318,8 +317,210 @@ def _inject_css() -> None:
         }
 
         /* dataframe */
-        [data-testid="stDataFrame"] { border-radius: 10px !important; overflow: hidden !important; }
-        hr { border-color: #1a2e44 !important; }
+        [data-testid="stDataFrame"] {
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            border: 1px solid var(--border-soft) !important;
+        }
+        hr { border-color: var(--border-soft) !important; }
+
+        /* ── detail card / expander polish ── */
+        [data-testid="stExpander"] {
+            border: 1px solid var(--border-soft) !important;
+            border-radius: 14px !important;
+            background: rgba(15, 23, 42, .55) !important;
+            margin-bottom: 10px !important;
+            overflow: hidden !important;
+            box-shadow: var(--shadow-soft) !important;
+        }
+        [data-testid="stExpander"] details summary {
+            background: linear-gradient(180deg, rgba(99,102,241,.2), rgba(30,41,59,.9)) !important;
+            color: var(--text-primary) !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            border-bottom: 1px solid var(--border-soft) !important;
+        }
+        .detail-shell {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+        .detail-hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-name {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .detail-sub {
+            color: var(--text-secondary);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .detail-pill {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(99, 102, 241, .38);
+            background: rgba(99, 102, 241, .14);
+            color: #C7D2FE;
+            font-size: 10px;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .chip-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 6px 0 10px;
+        }
+        .detail-chip {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: rgba(30, 41, 59, .86);
+            color: #E2E8F0;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .section-cap {
+            color: var(--text-secondary);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        /* ── light theme alignment override ── */
+        :root {
+            --primary-color: #4F46E5;
+            --primary-deep: #4338CA;
+            --accent-color: #0EA5E9;
+            --success-color: #059669;
+            --warning-color: #D97706;
+            --bg-main: #F8FAFC;
+            --bg-elevated: #FFFFFF;
+            --bg-soft: #F8FAFC;
+            --border-soft: #E2E8F0;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .stApp {
+            background: radial-gradient(circle at top right, #EEF2FF 0%, #F8FAFC 60%, #FFFFFF 100%) !important;
+            color: var(--text-primary) !important;
+        }
+        .block-container {
+            background: #FFFFFF !important;
+            border: 1px solid var(--border-soft) !important;
+            box-shadow: var(--shadow-soft) !important;
+            backdrop-filter: none !important;
+        }
+        [data-testid="stSidebar"] > div:first-child {
+            background: #FFFFFF !important;
+            border-right: 1px solid var(--border-soft) !important;
+        }
+        div[data-testid="stSidebar"] div[data-testid="stButton"] button {
+            color: #334155 !important;
+        }
+        div[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
+            background: rgba(79, 70, 229, 0.08) !important;
+            border-color: rgba(79, 70, 229, 0.25) !important;
+            color: #3730A3 !important;
+        }
+        .nav-active button {
+            background: rgba(79, 70, 229, 0.12) !important;
+            border-color: rgba(79, 70, 229, 0.30) !important;
+            color: #312E81 !important;
+        }
+
+        .metric-box,
+        .pt-row,
+        .hist-row,
+        .detail-shell,
+        .admin-stat-box,
+        .tmpl-card {
+            background: #FFFFFF !important;
+            border: 1px solid var(--border-soft) !important;
+            box-shadow: var(--shadow-soft) !important;
+            backdrop-filter: none !important;
+        }
+        .ms-title,
+        .pt-name,
+        .hist-q,
+        .tmpl-name,
+        .detail-name,
+        .metric-val,
+        .pt-count,
+        .hist-num,
+        .admin-stat-val {
+            color: #0F172A !important;
+        }
+        .ms-sub,
+        .metric-lbl,
+        .pt-meta,
+        .hist-meta,
+        .tmpl-meta,
+        .detail-sub,
+        .section-cap {
+            color: #475569 !important;
+        }
+        .pt-meta span,
+        .hist-meta span,
+        .tmpl-meta b {
+            color: #334155 !important;
+        }
+
+        [data-testid="stTextInput"] input {
+            background: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            color: #0F172A !important;
+        }
+        [data-testid="stTextInput"] input::placeholder {
+            color: #94A3B8 !important;
+        }
+        [data-testid="stTextInput"] input:focus {
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, .15) !important;
+        }
+
+        div[data-testid="stButton"] > button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
+            box-shadow: 0 8px 18px rgba(79, 70, 229, .20) !important;
+        }
+
+        [data-testid="stExpander"] {
+            background: #FFFFFF !important;
+            border: 1px solid var(--border-soft) !important;
+            box-shadow: var(--shadow-soft) !important;
+        }
+        [data-testid="stExpander"] details summary {
+            background: linear-gradient(180deg, #EEF2FF, #FFFFFF) !important;
+            color: #0F172A !important;
+            border-bottom: 1px solid var(--border-soft) !important;
+        }
+        .detail-pill {
+            border-color: rgba(79, 70, 229, .28) !important;
+            background: rgba(79, 70, 229, .10) !important;
+            color: #4338CA !important;
+        }
+        .detail-chip {
+            border-color: #CBD5E1 !important;
+            background: #F8FAFC !important;
+            color: #1E293B !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -402,6 +603,212 @@ def _search_mock_patients(query: str):
     return results
 
 
+def _load_patient_details(patient_id: int) -> dict | None:
+    """Fetch detailed patient context for the details panel."""
+
+    conn = None
+    try:
+        conn = get_connection()
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT
+                    p.patient_id,
+                    p.first_name,
+                    p.last_name,
+                    p.gender,
+                    DATE_PART('year', AGE(p.date_of_birth))::int AS age,
+                    p.city
+                FROM patients p
+                WHERE p.patient_id = %s
+                """,
+                (patient_id,),
+            )
+            row = cur.fetchone()
+            if not row:
+                return None
+
+            cur.execute(
+                """
+                SELECT
+                    v.visit_date,
+                    v.diagnosis,
+                    COALESCE(d.specialization, 'General Medicine') AS department,
+                    COALESCE(d.doctor_name, 'Unknown Doctor') AS doctor_name
+                FROM visits v
+                LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
+                WHERE v.patient_id = %s
+                ORDER BY v.visit_date DESC
+                LIMIT 20
+                """,
+                (patient_id,),
+            )
+            visits = [
+                {
+                    "visit_date": v[0],
+                    "diagnosis": v[1],
+                    "department": v[2],
+                    "doctor_name": v[3],
+                }
+                for v in cur.fetchall()
+            ]
+
+            cur.execute(
+                """
+                SELECT DISTINCT s.symptom_name
+                FROM visits v
+                JOIN patient_symptoms ps ON ps.visit_id = v.visit_id
+                JOIN symptoms s ON s.symptom_id = ps.symptom_id
+                WHERE v.patient_id = %s
+                ORDER BY s.symptom_name
+                LIMIT 12
+                """,
+                (patient_id,),
+            )
+            symptoms = [r[0] for r in cur.fetchall()]
+
+            cur.execute(
+                """
+                SELECT
+                    COALESCE(d.doctor_name, 'Unknown Doctor') AS doctor_name,
+                    COUNT(*)::int AS visit_count
+                FROM visits v
+                LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
+                WHERE v.patient_id = %s
+                GROUP BY COALESCE(d.doctor_name, 'Unknown Doctor')
+                ORDER BY visit_count DESC, doctor_name
+                """,
+                (patient_id,),
+            )
+            doctor_visits = [
+                {"doctor_name": r[0], "visit_count": r[1]}
+                for r in cur.fetchall()
+            ]
+
+            diagnoses = sorted({(v.get("diagnosis") or "").strip() for v in visits if v.get("diagnosis")})
+
+        return {
+            "id": row[0],
+            "name": f"{row[1]} {row[2]}".strip(),
+            "gender": row[3],
+            "age": row[4],
+            "city": row[5],
+            "visits": visits,
+            "visit_count": len(visits),
+            "doctor_visits": doctor_visits,
+            "diagnoses": diagnoses,
+            "symptoms": symptoms,
+        }
+    except Exception:
+        return None
+    finally:
+        if conn:
+            conn.close()
+
+
+def _resolve_patient_details(item: dict) -> dict:
+    """Resolve detailed patient data from DB with a safe fallback payload."""
+
+    details = None
+    patient_id = item.get("id")
+    if isinstance(patient_id, int):
+        details = _load_patient_details(patient_id)
+
+    if details is None:
+        details = {
+            "id": item.get("id"),
+            "name": item.get("name", "Unknown"),
+            "gender": item.get("gender", "Unknown"),
+            "age": item.get("age", "—"),
+            "city": item.get("city", "—"),
+            "visit_count": 0,
+            "doctor_visits": [],
+            "diagnoses": item.get("diagnoses", []),
+            "visits": [],
+            "symptoms": item.get("symptoms", []),
+        }
+    return details
+
+
+def _chip_html(values: list) -> str:
+    if not values:
+        return ""
+    chips = "".join(f'<span class="detail-chip">{escape(str(v))}</span>' for v in values if str(v).strip())
+    return f'<div class="chip-wrap">{chips}</div>' if chips else ""
+
+
+def render_patient_detail_card(item: dict, label_prefix: str = "Open patient card") -> None:
+    """Render one expandable patient detail card with clinical context."""
+
+    label = f"{label_prefix}: {item.get('name', 'Unknown')} ({item.get('id', '—')})"
+    with st.expander(label, expanded=False):
+        details = _resolve_patient_details(item)
+
+        st.markdown(
+            f"""
+            <div class="detail-shell">
+                <div class="detail-hero">
+                    <div>
+                        <div class="detail-name">{escape(str(details.get('name', 'Unknown')))}</div>
+                        <div class="detail-sub">Patient deep-dive summary</div>
+                    </div>
+                    <div>
+                        <span class="detail-pill">ID {escape(str(details.get('id', '—')))}</span>
+                        <span class="detail-pill">{escape(str(details.get('gender', '—')))}</span>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        meta_col1, meta_col2, meta_col3, meta_col4 = st.columns(4)
+        meta_col1.metric("Patient ID", str(details.get("id", "—")))
+        meta_col2.metric("Age", str(details.get("age", "—")))
+        meta_col3.metric("Gender", str(details.get("gender", "—")))
+        meta_col4.metric("Location", str(details.get("city", "—")))
+
+        left_col, right_col = st.columns(2)
+        with left_col:
+            diagnoses = details.get("diagnoses", [])
+            if diagnoses:
+                st.markdown('<div class="section-cap">Disease / Diagnosis</div>', unsafe_allow_html=True)
+                st.markdown(_chip_html(diagnoses), unsafe_allow_html=True)
+            symptoms = details.get("symptoms", [])
+            if symptoms:
+                st.markdown('<div class="section-cap">Symptoms</div>', unsafe_allow_html=True)
+                st.markdown(_chip_html(symptoms), unsafe_allow_html=True)
+
+        with right_col:
+            st.metric("Total Visits", int(details.get("visit_count", 0) or 0))
+            doctor_rows = details.get("doctor_visits", [])
+            if doctor_rows:
+                st.markdown("**Visits by Doctor**")
+                st.dataframe(
+                    doctor_rows,
+                    width="stretch",
+                    hide_index=True,
+                )
+
+        visits = details.get("visits", [])
+        if visits:
+            visit_rows = []
+            for v in visits[:10]:
+                vd = v.get("visit_date")
+                if hasattr(vd, "strftime"):
+                    vd = vd.strftime("%Y-%m-%d")
+                visit_rows.append(
+                    {
+                        "Visit Date": vd,
+                        "Doctor": v.get("doctor_name", "—"),
+                        "Department": v.get("department", "—"),
+                        "Diagnosis": v.get("diagnosis", "—"),
+                    }
+                )
+            st.markdown("**Recent Visits**")
+            st.dataframe(visit_rows, width="stretch", hide_index=True)
+
+
 def _sidebar(role: str = "Clinician") -> str:
     with st.sidebar:
         st.markdown("## MediCare")
@@ -418,7 +825,7 @@ def _sidebar(role: str = "Clinician") -> str:
             with st.container():
                 if active:
                     st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-                clicked = st.button(label, use_container_width=True, key=key)
+                clicked = st.button(label, width="stretch", key=key)
                 if active:
                     st.markdown("</div>", unsafe_allow_html=True)
                 if clicked:
@@ -478,7 +885,7 @@ def _search_section() -> None:
             label_visibility="collapsed", key="ms_query",
         )
     with col_btn:
-        searched = st.button("🔍 Search", use_container_width=True, key="ms_search_btn")
+        searched = st.button("🔍 Search", width="stretch", key="ms_search_btn")
 
     run = searched or st.session_state.pop("_ms_run", False)
 
@@ -487,50 +894,18 @@ def _search_section() -> None:
         try:
             conn = get_connection()
             result = nl_search_pipeline(conn, st.session_state.get("ms_user_id", 1), query)
-
-            # Fetch extra patient details (age, dept, status) from DB
             raw_results = result.get("results", [])
             enriched = []
-            if raw_results:
-                ids = [getattr(p, "patient_id", None) for p in raw_results]
-                try:
-                    with conn.cursor() as cur:
-                        cur.execute(
-                            """
-                            SELECT
-                                p.patient_id,
-                                DATE_PART('year', AGE(p.date_of_birth))::int AS age,
-                                COALESCE(d.specialization, 'General Medicine') AS department,
-                                NULL::date AS discharge_date
-                            FROM patients p
-                            LEFT JOIN LATERAL (
-                                SELECT doctor_id
-                                FROM visits
-                                WHERE patient_id = p.patient_id
-                                ORDER BY visit_date DESC
-                                LIMIT 1
-                            ) v ON true
-                            LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
-                            WHERE p.patient_id = ANY(%s)
-                            """,
-                            (ids,),
-                        )
-                        extra = {row[0]: row for row in cur.fetchall()}
-                except Exception:
-                    extra = {}
-
-                for p in raw_results:
-                    pid = getattr(p, "patient_id", None)
-                    ex  = extra.get(pid, ())
-                    enriched.append({
-                        "id":   pid,
-                        "name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                        "age":  ex[1] if len(ex) > 1 else "—",
-                        "gender": getattr(p, "gender", ""),
-                        "department": ex[2] if len(ex) > 2 else "—",
-                        "status": "Discharged" if (len(ex) > 3 and ex[3]) else "Active",
-                        "symptoms": [], "diagnoses": [],
-                    })
+            for p in raw_results:
+                enriched.append({
+                    "id": getattr(p, "patient_id", None),
+                    "name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
+                    "age": getattr(p, "age", "—"),
+                    "gender": getattr(p, "gender", ""),
+                    "department": "—",
+                    "status": getattr(p, "status", "Active"),
+                    "symptoms": [], "diagnoses": [],
+                })
             conn.close()
         except Exception as e:
             use_mock = True
@@ -577,7 +952,7 @@ def _search_section() -> None:
                 unsafe_allow_html=True,
             )
 
-            for p in enriched:
+            for idx, p in enumerate(enriched):
                 gender_raw = str(p.get("gender", "")).strip()
                 gender_key = gender_raw.lower()
                 if gender_key == "female":
@@ -613,6 +988,8 @@ def _search_section() -> None:
                     """,
                     unsafe_allow_html=True,
                 )
+
+                render_patient_detail_card(p)
         else:
             st.markdown(
                 """
@@ -771,11 +1148,40 @@ def _cohorts_section() -> None:
     import pandas as pd
     import matplotlib.pyplot as plt
 
+    def _display_cohort_name(raw: str) -> str:
+        text = str(raw or "").strip()
+        # Normalize legacy generated names: "U1 | clinical | query text" -> "query text"
+        if "|" in text:
+            parts = [p.strip() for p in text.split("|") if p.strip()]
+            if len(parts) >= 3 and parts[0].lower().startswith("u"):
+                return parts[-1]
+        return text or "Untitled Cohort"
+
+    # Deduplicate cohorts by normalized display name; keep the latest record for each name.
+    unique_by_name = {}
+    for item in cohorts:
+        raw_name = _display_cohort_name(item.get("cohort_name"))
+        key = " ".join(raw_name.lower().split())
+        created_at = str(item.get("created_at") or "")
+        prev = unique_by_name.get(key)
+        if prev is None or created_at > str(prev.get("created_at") or ""):
+            unique_by_name[key] = item
+
+    cohorts = sorted(
+        unique_by_name.values(),
+        key=lambda c: str(c.get("created_at") or ""),
+        reverse=True,
+    )
+
+    if not cohorts:
+        st.info("No cohorts available.")
+        return
+
     # --- TOP STATS ---
     c1, c2, c3, c4 = st.columns(4)
-    total_members = sum(int(c.get('member_count', 0)) for c in cohorts)
+    total_members = sum(int(c.get("member_count", 0) or 0) for c in cohorts)
     avg_size = total_members // len(cohorts) if cohorts else 0
-    
+
     with c1:
         st.markdown(f'<div class="metric-box" style="border-left: 4px solid #00b4d8;"><div class="metric-val" style="color:#00b4d8;">{len(cohorts)}</div><div class="metric-lbl">Total Cohorts</div></div>', unsafe_allow_html=True)
     with c2:
@@ -792,18 +1198,16 @@ def _cohorts_section() -> None:
 
     with list_col:
         st.markdown("#### 📂 Saved Patient Cohorts")
-        # Grid of cards (2 columns within the left side)
         grid_cols = st.columns(2)
         for idx, c in enumerate(cohorts):
             with grid_cols[idx % 2]:
-                cid = c.get('cohort_id')
-                name = c.get('cohort_name')
-                count = c.get('member_count', 0)
-                date = c.get('created_at')
-                
-                # Dynamic color for icon/badge based on index
-                theme_color = ['#00b4d8', '#4FD1C5', '#F6AD55', '#E53E3E'][idx % 4]
-                
+                cid = c.get("cohort_id")
+                name_raw = c.get("cohort_name") or "Untitled Cohort"
+                name = _display_cohort_name(name_raw)
+                count = int(c.get("member_count", 0) or 0)
+                date = c.get("created_at")
+                theme_color = ["#00b4d8", "#4FD1C5", "#F6AD55", "#E53E3E"][idx % 4]
+
                 st.markdown(
                     f"""
                     <div class="pt-row" style="flex-direction: column; align-items: flex-start; gap: 4px; padding: 18px; border-top: 3px solid {theme_color};">
@@ -818,91 +1222,75 @@ def _cohorts_section() -> None:
                         </div>
                     </div>
                     """,
-                    unsafe_allow_html=True
+                    unsafe_allow_html=True,
                 )
-                if st.button(f"Manage Cohort #{cid}", key=f"an_{cid}", use_container_width=True):
-                    st.session_state.current_cohort_id = cid
-                    st.session_state.current_cohort_name = name
-                    st.rerun()
+
+                exp_label = f"Open Cohort #{cid} - {name}"
+                with st.expander(exp_label, expanded=False):
+                    members = []
+                    member_conn = None
+                    try:
+                        member_conn = get_connection()
+                        members = get_cohort_members(member_conn, int(cid), limit=200)
+                    except Exception:
+                        members = []
+                    finally:
+                        try:
+                            if member_conn:
+                                member_conn.close()
+                        except Exception:
+                            pass
+
+                    if members:
+                        member_rows = []
+                        for m in members:
+                            member_rows.append({
+                                "ID": m.get("patient_id"),
+                                "First Name": m.get("first_name", ""),
+                                "Last Name": m.get("last_name", ""),
+                                "Sex": m.get("gender"),
+                                "Age": m.get("age"),
+                                "City": m.get("city"),
+                                "Added": m.get("added_at").strftime("%Y-%m-%d") if hasattr(m.get("added_at"), "strftime") else m.get("added_at"),
+                            })
+                        st.dataframe(pd.DataFrame(member_rows), width="stretch", hide_index=True)
+                    else:
+                        st.info(f"No members found for Cohort #{cid}.")
 
     with anal_col:
         st.markdown("#### 📊 Clinical Distribution")
-        labels = ['Diabetes', 'Hypertension', 'Asthma', 'Cardiac', 'Others']
+        labels = ["Diabetes", "Hypertension", "Asthma", "Cardiac", "Others"]
         sizes = [35, 30, 15, 10, 10]
-        
-        # Draw a nicer donut chart with better labels
+
         fig, ax = plt.subplots(figsize=(4, 4))
-        colors = ['#00b4d8', '#4FD1C5', '#F6AD55', '#E53E3E', '#1E293B']
-        fig.patch.set_facecolor('none')
-        ax.set_facecolor('none')
-        
-        wedges, texts = ax.pie(
-            sizes, labels=None, startangle=140, colors=colors,
-            wedgeprops=dict(width=0.4, edgecolor='#0F172A', linewidth=2)
+        colors = ["#00b4d8", "#4FD1C5", "#F6AD55", "#E53E3E", "#1E293B"]
+        fig.patch.set_facecolor("#ffffff")
+        ax.set_facecolor("#ffffff")
+
+        ax.pie(
+            sizes,
+            labels=None,
+            startangle=140,
+            colors=colors,
+            wedgeprops=dict(width=0.4, edgecolor="#ffffff", linewidth=2),
         )
-        
-        # Center text (Total count)
-        ax.text(0, 0, f"{total_members}\nTotal", ha='center', va='center', fontsize=14, fontweight='bold', color='#e8f4fd')
-            
-        ax.axis('equal')
+
+        ax.text(0, 0, f"{total_members}\nTotal", ha="center", va="center", fontsize=14, fontweight="bold", color="#0f172a")
+        ax.axis("equal")
         st.pyplot(fig)
-        
-        # Redesigned Legend
+
         for i, label in enumerate(labels):
             st.markdown(
                 f'''
-                <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom:8px; background:rgba(30,41,59,0.3); padding:4px 10px; border-radius:6px; border-left: 2px solid {colors[i]};">
-                    <span style="font-size:11px; color:#cde;">{label}</span>
+                <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom:8px; background:#f8fafc; padding:4px 10px; border-radius:6px; border-left: 2px solid {colors[i]};">
+                    <span style="font-size:11px; color:#334155;">{label}</span>
                     <span style="font-size:11px; font-weight:700; color:{colors[i]};">{sizes[i]}%</span>
                 </div>
-                ''', 
-                unsafe_allow_html=True
+                ''',
+                unsafe_allow_html=True,
             )
 
-    # --- SELECTION & MEMBERS ---
-    st.divider()
-    
-    selected_id = st.session_state.get("current_cohort_id", cohorts[0].get("cohort_id"))
-    selected_name = st.session_state.get("current_cohort_name", cohorts[0].get("cohort_name"))
-    
-    st.markdown(
-        f'<div class="ms-title" style="font-size:18px;">Members: {selected_name}</div>'
-        f'<div class="ms-sub">Detailed patient roster for Cohort #{selected_id}</div>',
-        unsafe_allow_html=True
-    )
-
-    members = []
-    try:
-        if conn is None:
-            conn = get_connection()
-        members = get_cohort_members(conn, selected_id, limit=200)
-    except Exception:
-        members = []
-    finally:
-        if conn:
-            conn.close()
-
-    if members:
-        member_rows = []
-        for m in members:
-            member_rows.append({
-                "ID": m.get("patient_id"),
-                "First Name": m.get("first_name", ""),
-                "Last Name": m.get("last_name", ""),
-                "Sex": m.get("gender"),
-                "Age": m.get("age"),
-                "City": m.get("city"),
-                "Added": m.get("added_at").strftime("%Y-%m-%d") if hasattr(m.get("added_at"), "strftime") else m.get("added_at"),
-            })
-        st.dataframe(pd.DataFrame(member_rows), use_container_width=True, hide_index=True)
-    else:
-        st.info(f"No members found for Cohort #{selected_id}. Showing sample data for demo.")
-        sample_members = [
-            {"ID": 101, "First Name": "Rahul", "Last Name": "Sharma", "Sex": "Male", "Age": 45, "City": "Delhi", "Added": "2024-01-10"},
-            {"ID": 102, "First Name": "Sneha", "Last Name": "Iyer", "Sex": "Female", "Age": 38, "City": "Chennai", "Added": "2024-01-12"},
-            {"ID": 103, "First Name": "Amit", "Last Name": "Verma", "Sex": "Male", "Age": 52, "City": "Mumbai", "Added": "2024-01-15"}
-        ]
-        st.dataframe(pd.DataFrame(sample_members), use_container_width=True, hide_index=True)
+    st.markdown('<div class="ms-sub" style="margin-top:10px;">Click a cohort card and expand it to view that cohort\'s patient list.</div>', unsafe_allow_html=True)
 
 
 # ── public entry ──────────────────────────────────────────────────────────────

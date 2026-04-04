@@ -7,6 +7,7 @@ from src.modules.C13.backend import get_connection, nl_search_pipeline, get_sear
 from src.modules.C13.patient_search import (
     MOCK_PATIENTS, MOCK_HISTORY, _search_mock_patients,
     _inject_css as _shared_css,
+    render_patient_detail_card,
     _history_section,
     _cohorts_section,
 )
@@ -75,94 +76,87 @@ def _inject_css() -> None:
     st.markdown(
         """
         <style>
-        /* admin avatar purple */
-        .ms-ava { background: linear-gradient(135deg,#9b59b6,#6c3483) !important; }
-        .ms-ava-role { color: #9b59b6 !important; }
+        .ms-ava { background: linear-gradient(135deg,#6366F1,#4F46E5) !important; }
+        .ms-ava-role { color: #C7D2FE !important; }
 
-        /* ── Admin Panel stat strip ── */
         .admin-stats {
-            display: grid; grid-template-columns: repeat(3, auto);
-            gap: 12px; margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
         }
         .admin-stat-box {
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 10px; padding: 16px 22px;
+            background: rgba(30, 41, 59, 0.74);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 14px;
+            padding: 16px 18px;
+            box-shadow: 0 10px 24px rgba(2, 6, 23, 0.24);
+            backdrop-filter: blur(12px);
         }
-        .admin-stat-lbl { font-size: 10px; color: #2e4a60; font-weight: 700;
-                          text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
-        .admin-stat-val { font-size: 28px; font-weight: 800; color: #e8f4fd; }
+        .admin-stat-lbl {
+            font-size: 10px;
+            color: #94A3B8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 4px;
+        }
+        .admin-stat-val {
+            font-size: 28px;
+            font-weight: 800;
+            color: #F8FAFC;
+        }
 
-        /* ── Template card grid ── */
         .tmpl-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
         }
         .tmpl-card {
-            background: #111f30; border: 1px solid #1a2e44;
-            border-radius: 12px; padding: 16px 18px;
+            background: rgba(30, 41, 59, 0.74);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 14px;
+            padding: 16px 18px;
             position: relative;
+            box-shadow: 0 10px 24px rgba(2, 6, 23, 0.22);
+            backdrop-filter: blur(12px);
         }
         .tmpl-header {
             display: flex; justify-content: space-between;
             align-items: center; margin-bottom: 10px;
         }
-        .tmpl-name { color: #d4eaf8; font-size: 14px; font-weight: 700; }
-        .tmpl-cat-demo { background: rgba(0,180,216,.12); color:#00b4d8;
+        .tmpl-name { color: #F8FAFC; font-size: 14px; font-weight: 700; }
+        .tmpl-cat-demo { background: rgba(99,102,241,.16); color:#E0E7FF;
                          font-size:9px; font-weight:700; padding:3px 8px;
                          border-radius:99px; letter-spacing:.5px; }
-        .tmpl-cat-clin { background: rgba(0,200,120,.10); color:#4ade80;
+        .tmpl-cat-clin { background: rgba(16,185,129,.14); color:#6EE7B7;
                          font-size:9px; font-weight:700; padding:3px 8px;
                          border-radius:99px; letter-spacing:.5px; }
-        .tmpl-cat-temp { background: rgba(250,170,60,.10); color:#fbbf24;
+        .tmpl-cat-temp { background: rgba(245,158,11,.14); color:#FCD34D;
                          font-size:9px; font-weight:700; padding:3px 8px;
                          border-radius:99px; letter-spacing:.5px; }
         .tmpl-sql {
-            background: #0d1828; border: 1px solid #1a2e44;
+            background: rgba(15, 23, 42, .72); border: 1px solid rgba(148, 163, 184, .22);
             border-radius: 6px; padding: 8px 10px;
             font-family: 'Courier New', monospace; font-size: 11px;
-            color: #4b7594; white-space: nowrap; overflow: hidden;
+            color: #CBD5E1; white-space: nowrap; overflow: hidden;
             text-overflow: ellipsis; margin-bottom: 10px;
         }
-        .tmpl-params-lbl { font-size:10px; color:#2e4a60; font-weight:700;
+        .tmpl-params-lbl { font-size:10px; color:#94A3B8; font-weight:700;
                            text-transform:uppercase; letter-spacing:.7px; margin-bottom:6px; }
         .tmpl-param-tag {
             display: inline-block;
-            background: #0d1828; border: 1px solid #1a2e44;
-            color: #4b7594; font-size: 11px;
+            background: rgba(15, 23, 42, .72); border: 1px solid rgba(148, 163, 184, .22);
+            color: #CBD5E1; font-size: 11px;
             padding: 2px 8px; border-radius: 5px; margin-right: 4px; margin-bottom: 4px;
         }
         .tmpl-footer {
             display: flex; align-items: center; justify-content: space-between;
-            margin-top: 10px; padding-top: 10px; border-top: 1px solid #1a2e44;
+            margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(148, 163, 184, .24);
         }
-        .tmpl-meta { color: #2e4a60; font-size: 11px; }
-        .tmpl-meta b { color: #3a6278; }
-        .tmpl-success { color: #4ade80; font-size: 11px; font-weight: 600; }
-
-        /* ── new-template button ── */
-        .new-tmpl-wrap {
-            position: absolute; top: 1.8rem; right: 2rem;
-        }
-
-        /* ── background + sidebar ── */
-        [data-testid="stAppViewContainer"] { 
-            background: #0F172A !important; 
-        }
-        [data-testid="stSidebar"] > div:first-child {
-            background: #1E293B !important;
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-        }
-        .block-container { 
-            padding: 2.2rem 2.4rem !important; 
-            max-width: 100% !important;
-            background: rgba(30, 41, 59, 0.4);
-            border-radius: 20px;
-            margin: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        .tmpl-meta { color: #94A3B8; font-size: 11px; }
+        .tmpl-meta b { color: #E2E8F0; }
+        .tmpl-success { color: #6EE7B7; font-size: 11px; font-weight: 600; }
         </style>
         """,
         unsafe_allow_html=True,
@@ -181,7 +175,7 @@ def _sidebar() -> str:
             active = page == label
             if active:
                 st.markdown('<div class="nav-active">', unsafe_allow_html=True)
-            clicked = st.button(label, use_container_width=True, key=key)
+            clicked = st.button(label, width="stretch", key=key)
             if active:
                 st.markdown("</div>", unsafe_allow_html=True)
             if clicked:
@@ -213,7 +207,7 @@ def _search_section() -> None:
             label_visibility="collapsed", key="ms_admin_query",
         )
     with col_btn:
-        searched = st.button("🔍 Search", use_container_width=True, key="ms_adm_btn")
+        searched = st.button("🔍 Search", width="stretch", key="ms_adm_btn")
 
     run = searched or st.session_state.pop("_ma_run", False)
 
@@ -234,19 +228,58 @@ def _search_section() -> None:
         if patients_raw:
             import pandas as pd
             rows = []
+            detail_items = []
             for p in patients_raw:
-                pid  = getattr(p, "patient_id", None)
-                mock = next((m for m in MOCK_PATIENTS if m["id"] == pid), None)
-                rows.append({
-                    "ID": mock["id"] if mock else pid,
-                    "Name": mock["name"] if mock else f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
-                    "Age": mock["age"] if mock else "—",
-                    "Gender": mock["gender"] if mock else getattr(p, "gender", ""),
-                    "Department": mock["department"] if mock else "—",
-                    "Status": mock["status"] if mock else "Active",
-                })
+                if use_mock:
+                    pid = getattr(p, "patient_id", None)
+                    mock = next((m for m in MOCK_PATIENTS if m["id"] == pid), None)
+                    row = {
+                        "ID": mock["id"] if mock else pid,
+                        "Name": mock["name"] if mock else f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
+                        "Age": mock["age"] if mock else getattr(p, "age", "—"),
+                        "Gender": mock["gender"] if mock else getattr(p, "gender", ""),
+                        "Department": mock["department"] if mock else "—",
+                        "Status": mock["status"] if mock else getattr(p, "status", "Active"),
+                    }
+                    rows.append(row)
+                    detail_items.append(
+                        {
+                            "id": row["ID"],
+                            "name": row["Name"],
+                            "age": row["Age"],
+                            "gender": row["Gender"],
+                            "city": mock.get("city", "—") if mock else "—",
+                            "diagnoses": mock.get("diagnoses", []) if mock else [],
+                            "symptoms": mock.get("symptoms", []) if mock else [],
+                        }
+                    )
+                else:
+                    row = {
+                        "ID": getattr(p, "patient_id", None),
+                        "Name": f"{getattr(p,'first_name','')} {getattr(p,'last_name','')}".strip(),
+                        "Age": getattr(p, "age", "—"),
+                        "Gender": getattr(p, "gender", ""),
+                        "Department": "—",
+                        "Status": getattr(p, "status", "Active"),
+                    }
+                    rows.append(row)
+                    detail_items.append(
+                        {
+                            "id": row["ID"],
+                            "name": row["Name"],
+                            "age": row["Age"],
+                            "gender": row["Gender"],
+                            "city": "—",
+                            "diagnoses": [],
+                            "symptoms": [],
+                        }
+                    )
             st.success(f"Found **{len(rows)}** patient(s)")
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
+
+            st.markdown("### Patient Detail Cards")
+            for item in detail_items:
+                render_patient_detail_card(item)
         else:
             st.markdown(
                 '<div class="empty"><div class="empty-ico">🔍</div>'
@@ -281,7 +314,7 @@ def _admin_panel_section() -> None:
         )
     with btn_col:
         st.markdown("<br>", unsafe_allow_html=True)
-        st.button("＋ New Template", key="new_tmpl", use_container_width=True)
+        st.button("＋ New Template", key="new_tmpl", width="stretch")
 
     # Stat strip
     total_uses = sum(t["uses"] for t in MOCK_TEMPLATES)
@@ -325,7 +358,7 @@ def _admin_panel_section() -> None:
                 "Members": c.get("member_count", 0),
                 "Created At": c.get("created_at"),
             })
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
     else:
         st.info("No cohorts available yet. Run a few searches to generate cohorts.")
 
@@ -375,9 +408,9 @@ def _admin_panel_section() -> None:
                 # Edit / Delete under each card
                 ec, dc = st.columns(2, gap="small")
                 with ec:
-                    st.button("✏ Edit",   key=f"edit_{tmpl_idx}",   use_container_width=True)
+                    st.button("✏ Edit",   key=f"edit_{tmpl_idx}",   width="stretch")
                 with dc:
-                    st.button("🗑 Delete", key=f"delete_{tmpl_idx}", use_container_width=True)
+                    st.button("🗑 Delete", key=f"delete_{tmpl_idx}", width="stretch")
 
 
 # ── public entry ──────────────────────────────────────────────────────────────

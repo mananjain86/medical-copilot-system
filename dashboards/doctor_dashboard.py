@@ -296,7 +296,7 @@ def show_main_dashboard():
                     st.markdown(f"⚠️ {cat['stats']['alerts']}")
                     st.caption("Alerts")
                 
-                if st.button("View Details →", key=f"cat_{idx}", use_container_width=True):
+                if st.button("View Details →", key=f"cat_{idx}", width="stretch"):
                     st.session_state.selected_category = key
                     st.session_state.view = "category"
                     st.rerun()
@@ -312,7 +312,7 @@ def show_category_view():
         st.markdown(f"# {category['icon']} {category['title']}")
         st.markdown(f"*{category['description']}*")
     with col2:
-        st.button("📄 Export Data", use_container_width=True)
+        st.button("📄 Export Data", width="stretch")
     
     st.divider()
     
@@ -340,7 +340,7 @@ def show_category_view():
                 mcol1.metric("Tables", tables)
                 mcol2.metric("Records", f"{records:,}")
                 
-                if st.button("→", key=f"mod_{code}", use_container_width=True):
+                if st.button("→", key=f"mod_{code}", width="stretch"):
                     st.session_state.selected_module = module
                     st.session_state.view = "module"
                     st.rerun()

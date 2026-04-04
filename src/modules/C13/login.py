@@ -19,9 +19,16 @@ def _inject_css() -> None:
         #MainMenu, footer, [data-testid="stHeader"],
         [data-testid="stToolbar"], [data-testid="stDecoration"] { display: none !important; visibility: hidden !important; }
 
-        /* ── full background ── */
+        :root {
+            --primary-color: #6366F1;
+            --primary-deep: #4F46E5;
+            --bg-main: #0F172A;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --border-soft: rgba(148, 163, 184, .22);
+        }
         [data-testid="stAppViewContainer"] {
-            background: radial-gradient(ellipse at 35% 40%, #0e2040 0%, #080f1e 55%, #050b16 100%);
+            background: radial-gradient(circle at top right, #1E293B 0%, #0F172A 62%, #0B1220 100%);
             min-height: 100vh;
         }
         .block-container { padding: 0 !important; max-width: 100% !important; }
@@ -34,12 +41,13 @@ def _inject_css() -> None:
 
         /* ── card ── */
         .login-card {
-            background: #111827;
-            border: 1px solid #1f2d44;
-            border-radius: 16px;
-            padding: 36px 32px 28px;
-            width: 420px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            background: rgba(30, 41, 59, 0.78);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 34px 30px 28px;
+            width: 430px;
+            box-shadow: 0 12px 28px rgba(2, 6, 23, 0.30);
+            backdrop-filter: blur(12px);
             animation: fadeUp .35s ease;
         }
         @keyframes fadeUp {
@@ -58,20 +66,18 @@ def _inject_css() -> None:
             display: flex; align-items: center; justify-content: center;
             font-size: 22px;
         }
-        .logo-title { font-size: 22px; font-weight: 800; color: #f0f6ff; }
-        .logo-sub   { font-size: 12px; color: #4b6278; margin-top: 1px; }
+        .logo-title { font-size: 22px; font-weight: 800; color: var(--text-primary); }
+        .logo-sub   { font-size: 12px; color: var(--text-secondary); margin-top: 1px; }
 
-        .card-divider {
-            height: 1px; background: #1f2d44; margin: 20px 0 18px;
-        }
+        .card-divider { height: 1px; background: var(--border-soft); margin: 18px 0 16px; }
 
         /* ── label above role ── */
-        .role-hint { color: #6b8290; font-size: 12px; margin-bottom: 10px; }
+        .role-hint { color: var(--text-secondary); font-size: 12px; margin-bottom: 10px; }
 
         /* ── Streamlit radio → pill toggle ── */
         div[data-testid="stRadio"] {
-            background: #0d1828 !important;
-            border: 1px solid #1f2d44 !important;
+            background: rgba(15, 23, 42, 0.58) !important;
+            border: 1px solid var(--border-soft) !important;
             border-radius: 10px !important;
             padding: 3px !important;
             margin-bottom: 20px !important;
@@ -81,88 +87,109 @@ def _inject_css() -> None:
             flex: 1 !important; text-align: center !important;
             padding: 8px 0 !important; border-radius: 8px !important;
             font-size: 13px !important; font-weight: 500 !important;
-            color: #4b6278 !important; cursor: pointer !important;
+            color: var(--text-secondary) !important; cursor: pointer !important;
             transition: all .18s !important;
         }
         div[data-testid="stRadio"] label:has(input:checked) {
-            background: linear-gradient(135deg, #00b4d8, #0070f3) !important;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
             color: #fff !important;
         }
         div[data-testid="stRadio"] [data-testid="stMarkdownContainer"] { display: none; }
 
         /* ── field label ── */
         .f-label {
-            color: #8ba5b8; font-size: 12px; font-weight: 500;
+            color: #CBD5E1; font-size: 12px; font-weight: 500;
             margin-bottom: 6px; margin-top: 14px;
         }
 
         /* ── inputs ── */
         [data-testid="stTextInput"] input {
-            background: #0d1828 !important;
-            border: 1px solid #1f2d44 !important;
+            background: #0F172A !important;
+            border: 1px solid #334155 !important;
             border-radius: 8px !important;
-            color: #cce4f6 !important;
+            color: var(--text-primary) !important;
             font-size: 13px !important;
             font-family: 'Inter', sans-serif !important;
             padding: 11px 14px !important;
         }
         [data-testid="stTextInput"] input:focus {
-            border-color: #00b4d8 !important;
-            box-shadow: 0 0 0 2px rgba(0,180,216,.15) !important;
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 2px rgba(99,102,241,.2) !important;
         }
-        [data-testid="stTextInput"] input::placeholder { color: #2a3f52 !important; }
+        [data-testid="stTextInput"] input::placeholder { color: #64748B !important; }
         [data-testid="stTextInput"] > label { display: none !important; }
 
         /* ── sign-in button ── */
         div[data-testid="stButton"] > button {
             width: 100% !important;
-            background: linear-gradient(90deg, #00b4d8, #0070f3) !important;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
             color: #fff !important; border: none !important;
             border-radius: 8px !important;
             padding: 12px 0 !important;
             font-size: 14px !important; font-weight: 700 !important;
             font-family: 'Inter', sans-serif !important;
             margin-top: 6px !important;
-            box-shadow: 0 2px 14px rgba(0,180,216,.3) !important;
+            box-shadow: 0 8px 18px rgba(99,102,241,.30) !important;
             transition: opacity .18s !important;
         }
         div[data-testid="stButton"] > button:hover { opacity: .88 !important; }
 
         /* ── demo hint ── */
         .demo-hint {
-            text-align: center; font-size: 11px; color: #38516a; margin-top: 16px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 16px;
         }
-        .demo-hint a { color: #00b4d8; text-decoration: none; }
+        .demo-hint a { color: #C7D2FE; text-decoration: none; }
 
-        /* Website-aligned light overrides */
+        /* light theme alignment override */
+        :root {
+            --primary-color: #4F46E5;
+            --primary-deep: #4338CA;
+            --bg-main: #F8FAFC;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --border-soft: #E2E8F0;
+        }
         [data-testid="stAppViewContainer"] {
-            background: #f7f9fc !important;
+            background: radial-gradient(circle at top right, #EEF2FF 0%, #F8FAFC 60%, #FFFFFF 100%) !important;
         }
         .login-card {
-            background: #ffffff !important;
-            border: 1px solid #e5e7eb !important;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+            background: #FFFFFF !important;
+            border: 1px solid var(--border-soft) !important;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08) !important;
+            backdrop-filter: none !important;
         }
-        .logo-title { color: #111827 !important; }
-        .logo-sub { color: #6b7280 !important; }
-        .card-divider { background: #e5e7eb !important; }
-        .role-hint { color: #6b7280 !important; }
+        .logo-title { color: var(--text-primary) !important; }
+        .logo-sub,
+        .role-hint,
+        .demo-hint { color: var(--text-secondary) !important; }
+        .card-divider { background: var(--border-soft) !important; }
 
         div[data-testid="stRadio"] {
-            background: #f9fafb !important;
-            border: 1px solid #e5e7eb !important;
+            background: #F8FAFC !important;
+            border: 1px solid var(--border-soft) !important;
         }
-        div[data-testid="stRadio"] label { color: #4b5563 !important; }
+        div[data-testid="stRadio"] label { color: #475569 !important; }
 
-        .f-label { color: #374151 !important; }
+        .f-label { color: #334155 !important; }
         [data-testid="stTextInput"] input {
-            background: #ffffff !important;
-            border: 1px solid #d1d5db !important;
-            color: #111827 !important;
+            background: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            color: #0F172A !important;
         }
-        [data-testid="stTextInput"] input::placeholder { color: #9ca3af !important; }
-        .demo-hint { color: #6b7280 !important; }
-        .demo-hint a { color: #2563eb !important; }
+        [data-testid="stTextInput"] input::placeholder { color: #94A3B8 !important; }
+        [data-testid="stTextInput"] input:focus {
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, .14) !important;
+        }
+
+        div[data-testid="stButton"] > button {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
+            box-shadow: 0 8px 18px rgba(79, 70, 229, .20) !important;
+        }
+        .demo-hint a { color: #4338CA !important; }
         </style>
         """,
         unsafe_allow_html=True,
@@ -222,7 +249,7 @@ def login_page() -> None:
         )
 
         st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("Sign In", use_container_width=True):
+        if st.button("Sign In", width="stretch"):
             if email and password:
                 st.session_state.ms_logged_in = True
                 st.session_state.ms_user_role = role

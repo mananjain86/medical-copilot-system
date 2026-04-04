@@ -35,6 +35,7 @@ from typing import Any
 
 import psycopg2
 import psycopg2.extras
+from psycopg2 import sql as psy_sql
 
 _C13_ENV_PATH = Path(__file__).with_name(".env")
 
@@ -76,6 +77,44 @@ _DB_SSLMODE  = os.getenv("DB_SSLMODE") or os.getenv("PGSSLMODE")
 
 
 PROJECTDB_SQL_PATH = Path(__file__).with_name("projectdb.sql")
+
+
+def _sync_serial_sequence(conn, table_name: str, pk_column: str) -> None:
+	"""Ensure the serial sequence for a table PK is aligned with existing rows."""
+
+	with conn.cursor() as cur:
+		cur.execute("SELECT pg_get_serial_sequence(%s, %s)", (table_name, pk_column))
+		row = cur.fetchone()
+		if not row or not row[0]:
+			return
+		sequence_name = row[0]
+
+		table_ident = psy_sql.Identifier(*table_name.split("."))
+		pk_ident = psy_sql.Identifier(pk_column)
+		cur.execute(
+			psy_sql.SQL("SELECT COALESCE(MAX({pk}), 0) FROM {table}").format(
+				pk=pk_ident,
+				table=table_ident,
+			)
+		)
+		max_id = int(cur.fetchone()[0] or 0)
+
+		# With is_called=false, the next nextval() returns this exact value.
+		next_value = max(1, max_id + 1)
+		cur.execute("SELECT setval(%s, %s, false)", (sequence_name, next_value))
+
+
+def _repair_c13_write_sequences(conn) -> None:
+	"""Fix key write-path sequences that can drift after repeated SQL imports."""
+
+	for table_name, pk_column in (
+		("search_queries", "query_id"),
+		("search_results", "result_id"),
+		("patient_cohorts", "cohort_id"),
+		("saved_queries", "saved_id"),
+		("patient_cohort_members", "member_id"),
+	):
+		_sync_serial_sequence(conn, table_name, pk_column)
 
 
 @dataclass
@@ -392,12 +431,35 @@ def initialize_projectdb(
 	finally:
 		admin_conn.close()
 
+<<<<<<< HEAD
 	conn = get_connection(dsn=None, host=host, port=port, dbname=dbname, user=user, password=password)
 	conn.autocommit = True
 	try:
 		_load_sql_dump_via_psycopg2(conn, target_sql.read_text(encoding="utf-8"))
 	finally:
 		conn.close()
+=======
+	env = os.environ.copy()
+	if password:
+		env["PGPASSWORD"] = password
+
+	command = [
+		"psql",
+		"-h",
+		host,
+		"-p",
+		str(port),
+		"-U",
+		user,
+		"-d",
+		dbname,
+		"-f",
+		str(target_sql),
+	]
+	result = subprocess.run(command, check=False, capture_output=True, text=True, env=env)
+	if result.returncode != 0:
+		raise RuntimeError(result.stderr.strip() or "Failed to load projectdb.sql")
+>>>>>>> 3ff6460 (logic correction)
 
 	return f"Loaded database from {target_sql} into {dbname}"
 
@@ -598,7 +660,30 @@ def resolve_diagnosis(conn, text: str) -> str | None:
 	return None
 
 
-def generate_sql(query: SearchQuery) -> GeneratedSQL:
+def _table_has_column(conn, table_name: str, column_name: str) -> bool:
+	"""Check whether a table contains a given column (schema-aware)."""
+
+	if "." in table_name:
+		schema_name, rel_name = table_name.split(".", 1)
+	else:
+		schema_name, rel_name = "public", table_name
+
+	with conn.cursor() as cur:
+		cur.execute(
+			"""
+			SELECT 1
+			FROM information_schema.columns
+			WHERE table_schema = %s
+			  AND table_name = %s
+			  AND column_name = %s
+			LIMIT 1
+			""",
+			(schema_name, rel_name, column_name),
+		)
+		return cur.fetchone() is not None
+
+
+def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> GeneratedSQL:
 	"""
 	Build a dynamic SQL query from the parsed NL input using the real schema.
 	"""
@@ -647,7 +732,7 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 		params["department"] = query.department
 		notes.append(f"department = '{query.department}'")
 
-	if query.status:
+	if query.status and include_patient_status:
 		conditions.append("p.status ILIKE %(status)s")
 		params["status"] = query.status
 		notes.append(f"status = '{query.status}'")
@@ -722,7 +807,7 @@ def generate_sql(query: SearchQuery) -> GeneratedSQL:
 			"    p.gender,\n"
 			"    DATE_PART('year', AGE(p.date_of_birth)) AS age,\n"
 			"    p.city,\n"
-			"    p.status"
+			+ ("    p.status" if include_patient_status else "    'Active'::text AS status")
 		)
 
 	sql = (
@@ -762,6 +847,7 @@ def run_search(
 		raise ValueError("sql_payload is required for run_search()")
 
 	query_id: int | None = None
+	_repair_c13_write_sequences(conn)
 	with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
 		cur.execute("SELECT log_search_query(%s, %s, %s)", (user_id, nl_query, search_type))
 		qid_row = cur.fetchone()
@@ -805,11 +891,36 @@ def create_search_cohort(
 	query_id: int | None = None,
 ) -> int:
 	"""Create a cohort for a search and persist its member patient ids."""
+<<<<<<< HEAD
 	cohort_name = f"U{user_id} | {search_type} | {nl_query[:80]}"
+=======
+
+	_ensure_cohort_member_table(conn)
+	_repair_c13_write_sequences(conn)
+	clean_query = " ".join(str(nl_query or "").split())[:80]
+	cohort_name = clean_query or f"{search_type.title()} Cohort"
+	norm_cohort_name = cohort_name.lower()
+>>>>>>> 3ff6460 (logic correction)
 
 	with conn.cursor() as cur:
-		cur.execute("INSERT INTO patient_cohorts(cohort_name) VALUES(%s) RETURNING cohort_id", (cohort_name,))
-		cohort_id = int(cur.fetchone()[0])
+		cur.execute(
+			"""
+			SELECT cohort_id
+			FROM patient_cohorts
+			WHERE LOWER(REGEXP_REPLACE(TRIM(cohort_name), '\\s+', ' ', 'g')) = %s
+			ORDER BY created_at DESC, cohort_id DESC
+			LIMIT 1
+			""",
+			(norm_cohort_name,),
+		)
+		existing = cur.fetchone()
+		if existing:
+			cohort_id = int(existing[0])
+			# Keep one cohort per generated name and refresh members for latest run.
+			cur.execute("DELETE FROM patient_cohort_members WHERE cohort_id = %s", (cohort_id,))
+		else:
+			cur.execute("INSERT INTO patient_cohorts(cohort_name) VALUES(%s) RETURNING cohort_id", (cohort_name,))
+			cohort_id = int(cur.fetchone()[0])
 
 		if patient_ids:
 			for pid in sorted(set(patient_ids)):
@@ -847,6 +958,7 @@ def get_search_history(conn, user_id: int) -> list[dict[str, Any]]:
 def save_query(conn, user_id: int, query_text: str) -> None:
 	"""Save a query to saved_queries via save_user_query()."""
 
+	_repair_c13_write_sequences(conn)
 	with conn.cursor() as cur:
 		cur.execute("SELECT save_user_query(%s, %s)", (user_id, query_text))
 		conn.commit()
@@ -919,13 +1031,14 @@ def nl_search_pipeline(conn, user_id: int, nl_query: str) -> dict[str, Any]:
 
 	parsed = parse_query(nl_query)
 	normalized_query = _normalize_query(nl_query)
+	has_patient_status_col = _table_has_column(conn, "patients", "status")
 	parsed.expanded_terms = sorted(
 		set(expand_terms(conn, normalized_query))
 		| set(re.findall(r"[a-zA-Z]+", normalized_query))
 	)
 	parsed.symptom = resolve_symptom(conn, nl_query)
 	parsed.diagnosis = resolve_diagnosis(conn, nl_query)
-	sql_payload = generate_sql(parsed)
+	sql_payload = generate_sql(parsed, include_patient_status=has_patient_status_col)
 
 	results, query_id = run_search(
 		conn,

@@ -210,13 +210,13 @@ def show_main_dashboard():
     # Quick action buttons
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.button("📅 Book Appointment", use_container_width=True)
+        st.button("📅 Book Appointment", width="stretch")
     with c2:
-        st.button("📄 View Reports", use_container_width=True)
+        st.button("📄 View Reports", width="stretch")
     with c3:
-        st.button("💊 My Prescriptions", use_container_width=True)
+        st.button("💊 My Prescriptions", width="stretch")
     with c4:
-        st.button("🧪 Lab Results", use_container_width=True)
+        st.button("🧪 Lab Results", width="stretch")
 
     st.divider()
 
@@ -234,7 +234,7 @@ def show_main_dashboard():
                 st.caption("View your medical history, diagnoses, and treatment plans")
                 st.markdown("**12 Records**")
             with cat_col2:
-                if st.button("→", key="clinical", use_container_width=True):
+                if st.button("→", key="clinical", width="stretch"):
                     st.session_state.selected_category = "A - Patient Clinical Data"
                     st.session_state.view = "category"
                     st.rerun()
@@ -249,7 +249,7 @@ def show_main_dashboard():
                 st.caption("Access your lab test results and reports")
                 st.markdown("**5 Pending**")
             with cat_col2:
-                if st.button("→", key="laboratory", use_container_width=True):
+                if st.button("→", key="laboratory", width="stretch"):
                     st.session_state.selected_category = "B - Symptom-Disease Diagnosis"
                     st.session_state.view = "category"
                     st.rerun()
@@ -264,7 +264,7 @@ def show_main_dashboard():
                 st.caption("View prescriptions and medication history")
                 st.markdown("**3 Active**")
             with cat_col2:
-                if st.button("→", key="pharmacy", use_container_width=True):
+                if st.button("→", key="pharmacy", width="stretch"):
                     st.session_state.selected_category = "D - Drug & Prescription Safety"
                     st.session_state.view = "category"
                     st.rerun()
@@ -279,7 +279,7 @@ def show_main_dashboard():
                 st.caption("View invoices, payments, and insurance claims")
                 st.markdown("**2 Pending**")
             with cat_col2:
-                if st.button("→", key="billing", use_container_width=True):
+                if st.button("→", key="billing", width="stretch"):
                     st.session_state.selected_category = "G - Secure EHR & Access Control"
                     st.session_state.view = "category"
                     st.rerun()
@@ -303,7 +303,7 @@ def show_main_dashboard():
             st.caption("📅 Jan 15, 2026  🕐 2:00 PM")
         
         st.markdown("---")
-        st.button("📅 Book New Appointment", use_container_width=True)
+        st.button("📅 Book New Appointment", width="stretch")
         
         st.divider()
         
@@ -334,7 +334,7 @@ def show_category_view():
         st.markdown(f"# {category['icon']} {category['title']}")
         st.markdown(f"*{category['description']}*")
     with col2:
-        st.button("📄 Export Data", use_container_width=True)
+        st.button("📄 Export Data", width="stretch")
     
     st.divider()
     
@@ -362,7 +362,7 @@ def show_category_view():
                 mcol1.metric("Tables", tables)
                 mcol2.metric("Records", f"{records:,}")
                 
-                if st.button("→", key=f"mod_{code}", use_container_width=True):
+                if st.button("→", key=f"mod_{code}", width="stretch"):
                     st.session_state.selected_module = module
                     st.session_state.view = "module"
                     st.rerun()

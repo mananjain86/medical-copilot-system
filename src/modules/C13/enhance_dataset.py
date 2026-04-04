@@ -23,10 +23,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from src.modules.C13.backend import get_connection
 
 
-FIRST_NAMES = [
+MALE_FIRST_NAMES = [
     "Aarav", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Reyansh", "Krishna", "Ishaan", "Rohan",
-    "Aanya", "Diya", "Saanvi", "Myra", "Ananya", "Ira", "Meera", "Riya", "Kavya", "Siya",
     "Rahul", "Amit", "Nikhil", "Suresh", "Karan", "Manish", "Deepak", "Ravi", "Ajay", "Vikram",
+]
+
+FEMALE_FIRST_NAMES = [
+    "Aanya", "Diya", "Saanvi", "Myra", "Ananya", "Ira", "Meera", "Riya", "Kavya", "Siya",
     "Priya", "Pooja", "Neha", "Sneha", "Anita", "Shreya", "Nisha", "Komal", "Preeti", "Tanya",
 ]
 
@@ -110,6 +113,50 @@ def random_lab_value(test_name: str) -> float:
     return float(random.randint(9, 18))
 
 
+def rectify_synthetic_gender_names(seed: int = 42) -> dict[str, int]:
+    """Fix gender/name mismatches for synthetic patients (phone prefix 9000)."""
+
+    random.seed(seed)
+    conn = get_connection()
+    counters = {"rectified_male": 0, "rectified_female": 0, "rectified_total": 0}
+
+    female_set = {n.lower() for n in FEMALE_FIRST_NAMES}
+    male_set = {n.lower() for n in MALE_FIRST_NAMES}
+
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT patient_id, gender, first_name
+            FROM patients
+            WHERE phone LIKE '9000%'
+              AND gender IN ('male', 'female')
+            """
+        )
+        rows = cur.fetchall()
+
+        for patient_id, gender, first_name in rows:
+            first_name_l = (first_name or "").lower()
+            replacement = None
+
+            if gender == "male" and first_name_l in female_set:
+                replacement = random.choice(MALE_FIRST_NAMES)
+                counters["rectified_male"] += 1
+            elif gender == "female" and first_name_l in male_set:
+                replacement = random.choice(FEMALE_FIRST_NAMES)
+                counters["rectified_female"] += 1
+
+            if replacement:
+                cur.execute(
+                    "UPDATE patients SET first_name = %s WHERE patient_id = %s",
+                    (replacement, patient_id),
+                )
+                counters["rectified_total"] += 1
+
+    conn.commit()
+    conn.close()
+    return counters
+
+
 def enhance_dataset(target_synthetic_patients: int, seed: int = 42) -> dict[str, int]:
     random.seed(seed)
 
@@ -142,7 +189,10 @@ def enhance_dataset(target_synthetic_patients: int, seed: int = 42) -> dict[str,
 
         for i in range(to_add):
             gender = random.choice(["male", "female"])
-            first_name = random.choice(FIRST_NAMES)
+            if gender == "male":
+                first_name = random.choice(MALE_FIRST_NAMES)
+            else:
+                first_name = random.choice(FEMALE_FIRST_NAMES)
             last_name = random.choice(LAST_NAMES)
             dob = random_dob()
             city = random.choice(CITIES)
@@ -209,6 +259,7 @@ def enhance_dataset(target_synthetic_patients: int, seed: int = 42) -> dict[str,
     conn.commit()
     conn.close()
 
+    counters.update(rectify_synthetic_gender_names(seed=seed))
     counters["synthetic_target"] = target_synthetic_patients
     counters["added_patients"] = to_add
     return counters
@@ -218,9 +269,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Expand C13 dataset with synthetic records")
     parser.add_argument("--target", type=int, default=400, help="Target synthetic patient count (phone prefix 9000)")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument(
+        "--rectify-names-only",
+        action="store_true",
+        help="Only rectify synthetic patient names against gender; do not add new records.",
+    )
     args = parser.parse_args()
 
-    stats = enhance_dataset(target_synthetic_patients=args.target, seed=args.seed)
+    if args.rectify_names_only:
+        stats = rectify_synthetic_gender_names(seed=args.seed)
+    else:
+        stats = enhance_dataset(target_synthetic_patients=args.target, seed=args.seed)
     print("Dataset enhancement complete:")
     for key, value in stats.items():
         print(f"  {key}: {value}")
