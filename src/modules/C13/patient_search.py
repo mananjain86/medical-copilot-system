@@ -73,9 +73,34 @@ def _load_mock_patients() -> list[dict]:
 
 
 MOCK_PATIENTS = _load_mock_patients()
+_MOCK_HISTORY_PATH = Path(__file__).with_name("mock_history.json")
+_MOCK_COHORTS_PATH = Path(__file__).with_name("mock_cohorts.json")
+
+
+def _read_json_list(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return payload if isinstance(payload, list) else []
+
+
+def _save_json_list(path: Path, payload: list[dict]) -> None:
+    try:
+        path.write_text(json.dumps(payload, ensure_ascii=True, indent=2), encoding="utf-8")
+    except Exception:
+        # Non-fatal for UI flow; state remains available in session memory.
+        pass
 
 
 def _ensure_mock_state() -> None:
+    if not st.session_state.get("ms_mock_store_loaded"):
+        st.session_state.ms_mock_history = _read_json_list(_MOCK_HISTORY_PATH)
+        st.session_state.ms_mock_cohorts = _read_json_list(_MOCK_COHORTS_PATH)
+        st.session_state.ms_mock_store_loaded = True
+
     st.session_state.setdefault("ms_mock_history", [])
     st.session_state.setdefault("ms_mock_cohorts", [])
 
@@ -158,6 +183,7 @@ def _record_mock_search(query: str, results: list[dict]) -> None:
         },
     )
     st.session_state.ms_mock_history = st.session_state.ms_mock_history[:50]
+    _save_json_list(_MOCK_HISTORY_PATH, st.session_state.ms_mock_history)
 
     key = " ".join(query.lower().split())
     cohorts = st.session_state.ms_mock_cohorts
@@ -166,6 +192,7 @@ def _record_mock_search(query: str, results: list[dict]) -> None:
         existing["member_count"] = len(results)
         existing["members"] = results
         existing["created_at"] = ts
+        _save_json_list(_MOCK_COHORTS_PATH, st.session_state.ms_mock_cohorts)
         return
 
     next_id = max([int(c.get("cohort_id", 0)) for c in cohorts] + [0]) + 1
@@ -180,6 +207,7 @@ def _record_mock_search(query: str, results: list[dict]) -> None:
             "_key": key,
         },
     )
+    _save_json_list(_MOCK_COHORTS_PATH, st.session_state.ms_mock_cohorts)
 
 
 

@@ -1,0 +1,137 @@
+[
+  {
+    "cohort_id": 1,
+    "cohort_name": "female patients over 60 with diabetes",
+    "member_count": 8,
+    "created_at": "2026-04-04 18:18",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "female patients over 60 with diabetes"
+  }
+]
