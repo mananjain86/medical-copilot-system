@@ -699,13 +699,15 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 		notes.append(f"age = {query.age_is}")
 
 	if query.symptom:
-		conditions.append("(sy.symptom_name = %(symptom)s OR syn.synonym = %(symptom)s)")
+		conditions.append("(p.symptoms ILIKE %(symptom_lk)s OR sy.symptom_name = %(symptom)s OR syn.synonym = %(symptom)s)")
 		params["symptom"] = query.symptom
+		params["symptom_lk"] = f"%{query.symptom}%"
 		notes.append(f"symptom = '{query.symptom}' (+ synonyms)")
 
 	if query.diagnosis:
-		conditions.append("v.diagnosis ILIKE %(diagnosis)s")
+		conditions.append("(p.diagnoses ILIKE %(diagnosis_lk)s OR v.diagnosis ILIKE %(diagnosis)s)")
 		params["diagnosis"] = query.diagnosis
+		params["diagnosis_lk"] = f"%{query.diagnosis}%"
 		notes.append(f"diagnosis ~= '{query.diagnosis}'")
 
 	if query.city:
@@ -746,6 +748,8 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 				f"p.first_name ILIKE %({key})s OR "
 				f"p.last_name ILIKE %({key})s OR "
 				f"p.city ILIKE %({key})s OR "
+				f"p.diagnoses ILIKE %({key})s OR "
+				f"p.symptoms ILIKE %({key})s OR "
 				f"v.diagnosis ILIKE %({key})s OR "
 				f"sy.symptom_name ILIKE %({key})s OR "
 				f"syn.synonym ILIKE %({key})s OR "
@@ -801,8 +805,7 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 		f"FROM patients p\n"
 		f"{joins}"
 		f"{where_clause}\n"
-		f"ORDER BY p.patient_id\n"
-		f"LIMIT 100;"
+		f"ORDER BY p.patient_id;"
 	)
 
 	explanation = (

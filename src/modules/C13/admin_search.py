@@ -211,11 +211,40 @@ def _search_section() -> None:
     run = searched or st.session_state.pop("_ma_run", False)
 
     if run and (query or "").strip():
-        patients_raw = _search_mock_patients(query)
-        _record_mock_search(query, patients_raw)
-
-        if patients_raw:
-            import pandas as pd
+        user_id = 5 # Administrator ID
+        conn = None
+        try:
+            from src.modules.C13.backend import nl_search_pipeline, get_connection
+            conn = get_connection()
+            response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
+            patients_raw = response.get("results", [])
+            
+            # Map backend results to UI format
+            rows = []
+            detail_items = []
+            for r in patients_raw:
+                row = {
+                    "ID": r.patient_id,
+                    "Name": f"{r.first_name} {r.last_name}",
+                    "Age": r.age,
+                    "Gender": r.gender,
+                    "Department": "—",
+                    "Status": r.status,
+                }
+                rows.append(row)
+                detail_items.append({
+                    "id": r.patient_id,
+                    "name": row["Name"],
+                    "age": r.age,
+                    "gender": r.gender,
+                    "city": "—",
+                    "diagnoses": [],
+                    "symptoms": [],
+                })
+        except Exception:
+            patients_raw = _search_mock_patients(query)
+            _record_mock_search(query, patients_raw)
+            # ... process mock as before if needed, but the original code had its own logic
             rows = []
             detail_items = []
             for p in patients_raw:
@@ -228,17 +257,21 @@ def _search_section() -> None:
                     "Status": p.get("status", "Active"),
                 }
                 rows.append(row)
-                detail_items.append(
-                    {
-                        "id": row["ID"],
-                        "name": row["Name"],
-                        "age": row["Age"],
-                        "gender": row["Gender"],
-                        "city": "—",
-                        "diagnoses": [],
-                        "symptoms": [],
-                    }
-                )
+                detail_items.append({
+                    "id": row["ID"],
+                    "name": row["Name"],
+                    "age": row["Age"],
+                    "gender": row["Gender"],
+                    "city": "—",
+                    "diagnoses": [],
+                    "symptoms": [],
+                })
+        finally:
+            if conn:
+                conn.close()
+
+        if rows:
+            import pandas as pd
             st.success(f"Found **{len(rows)}** patient(s)")
             st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
 

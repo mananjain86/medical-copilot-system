@@ -941,10 +941,34 @@ def _search_section() -> None:
         searched = st.button("🔍 Search", width="stretch", key="ms_search_btn")
 
     run = searched or st.session_state.pop("_ms_run", False)
+    role = st.session_state.get("ms_user_role", "Clinician")
+    user_id = 5 if role == "Administrator" else 1
 
     if run and (query or "").strip():
-        enriched = _search_mock_patients(query)
-        _record_mock_search(query, enriched)
+        conn = None
+        try:
+            conn = get_connection()
+            # Perform real NL search via database pipeline
+            response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
+            
+            # Map backend results (dataclasses) to the UI's expected dictionary format
+            enriched = []
+            for r in response.get("results", []):
+                enriched.append({
+                    "id": r.patient_id,
+                    "name": f"{r.first_name} {r.last_name}",
+                    "age": r.age,
+                    "gender": r.gender,
+                    "status": r.status,
+                    "department": "—", # To be resolved on card expansion
+                })
+        except Exception as e:
+            # Fallback to mock search if DB is unavailable
+            enriched = _search_mock_patients(query)
+            _record_mock_search(query, enriched)
+        finally:
+            if conn:
+                conn.close()
 
         if enriched:
             ages   = [p["age"] for p in enriched if isinstance(p.get("age"), (int, float))]
@@ -1048,8 +1072,19 @@ def _history_section() -> None:
         unsafe_allow_html=True,
     )
 
-    _ensure_mock_state()
-    history = st.session_state.ms_mock_history
+    role = st.session_state.get("ms_user_role", "Clinician")
+    user_id = 5 if role == "Administrator" else 1
+
+    conn = None
+    try:
+        conn = get_connection()
+        history = get_search_history(conn, user_id=user_id)
+    except Exception:
+        _ensure_mock_state()
+        history = st.session_state.ms_mock_history
+    finally:
+        if conn:
+            conn.close()
 
     # Filter input
     filt = st.text_input(
@@ -1122,8 +1157,19 @@ def _cohorts_section() -> None:
         unsafe_allow_html=True,
     )
 
-    _ensure_mock_state()
-    cohorts = st.session_state.ms_mock_cohorts
+    role = st.session_state.get("ms_user_role", "Clinician")
+    user_id = 5 if role == "Administrator" else 1
+
+    conn = None
+    try:
+        conn = get_connection()
+        cohorts = get_cohorts(conn) # Fix: removed user_id
+    except Exception:
+        _ensure_mock_state()
+        cohorts = st.session_state.ms_mock_cohorts
+    finally:
+        if conn:
+            conn.close()
 
     if not cohorts:
         st.info("No cohorts available.")
@@ -1211,22 +1257,27 @@ def _cohorts_section() -> None:
 
                 exp_label = f"Open Cohort #{cid} - {name}"
                 with st.expander(exp_label, expanded=False):
-                    members = c.get("members", [])
+                    conn = None
+                    try:
+                        conn = get_connection()
+                        members = get_cohort_members(conn, cohort_id=cid)
+                    except Exception:
+                        members = c.get("members", []) # Fallback to mock if available
+                    finally:
+                        if conn:
+                            conn.close()
 
                     if members:
                         member_rows = []
                         for m in members:
-                            name_parts = str(m.get("name", "")).split()
-                            first_name = name_parts[0] if name_parts else ""
-                            last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""
                             member_rows.append({
-                                "ID": m.get("id"),
-                                "First Name": first_name,
-                                "Last Name": last_name,
+                                "ID": m.get("patient_id", m.get("id")),
+                                "First Name": m.get("first_name", ""),
+                                "Last Name": m.get("last_name", ""),
                                 "Sex": m.get("gender"),
                                 "Age": m.get("age"),
                                 "City": m.get("city"),
-                                "Added": c.get("created_at"),
+                                "Added": str(m.get("added_at", c.get("created_at") or "")),
                             })
                         st.dataframe(pd.DataFrame(member_rows), width="stretch", hide_index=True)
                     else:
