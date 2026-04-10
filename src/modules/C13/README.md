@@ -61,7 +61,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=projectdb
 DB_USER=postgres
-DB_PASSWORD=your_password
+DB_PASSWORD=postgres
 ```
 
 **Option B — Hosted/Cloud PostgreSQL (e.g. Railway, Supabase):**

@@ -29,6 +29,7 @@ from __future__ import annotations
 import os
 import re
 import io
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -80,8 +81,8 @@ _DATABASE_URL = _DATABASE_PRIVATE_URL or _DATABASE_PUBLIC_URL
 _DB_HOST     = os.getenv("DB_HOST",     "localhost")
 _DB_PORT     = int(os.getenv("DB_PORT", "5432"))
 _DB_NAME     = os.getenv("DB_NAME",     "projectdb")
-_DB_USER     = os.getenv("DB_USER",     "gaurav")
-_DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+_DB_USER     = os.getenv("DB_USER",     "postgres")
+_DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
 _DB_SSLMODE  = os.getenv("DB_SSLMODE") or os.getenv("PGSSLMODE")
 
 
@@ -407,8 +408,11 @@ def initialize_projectdb(
 	"""
 	Create the `projectdb` database if needed and load the bundled `projectdb.sql` dump.
 
-	This keeps the course project tied directly to the real database file instead of
-	any dummy in-memory data, without requiring the `psql` CLI.
+	Local flow (no DATABASE_URL):
+	1) Create database using psql with user `postgres`
+	2) Load projectdb.sql into that database with psql
+
+	Hosted flow (DATABASE_URL): keeps psycopg2 loader path for managed DB URLs.
 	"""
 
 	target_sql = Path(sql_file) if sql_file else PROJECTDB_SQL_PATH
@@ -424,30 +428,64 @@ def initialize_projectdb(
 			conn.close()
 		return f"Loaded database from {target_sql} via DATABASE_URL"
 
-	admin_conn = psycopg2.connect(
-		host=host,
-		port=port,
-		dbname="postgres",
-		user=user,
-		password=password,
+	def _run_psql_command(args: list[str]) -> None:
+		env = os.environ.copy()
+		if password:
+			env["PGPASSWORD"] = password
+		proc = subprocess.run(
+			args,
+			capture_output=True,
+			text=True,
+			env=env,
+			check=False,
+		)
+		if proc.returncode != 0:
+			stderr = (proc.stderr or "").strip()
+			stdout = (proc.stdout or "").strip()
+			details = stderr or stdout or "Unknown psql error"
+			raise RuntimeError(f"Command failed: {' '.join(args)}\n{details}")
+
+	admin_user = "postgres"
+	db_identifier = dbname.replace('"', '""')
+	db_literal = dbname.replace("'", "''")
+	create_db_sql = (
+		f"SELECT 'CREATE DATABASE \"{db_identifier}\"' "
+		f"WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '{db_literal}')\\gexec"
 	)
-	admin_conn.autocommit = True
-	try:
-		with admin_conn.cursor() as cur:
-			cur.execute("SELECT 1 FROM pg_database WHERE datname = %s", (dbname,))
-			if cur.fetchone() is None:
-				cur.execute(f'CREATE DATABASE "{dbname}"')
-	finally:
-		admin_conn.close()
 
-	conn = get_connection(dsn=None, host=host, port=port, dbname=dbname, user=user, password=password)
-	conn.autocommit = True
-	try:
-		_load_sql_dump_via_psycopg2(conn, target_sql.read_text(encoding="utf-8"))
-	finally:
-		conn.close()
+	_run_psql_command([
+		"psql",
+		"-v",
+		"ON_ERROR_STOP=1",
+		"-h",
+		host,
+		"-p",
+		str(port),
+		"-U",
+		admin_user,
+		"-d",
+		"postgres",
+		"-c",
+		create_db_sql,
+	])
 
-	return f"Loaded database from {target_sql} into {dbname}"
+	_run_psql_command([
+		"psql",
+		"-v",
+		"ON_ERROR_STOP=1",
+		"-h",
+		host,
+		"-p",
+		str(port),
+		"-U",
+		admin_user,
+		"-d",
+		dbname,
+		"-f",
+		str(target_sql),
+	])
+
+	return f"Created/verified {dbname} and loaded {target_sql} via psql as user postgres"
 
 
 def parse_query(text: str) -> SearchQuery:
