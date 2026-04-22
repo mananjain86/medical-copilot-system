@@ -212,49 +212,38 @@ def _search_section() -> None:
 
     if run and (query or "").strip():
         user_id = 5 # Administrator ID
-        conn = None
-        sql_payload = None
-
-        # Generate SQL from the query upfront — parse_query + generate_sql
-        # don't require a DB connection, so this always works.
         try:
-            from src.modules.C13.backend import parse_query, generate_sql
-            _parsed = parse_query(query)
-            sql_payload = generate_sql(_parsed)
-        except Exception:
-            sql_payload = None
-
-        try:
-            from src.modules.C13.backend import nl_search_pipeline, get_connection
-            conn = get_connection()
-            response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
-            patients_raw = response.get("results", [])
-            # Prefer the richer SQL payload built inside the pipeline (synonym-expanded)
-            if response.get("sql"):
-                sql_payload = response.get("sql")
-            
-            # Map backend results to UI format
-            rows = []
-            detail_items = []
-            for r in patients_raw:
-                row = {
-                    "ID": r.patient_id,
-                    "Name": f"{r.first_name} {r.last_name}",
-                    "Age": r.age,
-                    "Gender": r.gender,
-                    "Department": "—",
-                    "Status": r.status,
-                }
-                rows.append(row)
-                detail_items.append({
-                    "id": r.patient_id,
-                    "name": row["Name"],
-                    "age": r.age,
-                    "gender": r.gender,
-                    "city": "—",
-                    "diagnoses": [],
-                    "symptoms": [],
-                })
+            import requests
+            API_BASE_URL = "http://127.0.0.1:8000/api/v1"
+            resp = requests.post(f"{API_BASE_URL}/search", json={"user_id": user_id, "query": query})
+            if resp.status_code == 200:
+                response = resp.json()
+                patients_raw = response.get("results", [])
+                
+                # Map backend results to UI format
+                rows = []
+                detail_items = []
+                for r in patients_raw:
+                    row = {
+                        "ID": r.get("patient_id"),
+                        "Name": f"{r.get('first_name')} {r.get('last_name')}",
+                        "Age": r.get("age"),
+                        "Gender": r.get("gender"),
+                        "Department": "—",
+                        "Status": r.get("status", "Active"),
+                    }
+                    rows.append(row)
+                    detail_items.append({
+                        "id": r.get("patient_id"),
+                        "name": row["Name"],
+                        "age": r.get("age"),
+                        "gender": r.get("gender"),
+                        "city": "—",
+                        "diagnoses": [],
+                        "symptoms": [],
+                    })
+            else:
+                raise RuntimeError("API Search Failed")
         except Exception:
             patients_raw = _search_mock_patients(query)
             _record_mock_search(query, patients_raw)
@@ -284,12 +273,12 @@ def _search_section() -> None:
             if conn:
                 conn.close()
 
-        if sql_payload and hasattr(sql_payload, "sql"):
+        if isinstance(sql_payload, dict) and "sql" in sql_payload:
             with st.expander("🔍 Generated SQL Query", expanded=False):
-                if hasattr(sql_payload, "explanation") and sql_payload.explanation:
+                if sql_payload.get("explanation"):
                     st.info(sql_payload.explanation)
                 from src.modules.C13.patient_search import _render_sql
-                rendered = _render_sql(sql_payload.sql, getattr(sql_payload, "params", {}))
+                rendered = _render_sql(sql_payload["sql"], sql_payload.get("params", {}))
                 st.code(rendered, language="sql")
 
         if rows:

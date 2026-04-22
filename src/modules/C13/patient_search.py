@@ -31,42 +31,9 @@ def _render_sql(sql: str, params: dict) -> str:
 
 _BACKEND_IMPORT_ERROR: Exception | None = None
 
-try:
-    from src.modules.C13.backend import (
-        SearchResult,
-        get_connection,
-        nl_search_pipeline,
-        get_search_history,
-        get_cohorts,
-        get_cohort_members,
-    )
-except Exception as e:
-    _BACKEND_IMPORT_ERROR = e
+import requests
 
-    @dataclass
-    class SearchResult:
-        patient_id: str
-        first_name: str
-        last_name: str
-        gender: str
-        age: int
-        status: str
-
-    # Keep UI usable in frontend/demo mode even if DB deps (e.g. psycopg2) are missing.
-    def get_connection():
-        raise RuntimeError("Database backend unavailable")
-
-    def nl_search_pipeline(*args, **kwargs):
-        raise RuntimeError("Database backend unavailable")
-
-    def get_search_history(*args, **kwargs):
-        raise RuntimeError("Database backend unavailable")
-
-    def get_cohorts(*args, **kwargs):
-        raise RuntimeError("Database backend unavailable")
-
-    def get_cohort_members(*args, **kwargs):
-        raise RuntimeError("Database backend unavailable")
+API_BASE_URL = "http://127.0.0.1:8000/api/v1"
 
 
 # ── suggestion chips ──────────────────────────────────────────────────────────
@@ -567,106 +534,14 @@ def _inject_css() -> None:
 
 
 def _load_patient_details(patient_id: int) -> dict | None:
-    """Fetch detailed patient context for the details panel."""
-
-    conn = None
+    """Fetch detailed patient context for the details panel from API."""
     try:
-        conn = get_connection()
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                SELECT
-                    p.patient_id,
-                    p.first_name,
-                    p.last_name,
-                    p.gender,
-                    DATE_PART('year', AGE(p.date_of_birth))::int AS age,
-                    p.city
-                FROM patients p
-                WHERE p.patient_id = %s
-                """,
-                (patient_id,),
-            )
-            row = cur.fetchone()
-            if not row:
-                return None
-
-            cur.execute(
-                """
-                SELECT
-                    v.visit_date,
-                    v.diagnosis,
-                    COALESCE(d.specialization, 'General Medicine') AS department,
-                    COALESCE(d.doctor_name, 'Unknown Doctor') AS doctor_name
-                FROM visits v
-                LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
-                WHERE v.patient_id = %s
-                ORDER BY v.visit_date DESC
-                LIMIT 20
-                """,
-                (patient_id,),
-            )
-            visits = [
-                {
-                    "visit_date": v[0],
-                    "diagnosis": v[1],
-                    "department": v[2],
-                    "doctor_name": v[3],
-                }
-                for v in cur.fetchall()
-            ]
-
-            cur.execute(
-                """
-                SELECT DISTINCT s.symptom_name
-                FROM visits v
-                JOIN patient_symptoms ps ON ps.visit_id = v.visit_id
-                JOIN symptoms s ON s.symptom_id = ps.symptom_id
-                WHERE v.patient_id = %s
-                ORDER BY s.symptom_name
-                LIMIT 12
-                """,
-                (patient_id,),
-            )
-            symptoms = [r[0] for r in cur.fetchall()]
-
-            cur.execute(
-                """
-                SELECT
-                    COALESCE(d.doctor_name, 'Unknown Doctor') AS doctor_name,
-                    COUNT(*)::int AS visit_count
-                FROM visits v
-                LEFT JOIN doctors d ON d.doctor_id = v.doctor_id
-                WHERE v.patient_id = %s
-                GROUP BY COALESCE(d.doctor_name, 'Unknown Doctor')
-                ORDER BY visit_count DESC, doctor_name
-                """,
-                (patient_id,),
-            )
-            doctor_visits = [
-                {"doctor_name": r[0], "visit_count": r[1]}
-                for r in cur.fetchall()
-            ]
-
-            diagnoses = sorted({(v.get("diagnosis") or "").strip() for v in visits if v.get("diagnosis")})
-
-        return {
-            "id": row[0],
-            "name": f"{row[1]} {row[2]}".strip(),
-            "gender": row[3],
-            "age": row[4],
-            "city": row[5],
-            "visits": visits,
-            "visit_count": len(visits),
-            "doctor_visits": doctor_visits,
-            "diagnoses": diagnoses,
-            "symptoms": symptoms,
-        }
+        resp = requests.get(f"{API_BASE_URL}/patients/{patient_id}/details")
+        if resp.status_code == 200:
+            return resp.json()
+        return None
     except Exception:
         return None
-    finally:
-        if conn:
-            conn.close()
 
 
 def _resolve_patient_details(item: dict) -> dict:
@@ -851,59 +726,35 @@ def _search_section() -> None:
     user_id = 5 if role == "Administrator" else 1
 
     if run and (query or "").strip():
-        conn = None
         sql_payload = None
-
-        # Generate SQL from the query upfront — parse_query + generate_sql
-        # don't require a DB connection, so this always works.
         try:
-            from src.modules.C13.backend import parse_query, generate_sql, _STOPWORDS
-            import re as _re
-            _parsed = parse_query(query)
-            # Seed expanded_terms from raw words so keyword fallback WHERE clause fires
-            # (normally expand_terms() does this with a DB; we do it manually here)
-            _raw_words = [
-                w for w in _re.findall(r"[a-zA-Z]+", query.lower())
-                if len(w) >= 3 and w not in _STOPWORDS
-            ]
-            if not _parsed.expanded_terms:
-                _parsed.expanded_terms = _raw_words
-            sql_payload = generate_sql(_parsed)
-        except Exception:
-            sql_payload = None
-
-        try:
-            conn = get_connection()
-            # Perform real NL search via database pipeline
-            response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
-            # Prefer the richer SQL payload built inside the pipeline (synonym-expanded)
-            if response.get("sql"):
+            # Perform real NL search via API
+            resp = requests.post(f"{API_BASE_URL}/search", json={"user_id": user_id, "query": query})
+            if resp.status_code == 200:
+                response = resp.json()
                 sql_payload = response.get("sql")
-            
-            # Map backend results (dataclasses) to the UI's expected dictionary format
-            enriched = []
-            for r in response.get("results", []):
-                enriched.append({
-                    "id": r.patient_id,
-                    "name": f"{r.first_name} {r.last_name}",
-                    "age": r.age,
-                    "gender": r.gender,
-                    "status": r.status,
-                    "department": "—", # To be resolved on card expansion
-                })
+                enriched = []
+                for r in response.get("results", []):
+                    enriched.append({
+                        "id": r.get("patient_id"),
+                        "name": f"{r.get('first_name')} {r.get('last_name')}",
+                        "age": r.get("age"),
+                        "gender": r.get("gender"),
+                        "status": r.get("status", "Active"),
+                        "department": "—", # To be resolved on card expansion
+                    })
+            else:
+                raise RuntimeError("API Search Failed")
         except Exception as e:
-            # Fallback to mock search if DB is unavailable
+            # Fallback to mock search if API is unavailable
             enriched = _search_mock_patients(query)
             _record_mock_search(query, enriched)
-        finally:
-            if conn:
-                conn.close()
 
-        if sql_payload and hasattr(sql_payload, "sql"):
+        if isinstance(sql_payload, dict) and "sql" in sql_payload:
             with st.expander("🔍 Generated SQL Query", expanded=False):
-                if hasattr(sql_payload, "explanation") and sql_payload.explanation:
+                if sql_payload.get("explanation"):
                     st.info(sql_payload.explanation)
-                rendered = _render_sql(sql_payload.sql, getattr(sql_payload, "params", {}))
+                rendered = _render_sql(sql_payload["sql"], sql_payload.get("params", {}))
                 st.code(rendered, language="sql")
 
         if enriched:
@@ -1011,16 +862,15 @@ def _history_section() -> None:
     role = st.session_state.get("ms_user_role", "Clinician")
     user_id = 5 if role == "Administrator" else 1
 
-    conn = None
     try:
-        conn = get_connection()
-        history = get_search_history(conn, user_id=user_id)
+        resp = requests.get(f"{API_BASE_URL}/history/{user_id}")
+        if resp.status_code == 200:
+            history = resp.json()
+        else:
+            raise RuntimeError("API Failed")
     except Exception:
         _ensure_mock_state()
         history = st.session_state.ms_mock_history
-    finally:
-        if conn:
-            conn.close()
 
     # Filter input
     filt = st.text_input(
@@ -1096,16 +946,15 @@ def _cohorts_section() -> None:
     role = st.session_state.get("ms_user_role", "Clinician")
     user_id = 5 if role == "Administrator" else 1
 
-    conn = None
     try:
-        conn = get_connection()
-        cohorts = get_cohorts(conn) # Fix: removed user_id
+        resp = requests.get(f"{API_BASE_URL}/cohorts")
+        if resp.status_code == 200:
+            cohorts = resp.json()
+        else:
+            raise RuntimeError("API Failed")
     except Exception:
         _ensure_mock_state()
         cohorts = st.session_state.ms_mock_cohorts
-    finally:
-        if conn:
-            conn.close()
 
     if not cohorts:
         st.info("No cohorts available.")
@@ -1193,15 +1042,14 @@ def _cohorts_section() -> None:
 
                 exp_label = f"Open Cohort #{cid} - {name}"
                 with st.expander(exp_label, expanded=False):
-                    conn = None
                     try:
-                        conn = get_connection()
-                        members = get_cohort_members(conn, cohort_id=cid)
+                        resp = requests.get(f"{API_BASE_URL}/cohorts/{cid}/members")
+                        if resp.status_code == 200:
+                            members = resp.json()
+                        else:
+                            raise RuntimeError("API Failed")
                     except Exception:
                         members = c.get("members", []) # Fallback to mock if available
-                    finally:
-                        if conn:
-                            conn.close()
 
                     if members:
                         member_rows = []
