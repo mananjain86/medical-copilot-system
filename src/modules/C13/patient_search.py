@@ -10,6 +10,25 @@ import json
 import re
 import streamlit as st
 
+
+def _render_sql(sql: str, params: dict) -> str:
+    """Substitute psycopg2 %(key)s placeholders with their actual values for display."""
+    if not params:
+        return sql
+    rendered = sql
+    # Sort by length descending to avoid partial substitution (e.g. kw_0 before kw_0_extra)
+    for key in sorted(params.keys(), key=len, reverse=True):
+        value = params[key]
+        if isinstance(value, str):
+            substituted = f"'{value}'"
+        elif value is None:
+            substituted = "NULL"
+        else:
+            substituted = str(value)
+        rendered = rendered.replace(f"%({key})s", substituted)
+    return rendered
+
+
 _BACKEND_IMPORT_ERROR: Exception | None = None
 
 try:
@@ -232,6 +251,13 @@ def _inject_css() -> None:
             --text-secondary: #94A3B8;
             --text-muted: #64748B;
             --shadow-soft: 0 10px 24px rgba(2, 6, 23, 0.24);
+        }
+
+        /* Force dark mode regardless of Streamlit theme / user system setting */
+        html, body, [data-testid="stAppViewContainer"] {
+            color-scheme: dark !important;
+            background-color: #0F172A !important;
+            color: #F8FAFC !important;
         }
 
         [data-testid="stHeader"], [data-testid="stToolbar"], footer {
@@ -531,126 +557,6 @@ def _inject_css() -> None:
             margin-top: 8px;
         }
 
-        /* ── light theme alignment override ── */
-        :root {
-            --primary-color: #4F46E5;
-            --primary-deep: #4338CA;
-            --accent-color: #0EA5E9;
-            --success-color: #059669;
-            --warning-color: #D97706;
-            --bg-main: #F8FAFC;
-            --bg-elevated: #FFFFFF;
-            --bg-soft: #F8FAFC;
-            --border-soft: #E2E8F0;
-            --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-muted: #64748B;
-            --shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.08);
-        }
-
-        .stApp {
-            background: radial-gradient(circle at top right, #EEF2FF 0%, #F8FAFC 60%, #FFFFFF 100%) !important;
-            color: var(--text-primary) !important;
-        }
-        .block-container {
-            background: #FFFFFF !important;
-            border: 1px solid var(--border-soft) !important;
-            box-shadow: var(--shadow-soft) !important;
-            backdrop-filter: none !important;
-        }
-        [data-testid="stSidebar"] > div:first-child {
-            background: #FFFFFF !important;
-            border-right: 1px solid var(--border-soft) !important;
-        }
-        div[data-testid="stSidebar"] div[data-testid="stButton"] button {
-            color: #334155 !important;
-        }
-        div[data-testid="stSidebar"] div[data-testid="stButton"] button:hover {
-            background: rgba(79, 70, 229, 0.08) !important;
-            border-color: rgba(79, 70, 229, 0.25) !important;
-            color: #3730A3 !important;
-        }
-        .nav-active button {
-            background: rgba(79, 70, 229, 0.12) !important;
-            border-color: rgba(79, 70, 229, 0.30) !important;
-            color: #312E81 !important;
-        }
-
-        .metric-box,
-        .pt-row,
-        .hist-row,
-        .detail-shell,
-        .admin-stat-box,
-        .tmpl-card {
-            background: #FFFFFF !important;
-            border: 1px solid var(--border-soft) !important;
-            box-shadow: var(--shadow-soft) !important;
-            backdrop-filter: none !important;
-        }
-        .ms-title,
-        .pt-name,
-        .hist-q,
-        .tmpl-name,
-        .detail-name,
-        .metric-val,
-        .pt-count,
-        .hist-num,
-        .admin-stat-val {
-            color: #0F172A !important;
-        }
-        .ms-sub,
-        .metric-lbl,
-        .pt-meta,
-        .hist-meta,
-        .tmpl-meta,
-        .detail-sub,
-        .section-cap {
-            color: #475569 !important;
-        }
-        .pt-meta span,
-        .hist-meta span,
-        .tmpl-meta b {
-            color: #334155 !important;
-        }
-
-        [data-testid="stTextInput"] input {
-            background: #FFFFFF !important;
-            border: 1px solid #CBD5E1 !important;
-            color: #0F172A !important;
-        }
-        [data-testid="stTextInput"] input::placeholder {
-            color: #94A3B8 !important;
-        }
-        [data-testid="stTextInput"] input:focus {
-            border-color: var(--primary-color) !important;
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, .15) !important;
-        }
-
-        div[data-testid="stButton"] > button {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-deep)) !important;
-            box-shadow: 0 8px 18px rgba(79, 70, 229, .20) !important;
-        }
-
-        [data-testid="stExpander"] {
-            background: #FFFFFF !important;
-            border: 1px solid var(--border-soft) !important;
-            box-shadow: var(--shadow-soft) !important;
-        }
-        [data-testid="stExpander"] details summary {
-            background: linear-gradient(180deg, #EEF2FF, #FFFFFF) !important;
-            color: #0F172A !important;
-            border-bottom: 1px solid var(--border-soft) !important;
-        }
-        .detail-pill {
-            border-color: rgba(79, 70, 229, .28) !important;
-            background: rgba(79, 70, 229, .10) !important;
-            color: #4338CA !important;
-        }
-        .detail-chip {
-            border-color: #CBD5E1 !important;
-            background: #F8FAFC !important;
-            color: #1E293B !important;
-        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -946,10 +852,33 @@ def _search_section() -> None:
 
     if run and (query or "").strip():
         conn = None
+        sql_payload = None
+
+        # Generate SQL from the query upfront — parse_query + generate_sql
+        # don't require a DB connection, so this always works.
+        try:
+            from src.modules.C13.backend import parse_query, generate_sql, _STOPWORDS
+            import re as _re
+            _parsed = parse_query(query)
+            # Seed expanded_terms from raw words so keyword fallback WHERE clause fires
+            # (normally expand_terms() does this with a DB; we do it manually here)
+            _raw_words = [
+                w for w in _re.findall(r"[a-zA-Z]+", query.lower())
+                if len(w) >= 3 and w not in _STOPWORDS
+            ]
+            if not _parsed.expanded_terms:
+                _parsed.expanded_terms = _raw_words
+            sql_payload = generate_sql(_parsed)
+        except Exception:
+            sql_payload = None
+
         try:
             conn = get_connection()
             # Perform real NL search via database pipeline
             response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
+            # Prefer the richer SQL payload built inside the pipeline (synonym-expanded)
+            if response.get("sql"):
+                sql_payload = response.get("sql")
             
             # Map backend results (dataclasses) to the UI's expected dictionary format
             enriched = []
@@ -969,6 +898,13 @@ def _search_section() -> None:
         finally:
             if conn:
                 conn.close()
+
+        if sql_payload and hasattr(sql_payload, "sql"):
+            with st.expander("🔍 Generated SQL Query", expanded=False):
+                if hasattr(sql_payload, "explanation") and sql_payload.explanation:
+                    st.info(sql_payload.explanation)
+                rendered = _render_sql(sql_payload.sql, getattr(sql_payload, "params", {}))
+                st.code(rendered, language="sql")
 
         if enriched:
             ages   = [p["age"] for p in enriched if isinstance(p.get("age"), (int, float))]

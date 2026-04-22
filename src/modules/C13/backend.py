@@ -763,37 +763,49 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 		params["status"] = query.status
 		notes.append(f"status = '{query.status}'")
 
-	# Keyword fallback for free-text clinical queries when explicit entities are sparse.
+	# Keyword fallback: fire when there are unstructured terms not already handled by
+	# explicit symptom/diagnosis filters.  This lets a query like
+	# "age above 50 cancer patients" apply BOTH the age filter AND a 'cancer' keyword
+	# filter — regardless of the detected search_type.
 	keyword_terms = [
 		term for term in (query.expanded_terms or [])
 		if len(term) >= 3 and term not in _STOPWORDS
 	]
-	if query.search_type == "clinical" and not any([
-		query.gender,
-		query.age_above,
-		query.age_below,
-		query.symptom,
-		query.diagnosis,
-		query.city,
-		query.department,
-	]) and keyword_terms:
+	has_clinical_structured = query.symptom or query.diagnosis
+	has_any_structured = any([
+		query.gender, query.age_above, query.age_below,
+		query.symptom, query.diagnosis, query.city, query.department,
+	])
+	# Apply keyword filter when:
+	#   a) pure clinical query with no structured filters (original behaviour), OR
+	#   b) any search type that has keywords but no symptom/diagnosis resolved
+	should_apply_keywords = keyword_terms and not has_clinical_structured and (
+		(query.search_type == "clinical" and not has_any_structured)
+		or (query.search_type != "laboratory")
+	)
+	if should_apply_keywords:
 		kw_clauses: list[str] = []
 		for idx, kw in enumerate(sorted(set(keyword_terms))[:10]):
 			key = f"kw_{idx}"
 			params[key] = f"%{kw}%"
-			kw_clauses.append(
-				"(" 
-				f"p.first_name ILIKE %({key})s OR "
-				f"p.last_name ILIKE %({key})s OR "
-				f"p.city ILIKE %({key})s OR "
-				f"p.diagnoses ILIKE %({key})s OR "
-				f"p.symptoms ILIKE %({key})s OR "
-				f"v.diagnosis ILIKE %({key})s OR "
-				f"sy.symptom_name ILIKE %({key})s OR "
-				f"syn.synonym ILIKE %({key})s OR "
-				f"d.specialization ILIKE %({key})s"
-				")"
-			)
+			# Build the OR columns — exclude columns already covered by a structured
+			# filter OR that would contradict it.  E.g. if d.specialization='Cardiology'
+			# is already in the WHERE clause, adding d.specialization ILIKE '%heart%' 
+			# would always be false and cause 0 results.
+			kw_cols = [
+				f"p.first_name ILIKE %({key})s",
+				f"p.last_name ILIKE %({key})s",
+				f"p.city ILIKE %({key})s",
+				f"p.diagnoses ILIKE %({key})s",
+				f"p.symptoms ILIKE %({key})s",
+				f"v.diagnosis ILIKE %({key})s",
+				f"sy.symptom_name ILIKE %({key})s",
+				f"syn.synonym ILIKE %({key})s",
+			]
+			# Only search doctor specialization if no department filter already set
+			if not query.department:
+				kw_cols.append(f"d.specialization ILIKE %({key})s")
+			kw_clauses.append("(" + " OR ".join(kw_cols) + ")")
 		if kw_clauses:
 			conditions.append("(" + " OR ".join(kw_clauses) + ")")
 			notes.append("keyword fallback")

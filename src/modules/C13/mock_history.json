@@ -1,5 +1,137 @@
 [
   {
+    "query_text": "heart patients above 50",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:51",
+    "results": 16
+  },
+  {
+    "query_text": "age above 50 heart patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:51",
+    "results": 0
+  },
+  {
+    "query_text": "heart patients above 50",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:51",
+    "results": 16
+  },
+  {
+    "query_text": "heart patients above 50",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:46",
+    "results": 16
+  },
+  {
+    "query_text": "age above 50 heart patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:45",
+    "results": 0
+  },
+  {
+    "query_text": "heart patients above 50",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:45",
+    "results": 16
+  },
+  {
+    "query_text": "heart patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:45",
+    "results": 28
+  },
+  {
+    "query_text": "age above 50 heart patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:44",
+    "results": 0
+  },
+  {
+    "query_text": "age above 50 sugar patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:44",
+    "results": 0
+  },
+  {
+    "query_text": "age above 50 cancer patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:44",
+    "results": 28
+  },
+  {
+    "query_text": "age above 50 cancer patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:40",
+    "results": 28
+  },
+  {
+    "query_text": "age above 50",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:40",
+    "results": 29
+  },
+  {
+    "query_text": "cancer",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:39",
+    "results": 51
+  },
+  {
+    "query_text": "cancer patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:37",
+    "results": 51
+  },
+  {
+    "query_text": "cancer patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:33",
+    "results": 51
+  },
+  {
+    "query_text": "cancer ",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:22",
+    "results": 51
+  },
+  {
+    "query_text": "cancer ",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:20",
+    "results": 51
+  },
+  {
+    "query_text": "diabeties",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:20",
+    "results": 0
+  },
+  {
+    "query_text": "cancer",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:18",
+    "results": 51
+  },
+  {
+    "query_text": "female patients over 60",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:16",
+    "results": 91
+  },
+  {
+    "query_text": "cancer patients",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:08",
+    "results": 51
+  },
+  {
+    "query_text": "over 60",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 00:03",
+    "results": 160
+  },
+  {
     "query_text": "below 60",
     "search_type": "Mock Search",
     "created_at": "2026-04-05 12:11",

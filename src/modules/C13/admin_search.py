@@ -213,11 +213,25 @@ def _search_section() -> None:
     if run and (query or "").strip():
         user_id = 5 # Administrator ID
         conn = None
+        sql_payload = None
+
+        # Generate SQL from the query upfront — parse_query + generate_sql
+        # don't require a DB connection, so this always works.
+        try:
+            from src.modules.C13.backend import parse_query, generate_sql
+            _parsed = parse_query(query)
+            sql_payload = generate_sql(_parsed)
+        except Exception:
+            sql_payload = None
+
         try:
             from src.modules.C13.backend import nl_search_pipeline, get_connection
             conn = get_connection()
             response = nl_search_pipeline(conn, user_id=user_id, nl_query=query)
             patients_raw = response.get("results", [])
+            # Prefer the richer SQL payload built inside the pipeline (synonym-expanded)
+            if response.get("sql"):
+                sql_payload = response.get("sql")
             
             # Map backend results to UI format
             rows = []
@@ -269,6 +283,14 @@ def _search_section() -> None:
         finally:
             if conn:
                 conn.close()
+
+        if sql_payload and hasattr(sql_payload, "sql"):
+            with st.expander("🔍 Generated SQL Query", expanded=False):
+                if hasattr(sql_payload, "explanation") and sql_payload.explanation:
+                    st.info(sql_payload.explanation)
+                from src.modules.C13.patient_search import _render_sql
+                rendered = _render_sql(sql_payload.sql, getattr(sql_payload, "params", {}))
+                st.code(rendered, language="sql")
 
         if rows:
             import pandas as pd

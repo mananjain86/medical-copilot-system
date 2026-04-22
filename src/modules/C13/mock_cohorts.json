@@ -1,5 +1,7090 @@
 [
   {
+    "cohort_id": 13,
+    "cohort_name": "heart patients above 50",
+    "member_count": 16,
+    "created_at": "2026-04-23 00:51",
+    "members": [
+      {
+        "id": "P018",
+        "name": "Betty Scott",
+        "age": 73,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Edema"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P070",
+        "name": "Margaret Miller",
+        "age": 53,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P076",
+        "name": "Michelle Miller",
+        "age": 90,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P085",
+        "name": "Barbara Lopez",
+        "age": 70,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P087",
+        "name": "Susan Jones",
+        "age": 54,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P112",
+        "name": "Mary Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P131",
+        "name": "Daniel Taylor",
+        "age": 70,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P195",
+        "name": "Kimberly Jones",
+        "age": 72,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P209",
+        "name": "Matthew Davis",
+        "age": 54,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P212",
+        "name": "Andrew Jackson",
+        "age": 55,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P242",
+        "name": "David Brown",
+        "age": 86,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P267",
+        "name": "Margaret Gonzalez",
+        "age": 54,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P319",
+        "name": "Steven Thomas",
+        "age": 72,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P327",
+        "name": "Emily Jackson",
+        "age": 76,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P340",
+        "name": "Joshua Smith",
+        "age": 74,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P364",
+        "name": "Elizabeth Gonzalez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "heart patients above 50"
+  },
+  {
+    "cohort_id": 12,
+    "cohort_name": "heart patients",
+    "member_count": 28,
+    "created_at": "2026-04-23 00:45",
+    "members": [
+      {
+        "id": "P018",
+        "name": "Betty Scott",
+        "age": 73,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Edema"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P070",
+        "name": "Margaret Miller",
+        "age": 53,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P076",
+        "name": "Michelle Miller",
+        "age": 90,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P085",
+        "name": "Barbara Lopez",
+        "age": 70,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P087",
+        "name": "Susan Jones",
+        "age": 54,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P112",
+        "name": "Mary Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P121",
+        "name": "Michelle Hernandez",
+        "age": 46,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P131",
+        "name": "Daniel Taylor",
+        "age": 70,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P158",
+        "name": "Thomas Williams",
+        "age": 26,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P184",
+        "name": "Michelle Davis",
+        "age": 35,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P188",
+        "name": "Mark Jones",
+        "age": 23,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P195",
+        "name": "Kimberly Jones",
+        "age": 72,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P209",
+        "name": "Matthew Davis",
+        "age": 54,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P212",
+        "name": "Andrew Jackson",
+        "age": 55,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P242",
+        "name": "David Brown",
+        "age": 86,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P247",
+        "name": "Richard Gonzalez",
+        "age": 37,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P252",
+        "name": "Nancy Martinez",
+        "age": 38,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P267",
+        "name": "Margaret Gonzalez",
+        "age": 54,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P270",
+        "name": "Nancy Wilson",
+        "age": 34,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P293",
+        "name": "Christopher Martinez",
+        "age": 18,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P310",
+        "name": "Donald Moore",
+        "age": 46,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P319",
+        "name": "Steven Thomas",
+        "age": 72,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P327",
+        "name": "Emily Jackson",
+        "age": 76,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P340",
+        "name": "Joshua Smith",
+        "age": 74,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P347",
+        "name": "Robert Lopez",
+        "age": 37,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P359",
+        "name": "Matthew Taylor",
+        "age": 18,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P364",
+        "name": "Elizabeth Gonzalez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P386",
+        "name": "Betty Lopez",
+        "age": 43,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "heart patients"
+  },
+  {
+    "cohort_id": 11,
+    "cohort_name": "age above 50 heart patients",
+    "member_count": 0,
+    "created_at": "2026-04-23 00:51",
+    "members": [],
+    "_key": "age above 50 heart patients"
+  },
+  {
+    "cohort_id": 10,
+    "cohort_name": "age above 50 sugar patients",
+    "member_count": 0,
+    "created_at": "2026-04-23 00:44",
+    "members": [],
+    "_key": "age above 50 sugar patients"
+  },
+  {
+    "cohort_id": 9,
+    "cohort_name": "age above 50 cancer patients",
+    "member_count": 28,
+    "created_at": "2026-04-23 00:44",
+    "members": [
+      {
+        "id": "P012",
+        "name": "Susan White",
+        "age": 54,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Breast Cancer"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P097",
+        "name": "Richard Davis",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P198",
+        "name": "Karen Anderson",
+        "age": 53,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P248",
+        "name": "John Jackson",
+        "age": 56,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P275",
+        "name": "John Miller",
+        "age": 58,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P318",
+        "name": "Ashley Davis",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P374",
+        "name": "Paul Johnson",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P389",
+        "name": "Emily Martin",
+        "age": 51,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P394",
+        "name": "Kimberly Lopez",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "age above 50 cancer patients"
+  },
+  {
+    "cohort_id": 8,
+    "cohort_name": "age above 50",
+    "member_count": 29,
+    "created_at": "2026-04-23 00:40",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P012",
+        "name": "Susan White",
+        "age": 54,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Breast Cancer"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P097",
+        "name": "Richard Davis",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P198",
+        "name": "Karen Anderson",
+        "age": 53,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P248",
+        "name": "John Jackson",
+        "age": 56,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P275",
+        "name": "John Miller",
+        "age": 58,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P318",
+        "name": "Ashley Davis",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P374",
+        "name": "Paul Johnson",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P389",
+        "name": "Emily Martin",
+        "age": 51,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P394",
+        "name": "Kimberly Lopez",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "age above 50"
+  },
+  {
+    "cohort_id": 7,
+    "cohort_name": "diabeties",
+    "member_count": 0,
+    "created_at": "2026-04-23 00:20",
+    "members": [],
+    "_key": "diabeties"
+  },
+  {
+    "cohort_id": 6,
+    "cohort_name": "cancer",
+    "member_count": 51,
+    "created_at": "2026-04-23 00:39",
+    "members": [
+      {
+        "id": "P012",
+        "name": "Susan White",
+        "age": 54,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Breast Cancer"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P023",
+        "name": "Margaret Martinez",
+        "age": 43,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P051",
+        "name": "Thomas Anderson",
+        "age": 37,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P096",
+        "name": "Joshua Smith",
+        "age": 39,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P097",
+        "name": "Richard Davis",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P110",
+        "name": "Matthew Smith",
+        "age": 30,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P141",
+        "name": "Joshua Lopez",
+        "age": 25,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P143",
+        "name": "Joshua Miller",
+        "age": 46,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Migraine"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P147",
+        "name": "Donald Jackson",
+        "age": 25,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P154",
+        "name": "Elizabeth Martin",
+        "age": 20,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P168",
+        "name": "Christopher Miller",
+        "age": 42,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P175",
+        "name": "Mark Johnson",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P177",
+        "name": "John Martinez",
+        "age": 21,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P198",
+        "name": "Karen Anderson",
+        "age": 53,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P248",
+        "name": "John Jackson",
+        "age": 56,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P250",
+        "name": "Kimberly Davis",
+        "age": 34,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P265",
+        "name": "Joseph Smith",
+        "age": 32,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P270",
+        "name": "Nancy Wilson",
+        "age": 34,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P275",
+        "name": "John Miller",
+        "age": 58,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P307",
+        "name": "Joshua Jackson",
+        "age": 44,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P310",
+        "name": "Donald Moore",
+        "age": 46,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P318",
+        "name": "Ashley Davis",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P328",
+        "name": "Donna Gonzalez",
+        "age": 46,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P341",
+        "name": "Matthew Moore",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P362",
+        "name": "William Martin",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P371",
+        "name": "James Hernandez",
+        "age": 49,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P374",
+        "name": "Paul Johnson",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P380",
+        "name": "Mary Williams",
+        "age": 23,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P389",
+        "name": "Emily Martin",
+        "age": 51,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P390",
+        "name": "John Gonzalez",
+        "age": 19,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P393",
+        "name": "Paul Brown",
+        "age": 19,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P394",
+        "name": "Kimberly Lopez",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "cancer"
+  },
+  {
+    "cohort_id": 5,
+    "cohort_name": "female patients over 60",
+    "member_count": 91,
+    "created_at": "2026-04-23 00:16",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P003",
+        "name": "Patricia Lee",
+        "age": 62,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P006",
+        "name": "Dorothy Wilson",
+        "age": 70,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis",
+          "Hypertension"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P008",
+        "name": "Barbara Taylor",
+        "age": 67,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P010",
+        "name": "Nancy Jackson",
+        "age": 71,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P014",
+        "name": "Margaret Garcia",
+        "age": 60,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P018",
+        "name": "Betty Scott",
+        "age": 73,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Edema"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P020",
+        "name": "Helen Nelson",
+        "age": 64,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P027",
+        "name": "Michelle Rodriguez",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P030",
+        "name": "Emily Wilson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P033",
+        "name": "Ashley Wilson",
+        "age": 79,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P038",
+        "name": "Patricia Martin",
+        "age": 89,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P041",
+        "name": "Ashley Gonzalez",
+        "age": 76,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P042",
+        "name": "Ashley Anderson",
+        "age": 84,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P052",
+        "name": "Betty Jones",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P053",
+        "name": "Elizabeth Brown",
+        "age": 87,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P067",
+        "name": "Susan Lopez",
+        "age": 83,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P071",
+        "name": "Donna Martin",
+        "age": 74,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P072",
+        "name": "Emily Hernandez",
+        "age": 83,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P076",
+        "name": "Michelle Miller",
+        "age": 90,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P079",
+        "name": "Linda Jones",
+        "age": 76,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P082",
+        "name": "Lisa Jackson",
+        "age": 69,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P085",
+        "name": "Barbara Lopez",
+        "age": 70,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P112",
+        "name": "Mary Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P117",
+        "name": "Michelle Smith",
+        "age": 82,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P123",
+        "name": "Patricia Wilson",
+        "age": 85,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P127",
+        "name": "Jessica Martin",
+        "age": 79,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P137",
+        "name": "Donna Anderson",
+        "age": 70,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P150",
+        "name": "Barbara Williams",
+        "age": 84,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P152",
+        "name": "Michelle Hernandez",
+        "age": 75,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P153",
+        "name": "Jessica Martinez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P155",
+        "name": "Barbara Hernandez",
+        "age": 72,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P163",
+        "name": "Ashley Jones",
+        "age": 77,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P166",
+        "name": "Margaret Martin",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P172",
+        "name": "Michelle Lopez",
+        "age": 75,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P194",
+        "name": "Margaret Williams",
+        "age": 60,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P195",
+        "name": "Kimberly Jones",
+        "age": 72,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P219",
+        "name": "Lisa Jackson",
+        "age": 71,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P221",
+        "name": "Lisa Thomas",
+        "age": 85,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P224",
+        "name": "Kimberly Brown",
+        "age": 75,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P233",
+        "name": "Elizabeth Lopez",
+        "age": 88,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P235",
+        "name": "Karen Wilson",
+        "age": 80,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD",
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P239",
+        "name": "Donna Williams",
+        "age": 71,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P249",
+        "name": "Ashley Lopez",
+        "age": 80,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P254",
+        "name": "Susan Rodriguez",
+        "age": 71,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P255",
+        "name": "Sarah Garcia",
+        "age": 76,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P259",
+        "name": "Patricia Garcia",
+        "age": 85,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P260",
+        "name": "Elizabeth Hernandez",
+        "age": 89,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P262",
+        "name": "Nancy Thomas",
+        "age": 87,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P268",
+        "name": "Susan Wilson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P273",
+        "name": "Elizabeth Moore",
+        "age": 86,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P277",
+        "name": "Patricia Miller",
+        "age": 73,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P284",
+        "name": "Kimberly Smith",
+        "age": 62,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P294",
+        "name": "Betty Gonzalez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P296",
+        "name": "Emily Martinez",
+        "age": 66,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P297",
+        "name": "Michelle Davis",
+        "age": 88,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P306",
+        "name": "Ashley Moore",
+        "age": 71,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P311",
+        "name": "Sandra Wilson",
+        "age": 82,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P312",
+        "name": "Ashley Davis",
+        "age": 65,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P322",
+        "name": "Jessica Garcia",
+        "age": 67,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P327",
+        "name": "Emily Jackson",
+        "age": 76,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P334",
+        "name": "Kimberly Gonzalez",
+        "age": 80,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P343",
+        "name": "Sandra Taylor",
+        "age": 60,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P348",
+        "name": "Betty Hernandez",
+        "age": 76,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P361",
+        "name": "Barbara Miller",
+        "age": 64,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P363",
+        "name": "Jessica Smith",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P364",
+        "name": "Elizabeth Gonzalez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P377",
+        "name": "Sandra Davis",
+        "age": 85,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P379",
+        "name": "Jessica Thomas",
+        "age": 86,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P383",
+        "name": "Sarah Jones",
+        "age": 83,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P387",
+        "name": "Betty Thomas",
+        "age": 73,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P391",
+        "name": "Ashley Miller",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P400",
+        "name": "Emily Thomas",
+        "age": 61,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "female patients over 60"
+  },
+  {
+    "cohort_id": 4,
+    "cohort_name": "cancer patients",
+    "member_count": 51,
+    "created_at": "2026-04-23 00:37",
+    "members": [
+      {
+        "id": "P012",
+        "name": "Susan White",
+        "age": 54,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Breast Cancer"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P023",
+        "name": "Margaret Martinez",
+        "age": 43,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P051",
+        "name": "Thomas Anderson",
+        "age": 37,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P096",
+        "name": "Joshua Smith",
+        "age": 39,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P097",
+        "name": "Richard Davis",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P110",
+        "name": "Matthew Smith",
+        "age": 30,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P141",
+        "name": "Joshua Lopez",
+        "age": 25,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P143",
+        "name": "Joshua Miller",
+        "age": 46,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Migraine"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P147",
+        "name": "Donald Jackson",
+        "age": 25,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P154",
+        "name": "Elizabeth Martin",
+        "age": 20,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P168",
+        "name": "Christopher Miller",
+        "age": 42,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P175",
+        "name": "Mark Johnson",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P177",
+        "name": "John Martinez",
+        "age": 21,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P198",
+        "name": "Karen Anderson",
+        "age": 53,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P248",
+        "name": "John Jackson",
+        "age": 56,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P250",
+        "name": "Kimberly Davis",
+        "age": 34,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P265",
+        "name": "Joseph Smith",
+        "age": 32,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P270",
+        "name": "Nancy Wilson",
+        "age": 34,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P275",
+        "name": "John Miller",
+        "age": 58,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P307",
+        "name": "Joshua Jackson",
+        "age": 44,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P310",
+        "name": "Donald Moore",
+        "age": 46,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P318",
+        "name": "Ashley Davis",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P328",
+        "name": "Donna Gonzalez",
+        "age": 46,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P341",
+        "name": "Matthew Moore",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P362",
+        "name": "William Martin",
+        "age": 36,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P371",
+        "name": "James Hernandez",
+        "age": 49,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P374",
+        "name": "Paul Johnson",
+        "age": 57,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P380",
+        "name": "Mary Williams",
+        "age": 23,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P389",
+        "name": "Emily Martin",
+        "age": 51,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P390",
+        "name": "John Gonzalez",
+        "age": 19,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P393",
+        "name": "Paul Brown",
+        "age": 19,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P394",
+        "name": "Kimberly Lopez",
+        "age": 52,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "cancer patients"
+  },
+  {
+    "cohort_id": 3,
+    "cohort_name": "over 60",
+    "member_count": 160,
+    "created_at": "2026-04-23 00:03",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P003",
+        "name": "Patricia Lee",
+        "age": 62,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P004",
+        "name": "Robert Williams",
+        "age": 72,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension",
+          "Angina"
+        ],
+        "symptoms": [
+          "Hypertension",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P006",
+        "name": "Dorothy Wilson",
+        "age": 70,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis",
+          "Hypertension"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P008",
+        "name": "Barbara Taylor",
+        "age": 67,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P009",
+        "name": "Thomas Moore",
+        "age": 63,
+        "gender": "Male",
+        "department": "Nephrology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "CKD"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Kidney Disease"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P010",
+        "name": "Nancy Jackson",
+        "age": 71,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P013",
+        "name": "David Thompson",
+        "age": 66,
+        "gender": "Male",
+        "department": "Urology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Benign Prostate Hyperplasia"
+        ],
+        "symptoms": [
+          "Prostate Issues"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P014",
+        "name": "Margaret Garcia",
+        "age": 60,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P015",
+        "name": "Joseph Rodriguez",
+        "age": 76,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P018",
+        "name": "Betty Scott",
+        "age": 73,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Edema"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P020",
+        "name": "Helen Nelson",
+        "age": 64,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P024",
+        "name": "Patricia Hernandez",
+        "age": 87,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P026",
+        "name": "Richard Taylor",
+        "age": 86,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P027",
+        "name": "Michelle Rodriguez",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P030",
+        "name": "Emily Wilson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P033",
+        "name": "Ashley Wilson",
+        "age": 79,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P036",
+        "name": "Joshua Wilson",
+        "age": 78,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P038",
+        "name": "Patricia Martin",
+        "age": 89,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P041",
+        "name": "Ashley Gonzalez",
+        "age": 76,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P042",
+        "name": "Ashley Anderson",
+        "age": 84,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P045",
+        "name": "Charles Taylor",
+        "age": 79,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P048",
+        "name": "Thomas Garcia",
+        "age": 90,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy",
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P052",
+        "name": "Betty Jones",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P053",
+        "name": "Elizabeth Brown",
+        "age": 87,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P055",
+        "name": "David Brown",
+        "age": 71,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P061",
+        "name": "Anthony Jones",
+        "age": 80,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P064",
+        "name": "Mary Anderson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P067",
+        "name": "Susan Lopez",
+        "age": 83,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P069",
+        "name": "Lisa Martin",
+        "age": 78,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P071",
+        "name": "Donna Martin",
+        "age": 74,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P072",
+        "name": "Emily Hernandez",
+        "age": 83,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P073",
+        "name": "Richard Taylor",
+        "age": 86,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P074",
+        "name": "Emily Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P076",
+        "name": "Michelle Miller",
+        "age": 90,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P079",
+        "name": "Linda Jones",
+        "age": 76,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P082",
+        "name": "Lisa Jackson",
+        "age": 69,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P085",
+        "name": "Barbara Lopez",
+        "age": 70,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P089",
+        "name": "Joshua Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P099",
+        "name": "Daniel Martin",
+        "age": 62,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P106",
+        "name": "Anthony Rodriguez",
+        "age": 78,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P111",
+        "name": "James Jackson",
+        "age": 89,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P112",
+        "name": "Mary Lopez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P116",
+        "name": "Mary Martinez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P117",
+        "name": "Michelle Smith",
+        "age": 82,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P122",
+        "name": "Jessica Williams",
+        "age": 69,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P123",
+        "name": "Patricia Wilson",
+        "age": 85,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P126",
+        "name": "James Brown",
+        "age": 86,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P127",
+        "name": "Jessica Martin",
+        "age": 79,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P130",
+        "name": "Steven Thomas",
+        "age": 83,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P131",
+        "name": "Daniel Taylor",
+        "age": 70,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P134",
+        "name": "James Jones",
+        "age": 68,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P137",
+        "name": "Donna Anderson",
+        "age": 70,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P144",
+        "name": "Mark Thomas",
+        "age": 90,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P150",
+        "name": "Barbara Williams",
+        "age": 84,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P152",
+        "name": "Michelle Hernandez",
+        "age": 75,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P153",
+        "name": "Jessica Martinez",
+        "age": 69,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P155",
+        "name": "Barbara Hernandez",
+        "age": 72,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P156",
+        "name": "David Martinez",
+        "age": 78,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P157",
+        "name": "Thomas Brown",
+        "age": 90,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P160",
+        "name": "William Jackson",
+        "age": 79,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P163",
+        "name": "Ashley Jones",
+        "age": 77,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P165",
+        "name": "Matthew Johnson",
+        "age": 75,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P166",
+        "name": "Margaret Martin",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P167",
+        "name": "Mark Hernandez",
+        "age": 88,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P169",
+        "name": "Richard Smith",
+        "age": 64,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P171",
+        "name": "Joseph Gonzalez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P172",
+        "name": "Michelle Lopez",
+        "age": 75,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P173",
+        "name": "Jessica Williams",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P178",
+        "name": "Richard Martinez",
+        "age": 69,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P180",
+        "name": "Donald Hernandez",
+        "age": 69,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P182",
+        "name": "Patricia Moore",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P194",
+        "name": "Margaret Williams",
+        "age": 60,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P195",
+        "name": "Kimberly Jones",
+        "age": 72,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P196",
+        "name": "Steven Hernandez",
+        "age": 64,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P199",
+        "name": "Paul Martin",
+        "age": 78,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Hypothyroidism"
+        ],
+        "symptoms": [
+          "Thyroid",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P204",
+        "name": "Thomas Gonzalez",
+        "age": 63,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P210",
+        "name": "Anthony Anderson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P216",
+        "name": "John Rodriguez",
+        "age": 65,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P217",
+        "name": "Nancy Moore",
+        "age": 77,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P219",
+        "name": "Lisa Jackson",
+        "age": 71,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P220",
+        "name": "Charles Taylor",
+        "age": 73,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P221",
+        "name": "Lisa Thomas",
+        "age": 85,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P223",
+        "name": "David Lopez",
+        "age": 64,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P224",
+        "name": "Kimberly Brown",
+        "age": 75,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P226",
+        "name": "David Davis",
+        "age": 68,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P231",
+        "name": "Thomas Anderson",
+        "age": 84,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P233",
+        "name": "Elizabeth Lopez",
+        "age": 88,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P235",
+        "name": "Karen Wilson",
+        "age": 80,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD",
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P237",
+        "name": "Thomas Davis",
+        "age": 84,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P239",
+        "name": "Donna Williams",
+        "age": 71,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P240",
+        "name": "David Johnson",
+        "age": 76,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P242",
+        "name": "David Brown",
+        "age": 86,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P249",
+        "name": "Ashley Lopez",
+        "age": 80,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P254",
+        "name": "Susan Rodriguez",
+        "age": 71,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P255",
+        "name": "Sarah Garcia",
+        "age": 76,
+        "gender": "Female",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Diabetic Peripheral Neuropathy"
+        ],
+        "symptoms": [
+          "Diabetic Neuropathy",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P259",
+        "name": "Patricia Garcia",
+        "age": 85,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis",
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P260",
+        "name": "Elizabeth Hernandez",
+        "age": 89,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P262",
+        "name": "Nancy Thomas",
+        "age": 87,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P264",
+        "name": "Robert Gonzalez",
+        "age": 81,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P268",
+        "name": "Susan Wilson",
+        "age": 72,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P269",
+        "name": "David Gonzalez",
+        "age": 71,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P271",
+        "name": "David Thomas",
+        "age": 66,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P273",
+        "name": "Elizabeth Moore",
+        "age": 86,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P276",
+        "name": "Matthew Wilson",
+        "age": 66,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P277",
+        "name": "Patricia Miller",
+        "age": 73,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P283",
+        "name": "David Davis",
+        "age": 66,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P284",
+        "name": "Kimberly Smith",
+        "age": 62,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P294",
+        "name": "Betty Gonzalez",
+        "age": 77,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Thyroid"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P296",
+        "name": "Emily Martinez",
+        "age": 66,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P297",
+        "name": "Michelle Davis",
+        "age": 88,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P300",
+        "name": "Joshua Lopez",
+        "age": 70,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Essential Hypertension"
+        ],
+        "symptoms": [
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P304",
+        "name": "Robert Garcia",
+        "age": 66,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P305",
+        "name": "Michael Martinez",
+        "age": 87,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Active",
+        "diagnoses": [
+          "Alzheimer's Disease"
+        ],
+        "symptoms": [
+          "Alzheimers"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P306",
+        "name": "Ashley Moore",
+        "age": 71,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P308",
+        "name": "Steven Jackson",
+        "age": 81,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P309",
+        "name": "Christopher Lopez",
+        "age": 90,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P311",
+        "name": "Sandra Wilson",
+        "age": 82,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Osteoporosis"
+        ],
+        "symptoms": [
+          "Osteoporosis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P312",
+        "name": "Ashley Davis",
+        "age": 65,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P315",
+        "name": "James Moore",
+        "age": 74,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P319",
+        "name": "Steven Thomas",
+        "age": 72,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P320",
+        "name": "William Thomas",
+        "age": 69,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P321",
+        "name": "Mary Martinez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P322",
+        "name": "Jessica Garcia",
+        "age": 67,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Arthritis"
+        ],
+        "symptoms": [
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P323",
+        "name": "James Brown",
+        "age": 72,
+        "gender": "Male",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P324",
+        "name": "John Jones",
+        "age": 82,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P326",
+        "name": "Christopher Gonzalez",
+        "age": 60,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P327",
+        "name": "Emily Jackson",
+        "age": 76,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P331",
+        "name": "Paul Jackson",
+        "age": 69,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P332",
+        "name": "John Rodriguez",
+        "age": 69,
+        "gender": "Male",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P334",
+        "name": "Kimberly Gonzalez",
+        "age": 80,
+        "gender": "Female",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain",
+          "Diabetic Neuropathy"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P338",
+        "name": "Andrew Brown",
+        "age": 90,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Migraine"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P339",
+        "name": "Andrew Lopez",
+        "age": 86,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Active",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain",
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P340",
+        "name": "Joshua Smith",
+        "age": 74,
+        "gender": "Male",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P343",
+        "name": "Sandra Taylor",
+        "age": 60,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Discharged",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P346",
+        "name": "Paul Martinez",
+        "age": 76,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P348",
+        "name": "Betty Hernandez",
+        "age": 76,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P350",
+        "name": "Michael Davis",
+        "age": 74,
+        "gender": "Male",
+        "department": "Neurology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Chronic Migraine"
+        ],
+        "symptoms": [
+          "Migraine"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P353",
+        "name": "Joshua Anderson",
+        "age": 88,
+        "gender": "Male",
+        "department": "Orthopedics",
+        "status": "Discharged",
+        "diagnoses": [
+          "Lumbar Disc Herniation"
+        ],
+        "symptoms": [
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P354",
+        "name": "Thomas Miller",
+        "age": 64,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P357",
+        "name": "Thomas Gonzalez",
+        "age": 62,
+        "gender": "Male",
+        "department": "Pulmonology",
+        "status": "Discharged",
+        "diagnoses": [
+          "COPD"
+        ],
+        "symptoms": [
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P360",
+        "name": "Jennifer Martinez",
+        "age": 65,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P361",
+        "name": "Barbara Miller",
+        "age": 64,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchitis"
+        ],
+        "symptoms": [
+          "Cough"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P363",
+        "name": "Jessica Smith",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus",
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P364",
+        "name": "Elizabeth Gonzalez",
+        "age": 62,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Congestive Heart Failure"
+        ],
+        "symptoms": [
+          "Heart Failure"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P369",
+        "name": "James Martinez",
+        "age": 67,
+        "gender": "Male",
+        "department": "Oncology",
+        "status": "Active",
+        "diagnoses": [
+          "Lung Cancer Stage 1"
+        ],
+        "symptoms": [
+          "Weight Loss"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P377",
+        "name": "Sandra Davis",
+        "age": 85,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P378",
+        "name": "Paul Gonzalez",
+        "age": 88,
+        "gender": "Male",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P379",
+        "name": "Jessica Thomas",
+        "age": 86,
+        "gender": "Female",
+        "department": "Cardiology",
+        "status": "Active",
+        "diagnoses": [
+          "Angina"
+        ],
+        "symptoms": [
+          "Chest Pain",
+          "Back Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P383",
+        "name": "Sarah Jones",
+        "age": 83,
+        "gender": "Female",
+        "department": "Pulmonology",
+        "status": "Active",
+        "diagnoses": [
+          "Bronchial Asthma"
+        ],
+        "symptoms": [
+          "Asthma"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P387",
+        "name": "Betty Thomas",
+        "age": 73,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Active",
+        "diagnoses": [
+          "Systemic Lupus Erythematosus"
+        ],
+        "symptoms": [
+          "Lupus"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P391",
+        "name": "Ashley Miller",
+        "age": 86,
+        "gender": "Female",
+        "department": "Rheumatology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Rheumatoid Arthritis"
+        ],
+        "symptoms": [
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P400",
+        "name": "Emily Thomas",
+        "age": 61,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea",
+          "Abdominal Pain"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "over 60"
+  },
+  {
     "cohort_id": 2,
     "cohort_name": "below 60",
     "member_count": 244,
