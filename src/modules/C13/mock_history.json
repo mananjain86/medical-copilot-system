@@ -1,5 +1,35 @@
 [
   {
+    "query_text": "female patients with diabetes",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 02:05",
+    "results": 18
+  },
+  {
+    "query_text": "female patients with diabetes",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 01:58",
+    "results": 18
+  },
+  {
+    "query_text": "female patients with headache",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 01:58",
+    "results": 0
+  },
+  {
+    "query_text": "female patients with diabetes above 60",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 01:57",
+    "results": 8
+  },
+  {
+    "query_text": "female patients with diabetes above 60",
+    "search_type": "Mock Search",
+    "created_at": "2026-04-23 01:55",
+    "results": 8
+  },
+  {
     "query_text": "heart patients above 50",
     "search_type": "Mock Search",
     "created_at": "2026-04-23 00:51",

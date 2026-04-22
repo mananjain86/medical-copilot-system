@@ -59,35 +59,14 @@ from fastapi.encoders import jsonable_encoder
 
 @app.post("/api/v1/search")
 def search_patients(req: SearchRequest, db=Depends(get_db)):
-    if db is not None:
-        try:
-            result = nl_search_pipeline(db, req.user_id, req.query)
-            return jsonable_encoder(result)
-        except Exception as e:
-            # Fallback to mock if pipeline fails
-            pass
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection failed (None yielded from get_db)")
     
-    # Mock Fallback (similar to patient_search.py)
     try:
-        from src.modules.C13.patient_search import _search_mock_patients
-        mock_results = _search_mock_patients(req.query)
-        # Wrap in expected response format
-        return {
-            "results": [
-                {
-                    "patient_id": r["id"],
-                    "first_name": r["name"].split()[0] if " " in r["name"] else r["name"],
-                    "last_name": r["name"].split()[1] if " " in r["name"] else "",
-                    "age": r["age"],
-                    "gender": r["gender"],
-                    "status": r["status"]
-                } for r in mock_results
-            ],
-            "parsed": {"raw_text": req.query, "search_type": "mock"},
-            "sql": {"sql": "-- mock --", "params": {}, "explanation": "DB unavailable, using mock data"}
-        }
+        result = nl_search_pipeline(db, req.user_id, req.query)
+        return jsonable_encoder(result)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database and Mock fallback both failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Search pipeline failed: {str(e)}")
 
 @app.get("/api/v1/history/{user_id}")
 def get_history(user_id: int, db=Depends(get_db)):

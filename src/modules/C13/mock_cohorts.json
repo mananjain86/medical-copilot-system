@@ -1,5 +1,439 @@
 [
   {
+    "cohort_id": 16,
+    "cohort_name": "female patients with diabetes",
+    "member_count": 18,
+    "created_at": "2026-04-23 02:05",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P037",
+        "name": "Karen Smith",
+        "age": 31,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Arthritis"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P063",
+        "name": "Jessica Jackson",
+        "age": 39,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "GERD"
+        ],
+        "symptoms": [
+          "Nausea",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P086",
+        "name": "Michelle Williams",
+        "age": 39,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P102",
+        "name": "Emily Lopez",
+        "age": 46,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P108",
+        "name": "Patricia Wilson",
+        "age": 55,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P109",
+        "name": "Emily Davis",
+        "age": 54,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Chest Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P192",
+        "name": "Patricia Rodriguez",
+        "age": 21,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P228",
+        "name": "Ashley Hernandez",
+        "age": 22,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "COPD"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P303",
+        "name": "Ashley Williams",
+        "age": 55,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P399",
+        "name": "Jennifer Lopez",
+        "age": 32,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "female patients with diabetes"
+  },
+  {
+    "cohort_id": 15,
+    "cohort_name": "female patients with headache",
+    "member_count": 0,
+    "created_at": "2026-04-23 01:58",
+    "members": [],
+    "_key": "female patients with headache"
+  },
+  {
+    "cohort_id": 14,
+    "cohort_name": "female patients with diabetes above 60",
+    "member_count": 8,
+    "created_at": "2026-04-23 01:57",
+    "members": [
+      {
+        "id": "P001",
+        "name": "Mary Johnson",
+        "age": 65,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes",
+          "Stage 1 Hypertension"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Hypertension"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P002",
+        "name": "Linda Martinez",
+        "age": 68,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P174",
+        "name": "Karen Williams",
+        "age": 79,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P214",
+        "name": "Margaret Gonzalez",
+        "age": 63,
+        "gender": "Female",
+        "department": "Gastroenterology",
+        "status": "Active",
+        "diagnoses": [
+          "Gastritis"
+        ],
+        "symptoms": [
+          "Abdominal Pain",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P258",
+        "name": "Emily Johnson",
+        "age": 61,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes",
+          "Joint Pain"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P263",
+        "name": "Kimberly Anderson",
+        "age": 77,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Active",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P329",
+        "name": "Jennifer Johnson",
+        "age": 81,
+        "gender": "Female",
+        "department": "Oncology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Breast Cancer Stage 2"
+        ],
+        "symptoms": [
+          "Fatigue",
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      },
+      {
+        "id": "P372",
+        "name": "Donna Jackson",
+        "age": 74,
+        "gender": "Female",
+        "department": "Endocrinology",
+        "status": "Discharged",
+        "diagnoses": [
+          "Type 2 Diabetes"
+        ],
+        "symptoms": [
+          "Diabetes"
+        ],
+        "city": "\u2014"
+      }
+    ],
+    "_key": "female patients with diabetes above 60"
+  },
+  {
     "cohort_id": 13,
     "cohort_name": "heart patients above 50",
     "member_count": 16,
