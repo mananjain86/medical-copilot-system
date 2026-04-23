@@ -4,6 +4,7 @@ from pathlib import Path
 # Add project root to path so src modules can be imported
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
+import os
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -24,10 +25,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Enable CORS
+# Enable CORS – origins are configurable via the CORS_ORIGINS environment variable.
+# Defaults to localhost:8501 (Streamlit default port).
+# Example: CORS_ORIGINS="https://app.example.com,https://staging.example.com"
+_cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:8501")
+_cors_origins = [o.strip() for o in _cors_origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

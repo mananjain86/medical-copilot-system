@@ -20,6 +20,12 @@ DB_USER=gaurav
 DB_PASSWORD=gaurav123
 ```
 
+Optionally restrict the API CORS origins (defaults to `http://localhost:8501`):
+
+```env
+CORS_ORIGINS=http://localhost:8501,http://localhost:8502
+```
+
 3. Import C13 schema/data dump into PostgreSQL.
 
 ```bash
@@ -34,6 +40,12 @@ Full app:
 
 ```bash
 streamlit run app.py --server.port 8501
+```
+
+FastAPI backend (required for the C13 Natural Language Patient Search module):
+
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 C13 standalone:

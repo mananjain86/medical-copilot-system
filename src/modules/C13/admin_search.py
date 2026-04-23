@@ -36,7 +36,7 @@ MOCK_TEMPLATES = [
     {
         "name": "Demographic + Clinical Combo",
         "category": "DEMOGRAPHIC",
-        "sql": "SELECT * FROM PATIENT NHERL gender = :gender",
+        "sql": "SELECT * FROM PATIENT WHERE gender = :gender",
         "params": ["gender", "age", "symptom"],
         "uses": 198,
         "success": 84,
@@ -54,7 +54,7 @@ MOCK_TEMPLATES = [
     {
         "name": "Temporal Search",
         "category": "TEMPORAL",
-        "sql": "SELECT * FROM PATIENT WHERE admission_date f",
+        "sql": "SELECT * FROM PATIENT WHERE admission_date BETWEEN :start_date AND :end_date",
         "params": ["start_date", "end_date"],
         "uses": 54,
         "success": 85,
