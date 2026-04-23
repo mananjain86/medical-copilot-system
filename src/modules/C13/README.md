@@ -53,9 +53,17 @@ CREATE DATABASE projectdb;
 
 ## 3. Configure Environment
 
-Create a `.env` file in the project root (or `src/modules/C13/`):
+Create a `.env` file in the project root (or `src/modules/C13/`).
 
-**Option A — Local PostgreSQL (default):**
+Recommended for hosted PostgreSQL (including Supabase):
+
+```env
+DATABASE_URL=postgresql://username:password@host:port/db_name?sslmode=require
+```
+
+Optional fallback (local PostgreSQL):
+
+**Option A — Local PostgreSQL:**
 ```env
 DB_HOST=localhost
 DB_PORT=5432
@@ -64,9 +72,9 @@ DB_USER=postgres
 DB_PASSWORD=postgres
 ```
 
-**Option B — Hosted/Cloud PostgreSQL (e.g. Railway, Supabase):**
+**Option B — Public hosted URL fallback:**
 ```env
-DATABASE_URL=postgresql://username:password@host:port/db_name?sslmode=require
+DATABASE_PUBLIC_URL=postgresql://username:password@host:port/db_name?sslmode=require
 ```
 
 > Connection precedence: `DATABASE_URL` → `DATABASE_PUBLIC_URL` → individual `DB_*` vars.
@@ -140,3 +148,4 @@ python src/modules/C13/enhance_dataset.py --target 500
 - Run `db_init.py` **before** `import_json_to_db.py` — schema must exist first.
 - If searches return no results, verify DB connectivity with `verify_schema.py`.
 - SSL is required for hosted PostgreSQL (`sslmode=require`).
+- API search endpoint (`POST /api/v1/search`) requires a valid DB connection and does not fall back to mock search data if DB is unavailable.
