@@ -11,12 +11,15 @@ This application can be deployed with:
 
 ✅ **Use [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) to track your progress**
 
+🔑 **Having TOML format issues?** See [STREAMLIT_SECRETS_GUIDE.md](STREAMLIT_SECRETS_GUIDE.md)
+
 ### Quick Deployment Steps
 
-1. **Verify setup**: `python verify_deployment.py`
-2. **Push to GitHub**: `git push origin main`
-3. **Deploy Backend**: Create Web Service on [Render](https://render.com)
-4. **Deploy Frontend**: Create app on [Streamlit Cloud](https://streamlit.io/cloud)
+1. **Convert secrets**: `python convert_env_to_toml.py`
+2. **Verify setup**: `python verify_deployment.py`
+3. **Push to GitHub**: `git push origin main`
+4. **Deploy Backend**: Create Web Service on [Render](https://render.com)
+5. **Deploy Frontend**: Create app on [Streamlit Cloud](https://streamlit.io/cloud)
 
 ## Local Setup
 

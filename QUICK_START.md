@@ -46,9 +46,10 @@ git push origin main
 4. Fill in:
    - **Main file**: `streamlit_app.py`
 5. Click **"Advanced settings"**
-6. Add secrets (copy from `.env`):
+6. Add secrets in TOML format (paste this exactly):
    ```toml
    DATABASE_URL = "your_database_url"
+   DATABASE_PUBLIC_URL = "your_database_url"
    DB_HOST = "your_host"
    DB_PORT = "5432"
    DB_NAME = "postgres"
@@ -56,6 +57,8 @@ git push origin main
    DB_PASSWORD = "your_password"
    DB_SSLMODE = "require"
    ```
+   
+   **Replace** `your_*` values with your actual credentials from `.env`
 7. Click **"Deploy"**
 8. Wait 3 minutes
 9. Test: Visit your app URL

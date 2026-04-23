@@ -105,20 +105,26 @@ For now, the frontend connects directly to Supabase, which works fine.
    - **Branch**: `main`
    - **Main file path**: `streamlit_app.py`
 4. Click **"Advanced settings"**
-5. Add environment variables (copy from `.env`):
+5. In the **Secrets** section, paste this in TOML format:
 
+```toml
+# Streamlit uses TOML format for secrets
+DATABASE_URL = "postgresql://postgres.zvgrchtdzradiidwoeid:dbmsprojectc13@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require"
+
+DATABASE_PUBLIC_URL = "postgresql://postgres.zvgrchtdzradiidwoeid:dbmsprojectc13@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require"
+
+DB_HOST = "aws-1-ap-northeast-2.pooler.supabase.com"
+DB_PORT = "5432"
+DB_NAME = "postgres"
+DB_USER = "postgres.zvgrchtdzradiidwoeid"
+DB_PASSWORD = "dbmsprojectc13"
+DB_SSLMODE = "require"
 ```
-DATABASE_URL=postgresql://postgres.zvgrchtdzradiidwoeid:dbmsprojectc13@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require
 
-DATABASE_PUBLIC_URL=postgresql://postgres.zvgrchtdzradiidwoeid:dbmsprojectc13@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require
-
-DB_HOST=aws-1-ap-northeast-2.pooler.supabase.com
-DB_PORT=5432
-DB_NAME=postgres
-DB_USER=postgres.zvgrchtdzradiidwoeid
-DB_PASSWORD=dbmsprojectc13
-DB_SSLMODE=require
-```
+**Important**: 
+- Use `key = "value"` format (TOML), not `key=value`
+- All values must be in quotes
+- No spaces around the `=` sign is fine, but quotes are required
 
 6. Click **"Deploy!"**
 
@@ -133,9 +139,9 @@ DB_SSLMODE=require
 
 If you want the Streamlit frontend to use the Render backend API:
 
-1. Add `BACKEND_API_URL` to Streamlit Cloud secrets:
-   ```
-   BACKEND_API_URL=https://your-render-app.onrender.com
+1. Add `BACKEND_API_URL` to Streamlit Cloud secrets (in TOML format):
+   ```toml
+   BACKEND_API_URL = "https://your-render-app.onrender.com"
    ```
 
 2. Update your frontend code to use `requests` to call the API:
