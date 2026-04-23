@@ -712,11 +712,14 @@ def _search_section() -> None:
         unsafe_allow_html=True,
     )
 
+    def _trigger_search_on_enter() -> None:
+        st.session_state["_ms_run"] = True
+
     col_in, col_btn = st.columns([6, 1], gap="small")
     with col_in:
         query = st.text_input(
             "q", placeholder='e.g. "female patients over 60 with diabetes"',
-            label_visibility="collapsed", key="ms_query",
+            label_visibility="collapsed", key="ms_query", on_change=_trigger_search_on_enter,
         )
     with col_btn:
         searched = st.button("🔍 Search", width="stretch", key="ms_search_btn")
