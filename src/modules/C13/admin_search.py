@@ -217,7 +217,8 @@ def _search_section() -> None:
         user_id = 5 # Administrator ID
         try:
             import requests
-            API_BASE_URL = "http://127.0.0.1:8000/api/v1"
+            import os
+            API_BASE_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/api/v1")
             resp = requests.post(f"{API_BASE_URL}/search", json={"user_id": user_id, "query": query})
             if resp.status_code == 200:
                 response = resp.json()

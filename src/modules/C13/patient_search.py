@@ -32,8 +32,10 @@ def _render_sql(sql: str, params: dict) -> str:
 _BACKEND_IMPORT_ERROR: Exception | None = None
 
 import requests
+import os
 
-API_BASE_URL = "http://127.0.0.1:8000/api/v1"
+# Use environment variable for API URL, fallback to localhost for local dev
+API_BASE_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/api/v1")
 
 
 # ── suggestion chips ──────────────────────────────────────────────────────────
@@ -750,6 +752,7 @@ def _search_section() -> None:
                 raise RuntimeError("API Search Failed")
         except Exception as e:
             # API unavailable — try to generate SQL directly from backend (Supabase)
+            db_error = None
             try:
                 import sys as _sys, re as _re
                 _c13_dir = str(Path(__file__).resolve().parent)
@@ -757,7 +760,7 @@ def _search_section() -> None:
                     _sys.path.insert(0, _c13_dir)
                 from backend import (
                     get_connection, parse_query, expand_terms, generate_sql,
-                    resolve_symptom, resolve_diagnosis,
+                    resolve_symptom, resolve_diagnosis, run_search,
                     _normalize_query, _table_has_column,
                 )
                 _conn = get_connection()
@@ -776,12 +779,31 @@ def _search_section() -> None:
                     "params": _sql_obj.params,
                     "explanation": _sql_obj.explanation,
                 }
+                
+                # Actually run the query against the database
+                results, query_id = run_search(_conn, user_id, query, _parsed.search_type, sql_payload=_sql_obj)
+                enriched = []
+                for r in results:
+                    enriched.append({
+                        "id": r.patient_id,
+                        "name": f"{r.first_name} {r.last_name}",
+                        "age": r.age,
+                        "gender": r.gender,
+                        "status": r.status,
+                        "department": "—",
+                    })
+                
                 _conn.close()
-            except Exception:
+            except Exception as db_ex:
                 sql_payload = None
-            # Fallback to mock search for results display
-            enriched = _search_mock_patients(query)
-            _record_mock_search(query, enriched)
+                db_error = str(db_ex)
+                # Fallback to mock search for results display
+                enriched = _search_mock_patients(query)
+                _record_mock_search(query, enriched)
+            
+            # Show error if database connection failed
+            if db_error:
+                st.warning(f"⚠️ Using mock data. Database connection issue: {db_error[:200]}")
 
         if isinstance(sql_payload, dict) and "sql" in sql_payload:
             with st.expander("🔍 Generated SQL Query", expanded=True):
