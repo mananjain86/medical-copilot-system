@@ -746,14 +746,44 @@ def _search_section() -> None:
             else:
                 raise RuntimeError("API Search Failed")
         except Exception as e:
-            # Fallback to mock search if API is unavailable
+            # API unavailable — try to generate SQL directly from backend (Supabase)
+            try:
+                import sys as _sys, re as _re
+                _c13_dir = str(Path(__file__).resolve().parent)
+                if _c13_dir not in _sys.path:
+                    _sys.path.insert(0, _c13_dir)
+                from backend import (
+                    get_connection, parse_query, expand_terms, generate_sql,
+                    resolve_symptom, resolve_diagnosis,
+                    _normalize_query, _table_has_column,
+                )
+                _conn = get_connection()
+                _parsed = parse_query(query)
+                _norm = _normalize_query(query)
+                _has_status = _table_has_column(_conn, "patients", "status")
+                _parsed.expanded_terms = sorted(
+                    set(expand_terms(_conn, _norm))
+                    | set(_re.findall(r"[a-zA-Z]+", _norm))
+                )
+                _parsed.symptom = resolve_symptom(_conn, query)
+                _parsed.diagnosis = resolve_diagnosis(_conn, query)
+                _sql_obj = generate_sql(_parsed, include_patient_status=_has_status)
+                sql_payload = {
+                    "sql": _sql_obj.sql,
+                    "params": _sql_obj.params,
+                    "explanation": _sql_obj.explanation,
+                }
+                _conn.close()
+            except Exception:
+                sql_payload = None
+            # Fallback to mock search for results display
             enriched = _search_mock_patients(query)
             _record_mock_search(query, enriched)
 
         if isinstance(sql_payload, dict) and "sql" in sql_payload:
-            with st.expander("🔍 Generated SQL Query", expanded=False):
+            with st.expander("🔍 Generated SQL Query", expanded=True):
                 if sql_payload.get("explanation"):
-                    st.info(sql_payload.explanation)
+                    st.info(sql_payload["explanation"])
                 rendered = _render_sql(sql_payload["sql"], sql_payload.get("params", {}))
                 st.code(rendered, language="sql")
 
