@@ -2,24 +2,16 @@ Live Demo: 👉 [https://frontend-zxra8c5w4ip3f6k5gvjasp.streamlit.app/](https:/
 
 ## Deployment
 
-This application can be deployed with:
-- **Frontend**: Streamlit Cloud (free tier)
-- **Backend API**: Render (free tier)
-- **Database**: Supabase PostgreSQL (already configured)
+Deploy with frontend on Streamlit Cloud and backend on Render (optional).
 
-📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions**
+📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for complete instructions**
 
-✅ **Use [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) to track your progress**
-
-🔑 **Having TOML format issues?** See [STREAMLIT_SECRETS_GUIDE.md](STREAMLIT_SECRETS_GUIDE.md)
-
-### Quick Deployment Steps
+### Quick Steps
 
 1. **Convert secrets**: `python convert_env_to_toml.py`
-2. **Verify setup**: `python verify_deployment.py`
-3. **Push to GitHub**: `git push origin main`
-4. **Deploy Backend**: Create Web Service on [Render](https://render.com)
-5. **Deploy Frontend**: Create app on [Streamlit Cloud](https://streamlit.io/cloud)
+2. **Push to GitHub**: `git push origin main`
+3. **Deploy to Streamlit Cloud**: Use TOML output from step 1
+4. **Deploy to Render** (optional): For backend API
 
 ## Local Setup
 
