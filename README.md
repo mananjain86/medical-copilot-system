@@ -1,5 +1,23 @@
 Live Demo: 👉 [https://frontend-zxra8c5w4ip3f6k5gvjasp.streamlit.app/](https://frontend-zxra8c5w4ip3f6k5gvjasp.streamlit.app/)
 
+## Deployment
+
+This application can be deployed with:
+- **Frontend**: Streamlit Cloud (free tier)
+- **Backend API**: Render (free tier)
+- **Database**: Supabase PostgreSQL (already configured)
+
+📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions**
+
+✅ **Use [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) to track your progress**
+
+### Quick Deployment Steps
+
+1. **Verify setup**: `python verify_deployment.py`
+2. **Push to GitHub**: `git push origin main`
+3. **Deploy Backend**: Create Web Service on [Render](https://render.com)
+4. **Deploy Frontend**: Create app on [Streamlit Cloud](https://streamlit.io/cloud)
+
 ## Local Setup
 
 1. Create and activate virtual environment.

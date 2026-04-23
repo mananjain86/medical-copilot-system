@@ -1,0 +1,62 @@
+name: Deployment Checks
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Check required files
+      run: |
+        test -f app.py || exit 1
+        test -f streamlit_app.py || exit 1
+        test -f api/main.py || exit 1
+        test -f requirements.txt || exit 1
+        test -f Procfile || exit 1
+        test -f runtime.txt || exit 1
+        echo "✅ All required files present"
+    
+    - name: Verify Python syntax
+      run: |
+        python -m py_compile app.py
+        python -m py_compile streamlit_app.py
+        python -m py_compile api/main.py
+        echo "✅ Python syntax valid"
+    
+    - name: Check for secrets in code
+      run: |
+        if grep -r "dbmsprojectc13" --exclude-dir=.git --exclude=.env --exclude=.env.example .; then
+          echo "❌ Found hardcoded secrets in code!"
+          exit 1
+        fi
+        echo "✅ No hardcoded secrets found"
+    
+    - name: Verify .gitignore
+      run: |
+        if ! grep -q "^\.env$" .gitignore; then
+          echo "❌ .env not in .gitignore"
+          exit 1
+        fi
+        echo "✅ .gitignore configured correctly"
+    
+    - name: Check imports
+      run: |
+        python -c "import streamlit; import fastapi; import psycopg2; import uvicorn"
+        echo "✅ All required packages importable"
