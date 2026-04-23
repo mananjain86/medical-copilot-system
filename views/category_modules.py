@@ -96,7 +96,7 @@ def category_modules():
         cols = st.columns(3)
         for idx, module in enumerate(modules):
             with cols[idx % 3]:
-                if st.button(f"{module[0]} \u2013 {module[1]}", key=f"mod_{module[0]}"):
+                if st.button(f"{module[0]} \u2013 {module[1]}", key=f"mod_{category_label}_{module[0]}"):
                     st.session_state.selected_module = module
                     st.session_state.view = "module_detail"
                     st.rerun()

@@ -29,7 +29,13 @@ app = FastAPI(
 # Defaults to localhost:8501 (Streamlit default port).
 # Example: CORS_ORIGINS="https://app.example.com,https://staging.example.com"
 _cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:8501")
-_cors_origins = [o.strip() for o in _cors_origins_env.split(",") if o.strip()]
+_cors_origins = [
+    o.strip()
+    for o in _cors_origins_env.split(",")
+    if o.strip() and o.strip().startswith(("http://", "https://"))
+]
+if not _cors_origins:
+    _cors_origins = ["http://localhost:8501"]
 
 app.add_middleware(
     CORSMiddleware,
