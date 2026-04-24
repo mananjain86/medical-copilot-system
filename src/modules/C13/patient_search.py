@@ -34,8 +34,8 @@ _BACKEND_IMPORT_ERROR: Exception | None = None
 import requests
 import os
 
-# Use environment variable for API URL, fallback to localhost for local dev
-API_BASE_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/api/v1")
+# Use environment variable for API URL, fallback to deployed Render backend
+API_BASE_URL = os.getenv("BACKEND_API_URL", "https://medical-copilot-system.onrender.com/api/v1")
 
 
 # ── suggestion chips ──────────────────────────────────────────────────────────
@@ -800,10 +800,13 @@ def _search_section() -> None:
                 # Fallback to mock search for results display
                 enriched = _search_mock_patients(query)
                 _record_mock_search(query, enriched)
-            
-            # Show error if database connection failed
-            if db_error:
-                st.warning(f"⚠️ Using mock data. Database connection issue: {db_error[:200]}")
+                
+                # Show detailed error for debugging
+                st.error(f"❌ Database Error: {db_error[:300]}")
+                with st.expander("🔍 Full Error Details"):
+                    import traceback
+                    st.code(traceback.format_exc())
+                st.info("💡 Using mock data as fallback. Check your database connection settings.")
 
         if isinstance(sql_payload, dict) and "sql" in sql_payload:
             with st.expander("🔍 Generated SQL Query", expanded=True):
@@ -1162,6 +1165,14 @@ def _cohorts_section() -> None:
 
 def patient_search_page(role: str = "Clinician") -> None:
     _inject_css()
+    
+    # Add diagnostic tool at the top
+    try:
+        from diagnose import show_connection_test
+        show_connection_test()
+    except:
+        pass  # Silently skip if diagnose module not available
+    
     page = _sidebar(role=role)
 
     if page == "Patient":

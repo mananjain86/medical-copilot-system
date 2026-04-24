@@ -215,18 +215,20 @@ def _search_section() -> None:
 
     if run and (query or "").strip():
         user_id = 5 # Administrator ID
+        sql_payload = None
+        rows = []
+        detail_items = []
         try:
             import requests
             import os
-            API_BASE_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/api/v1")
+            API_BASE_URL = os.getenv("BACKEND_API_URL", "https://medical-copilot-system.onrender.com/api/v1")
             resp = requests.post(f"{API_BASE_URL}/search", json={"user_id": user_id, "query": query})
             if resp.status_code == 200:
                 response = resp.json()
+                sql_payload = response.get("sql")
                 patients_raw = response.get("results", [])
                 
                 # Map backend results to UI format
-                rows = []
-                detail_items = []
                 for r in patients_raw:
                     row = {
                         "ID": r.get("patient_id"),
@@ -251,7 +253,6 @@ def _search_section() -> None:
         except Exception:
             patients_raw = _search_mock_patients(query)
             _record_mock_search(query, patients_raw)
-            # ... process mock as before if needed, but the original code had its own logic
             rows = []
             detail_items = []
             for p in patients_raw:
@@ -273,14 +274,11 @@ def _search_section() -> None:
                     "diagnoses": [],
                     "symptoms": [],
                 })
-        finally:
-            if conn:
-                conn.close()
 
         if isinstance(sql_payload, dict) and "sql" in sql_payload:
             with st.expander("🔍 Generated SQL Query", expanded=False):
                 if sql_payload.get("explanation"):
-                    st.info(sql_payload.explanation)
+                    st.info(sql_payload["explanation"])
                 from src.modules.C13.patient_search import _render_sql
                 rendered = _render_sql(sql_payload["sql"], sql_payload.get("params", {}))
                 st.code(rendered, language="sql")

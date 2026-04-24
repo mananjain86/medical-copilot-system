@@ -221,19 +221,18 @@ _CONCEPT_MAP: dict[str, str] = {
 _DEPARTMENT_MAP: dict[str, str] = {
 	"cardio": "Cardiology",
 	"cardiology": "Cardiology",
-	"heart": "Cardiology",
+	"cardiology department": "Cardiology",
 	"endo": "Endocrinology",
 	"endocrinology": "Endocrinology",
-	"diabetes": "Endocrinology",
+	"endocrinology department": "Endocrinology",
 	"general medicine": "General Medicine",
-	"general": "General Medicine",
+	"general medicine department": "General Medicine",
 	"neurology": "Neurology",
+	"neurology department": "Neurology",
 	"neuro": "Neurology",
-	"brain": "Neurology",
 	"pulmonology": "Pulmonology",
+	"pulmonology department": "Pulmonology",
 	"pulmo": "Pulmonology",
-	"lung": "Pulmonology",
-	"respiratory": "Pulmonology",
 }
 
 
@@ -736,17 +735,29 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 		params["age_is"] = query.age_is
 		notes.append(f"age = {query.age_is}")
 
-	if query.symptom:
-		conditions.append("(p.symptoms ILIKE %(symptom_lk)s OR sy.symptom_name = %(symptom)s OR syn.synonym = %(symptom)s)")
+	# When both symptom and diagnosis resolve (often from the same term like
+	# "diabetes"), combine them with OR so a patient matching EITHER is returned.
+	if query.symptom and query.diagnosis:
+		conditions.append(
+			"(sy.symptom_name ILIKE %(symptom_lk)s OR syn.synonym ILIKE %(symptom_lk)s"
+			" OR v.diagnosis ILIKE %(diagnosis_lk)s)"
+		)
+		params["symptom"] = query.symptom
+		params["symptom_lk"] = f"%{query.symptom}%"
+		params["diagnosis"] = query.diagnosis
+		params["diagnosis_lk"] = f"%{query.diagnosis}%"
+		notes.append(f"symptom = '{query.symptom}' OR diagnosis ~= '{query.diagnosis}'")
+	elif query.symptom:
+		conditions.append("(sy.symptom_name ILIKE %(symptom_lk)s OR syn.synonym ILIKE %(symptom_lk)s)")
 		params["symptom"] = query.symptom
 		params["symptom_lk"] = f"%{query.symptom}%"
 		notes.append(f"symptom = '{query.symptom}' (+ synonyms)")
-
-	if query.diagnosis:
-		conditions.append("(p.diagnoses ILIKE %(diagnosis_lk)s OR v.diagnosis ILIKE %(diagnosis)s)")
+	elif query.diagnosis:
+		conditions.append("v.diagnosis ILIKE %(diagnosis_lk)s")
 		params["diagnosis"] = query.diagnosis
 		params["diagnosis_lk"] = f"%{query.diagnosis}%"
 		notes.append(f"diagnosis ~= '{query.diagnosis}'")
+
 
 	if query.city:
 		conditions.append("p.city ILIKE %(city)s")
@@ -796,8 +807,6 @@ def generate_sql(query: SearchQuery, include_patient_status: bool = True) -> Gen
 				f"p.first_name ILIKE %({key})s",
 				f"p.last_name ILIKE %({key})s",
 				f"p.city ILIKE %({key})s",
-				f"p.diagnoses ILIKE %({key})s",
-				f"p.symptoms ILIKE %({key})s",
 				f"v.diagnosis ILIKE %({key})s",
 				f"sy.symptom_name ILIKE %({key})s",
 				f"syn.synonym ILIKE %({key})s",
